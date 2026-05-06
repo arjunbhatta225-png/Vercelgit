@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Position Size Calculator — Free Trading Tool | Tradexa</title>
+  <meta name="description" content="Free position size calculator for stocks, forex, futures, and crypto. Calculate exact position size based on account balance, risk percentage, and stop loss distance."/>
+  <meta name="keywords" content="position size calculator, forex position size, stock position size, how many shares to buy, risk per trade calculator"/>
+  <link rel="canonical" href="https://tradexa.io/tools/position-size.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="/assets/nav.js" defer></script>
+  <script src="/assets/monitoring.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--g:#FFB732;--g2:#b08c1f;--b:#5E81AC;--red:#EF4444;--gold:#FFB732;--bg:#0d0f12;--s1:#13161b;--s2:#1a1d23;--border:rgba(255,255,255,.08);--text:#F5F5F5;--muted:#A1A1AA;--dim:#525252}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding-top:64px;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+    a{color:var(--g);text-decoration:none}a:hover{text-decoration:underline}
+
+    /* Breadcrumb */
+    .breadcrumb{padding:20px 28px;font-size:12px;color:var(--dim);max-width:1100px;margin:0 auto;display:flex;gap:6px;align-items:center}
+    .breadcrumb a{color:var(--dim);text-decoration:none}
+    .breadcrumb a:hover{color:#fff}
+
+    /* Hero */
+    .tool-hero{padding:40px 28px 60px;max-width:1100px;margin:0 auto}
+    .tool-tag{display:inline-block;background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2);color:var(--g);font-size:10px;font-weight:700;padding:3px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+    .tool-hero h1{font-size:clamp(32px,4.5vw,52px);font-weight:900;color:#fff;letter-spacing:-.05em;margin-bottom:12px;line-height:1.05}
+    .tool-hero p{font-size:16px;color:var(--muted);line-height:1.75;max-width:560px}
+
+    /* Calculator */
+    .calc-wrap{padding:0 28px 80px;max-width:1100px;margin:0 auto}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+
+    .calc-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .calc-card-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .calc-card-header h2{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+    .calc-card-header svg{flex-shrink:0}
+    .calc-body{padding:24px}
+
+    /* Market type tabs */
+    .mkt-tabs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:3px;margin-bottom:24px}
+    .mkt-tab{flex:1;padding:7px;font-size:12px;font-weight:600;color:var(--muted);background:none;border:none;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .12s;text-align:center}
+    .mkt-tab:hover{color:#fff}
+    .mkt-tab.active{background:rgba(255,255,255,.07);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+
+    /* Form fields */
+    .field{margin-bottom:18px}
+    .field-label{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px}
+    .field-hint{font-size:10px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+    .input-wrap{position:relative;display:flex}
+    .input-prefix,.input-suffix{
+      display:flex;align-items:center;padding:0 12px;background:rgba(255,255,255,.04);
+      border:1px solid var(--border);color:var(--dim);font-size:13px;font-weight:500;
+      flex-shrink:0;
+    }
+    .input-prefix{border-right:none;border-radius:8px 0 0 8px}
+    .input-suffix{border-left:none;border-radius:0 8px 8px 0}
+    .field-input{
+      flex:1;background:var(--bg);border:1px solid var(--border);border-radius:0;
+      color:#fff;font-size:15px;font-family:'Inter',sans-serif;padding:12px 14px;
+      outline:none;transition:border-color .15s;-moz-appearance:textfield;
+    }
+    .field-input::-webkit-inner-spin-button,.field-input::-webkit-outer-spin-button{-webkit-appearance:none}
+    .field-input:focus{border-color:rgba(255,183,50,.4)}
+    .input-prefix~.field-input{border-radius:0}
+    .field-input.no-prefix{border-radius:8px 0 0 8px}
+    .field-input:only-child{border-radius:8px}
+    .field-input~.input-suffix{border-radius:0 8px 8px 0}
+
+    /* Risk slider */
+    .risk-slider{width:100%;accent-color:var(--g);height:4px;cursor:pointer;margin-top:8px}
+    .risk-preview{font-size:24px;font-weight:900;color:var(--g);letter-spacing:-.04em;margin-top:4px}
+    .risk-bar{height:4px;background:var(--border);border-radius:2px;position:relative;margin-top:8px;margin-bottom:4px}
+    .risk-bar-fill{height:100%;background:linear-gradient(90deg,var(--g),#5E81AC);border-radius:2px;transition:width .15s}
+    .risk-ticks{display:flex;justify-content:space-between;font-size:9px;color:var(--dim)}
+
+    /* Calculate button */
+    .calc-btn{
+      width:100%;background:linear-gradient(135deg,var(--g),var(--g2));color:#000;
+      border:none;border-radius:10px;padding:16px;font-size:15px;font-weight:700;
+      cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;margin-top:8px;
+      letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;gap:8px;
+    }
+    .calc-btn:hover{background:linear-gradient(135deg,#d4ad2e,var(--g));transform:translateY(-1px)}
+
+    /* Results */
+    .result-empty{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:48px 24px;text-align:center;min-height:300px;
+    }
+    .result-empty-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+    .result-empty h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+    .result-empty p{font-size:13px;color:var(--muted);line-height:1.65}
+
+    .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:20px 24px;border-bottom:1px solid var(--border)}
+    .res-kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .res-kpi-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px}
+    .res-kpi-value{font-size:24px;font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1}
+    .res-kpi-sub{font-size:11px;color:var(--muted);margin-top:4px}
+    .res-kpi.highlight{border-color:rgba(255,183,50,.25);background:rgba(255,183,50,.04)}
+    .res-kpi.highlight .res-kpi-value{color:var(--g)}
+
+    .res-breakdown{padding:20px 24px}
+    .res-breakdown-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:14px}
+    .res-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+    .res-row:last-child{border-bottom:none}
+    .res-row-label{color:var(--muted)}
+    .res-row-value{font-weight:700;color:#fff}
+    .res-row-value.pos{color:var(--g)}
+    .res-row-value.neg{color:var(--red)}
+
+    /* Warning zones */
+    .risk-warn{background:rgba(255,176,32,.06);border:1px solid rgba(255,176,32,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:#FFB732;margin:0 24px 20px;display:none;line-height:1.6}
+    .risk-warn.show{display:block}
+
+    /* SEO */
+    .tool-guide{padding:60px 28px;border-top:1px solid var(--border);background:var(--s1)}
+    .guide-inner{max-width:860px;margin:0 auto}
+    .guide-inner h2{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:18px}
+    .guide-inner h3{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.02em;margin:28px 0 12px}
+    .guide-inner p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:14px}
+    .guide-formula{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px 22px;font-size:14px;color:#A1A1AA;font-family:monospace;margin:16px 0;letter-spacing:.02em}
+
+    @media(max-width:768px){.calc-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Position Size Calculator — Free Trading Tool | Tradexa"/>
+  <meta property="og:description" content="Free position size calculator for stocks, forex, futures, and crypto. Calculate exact position size based on account balance, risk percentage, and stop loss distance."/>
+  <meta property="og:url" content="https://tradexa.io/tools/position-size.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Position Size Calculator — Free Trading Tool | Tradexa"/>
+  <meta name="twitter:description" content="Free position size calculator for stocks, forex, futures, and crypto. Calculate exact position size based on account balance, risk percentage, and stop loss distance."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="/">Home</a> <span style="color:#374151">›</span>
+  <a href="/tools/">Tools</a> <span style="color:#374151">›</span>
+  Position Size Calculator
+</div>
+
+<div class="tool-hero">
+  <div class="tool-tag">Free Calculator</div>
+  <h1>Position Size Calculator</h1>
+  <p>Calculate the exact number of shares, contracts, or units to trade. Risk the right amount on every trade — automatically. Works for stocks, forex, futures, and crypto.</p>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h2>Trade Parameters</h2>
+      </div>
+      <div class="calc-body">
+        <!-- Market type -->
+        <div class="mkt-tabs">
+          <button class="mkt-tab active" onclick="setMarket('stocks',this)">Stocks</button>
+          <button class="mkt-tab" onclick="setMarket('forex',this)">Forex</button>
+          <button class="mkt-tab" onclick="setMarket('futures',this)">Futures</button>
+          <button class="mkt-tab" onclick="setMarket('crypto',this)">Crypto</button>
+        </div>
+
+        <!-- Account balance -->
+        <div class="field">
+          <div class="field-label">Account Balance</div>
+          <div class="input-wrap">
+            <div class="input-prefix">$</div>
+            <input type="number" class="field-input" id="balance" value="25000" min="0" step="1000" oninput="onInput()"/>
+          </div>
+        </div>
+
+        <!-- Risk % -->
+        <div class="field">
+          <div class="field-label">
+            Risk Per Trade
+            <span class="field-hint" id="riskDollarHint">= $500 at risk</span>
+          </div>
+          <div class="input-wrap">
+            <input type="number" class="field-input" id="riskPct" value="2" min="0.1" max="10" step="0.1" oninput="onInput()" style="border-radius:8px 0 0 8px"/>
+            <div class="input-suffix">%</div>
+          </div>
+          <input type="range" class="risk-slider" id="riskSlider" min="0.1" max="5" step="0.1" value="2" oninput="syncSlider(this.value)"/>
+          <div class="risk-ticks"><span>0.1%</span><span>1%</span><span>2%</span><span>3%</span><span>4%</span><span>5%</span></div>
+        </div>
+
+        <!-- Entry price -->
+        <div class="field">
+          <div class="field-label">Entry Price</div>
+          <div class="input-wrap">
+            <div class="input-prefix">$</div>
+            <input type="number" class="field-input" id="entry" value="150.00" min="0" step="0.01" oninput="onInput()"/>
+          </div>
+        </div>
+
+        <!-- Stop loss -->
+        <div class="field">
+          <div class="field-label">
+            Stop Loss Price
+            <span class="field-hint" id="slDistHint"></span>
+          </div>
+          <div class="input-wrap">
+            <div class="input-prefix">$</div>
+            <input type="number" class="field-input" id="stopLoss" value="147.00" min="0" step="0.01" oninput="onInput()"/>
+          </div>
+        </div>
+
+        <!-- Take profit (optional) -->
+        <div class="field">
+          <div class="field-label">
+            Take Profit Price
+            <span class="field-hint">Optional — for R:R calculation</span>
+          </div>
+          <div class="input-wrap">
+            <div class="input-prefix">$</div>
+            <input type="number" class="field-input" id="takeProfit" value="156.00" min="0" step="0.01" oninput="onInput()"/>
+          </div>
+        </div>
+
+        <!-- Commission -->
+        <div class="field">
+          <div class="field-label">
+            Commission Per Side
+            <span class="field-hint">Per trade leg</span>
+          </div>
+          <div class="input-wrap">
+            <div class="input-prefix">$</div>
+            <input type="number" class="field-input" id="commission" value="1.00" min="0" step="0.5" oninput="onInput()"/>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calculate()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          Calculate Position Size
+        </button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5E81AC" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h2>Results</h2>
+      </div>
+      <div id="resultsPanel">
+        <div class="result-empty">
+          <div class="result-empty-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </div>
+          <h3>Enter your parameters</h3>
+          <p>Fill in your account balance, risk percentage, entry price, and stop loss to calculate your ideal position size.</p>
+        </div>
+      </div>
+      <div class="risk-warn" id="riskWarn"></div>
+    </div>
+
+  </div>
+
+  <!-- CTA under calculator -->
+  <div style="margin-top:20px;background:linear-gradient(135deg,rgba(255,183,50,.05),rgba(94,129,172,.04));border:1px solid rgba(255,183,50,.15);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Want to track your position sizing across every trade automatically?</div>
+      <div style="font-size:13px;color:var(--muted)">Connect your broker or log manually — Tradexa records your actual sizing against your plan and flags every deviation.</div>
+    </div>
+    <a href="/app/dashboard.html" style="background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;text-decoration:none;font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;white-space:nowrap;box-shadow:0 0 20px rgba(255,183,50,.2)">Start Free →</a>
+  </div>
+</div>
+
+<!-- Guide / SEO -->
+<section class="tool-guide">
+  <div class="guide-inner">
+    <h2>How to Use the Position Size Calculator</h2>
+    <p>Position sizing is the single most important skill in trading. It determines whether your edge survives the inevitable drawdowns or gets wiped out before it can play out. This calculator uses the standard percent-risk method to give you an exact position size based on your personal parameters.</p>
+
+    <h3>The Position Sizing Formula</h3>
+    <div class="guide-formula">Position Size = (Account Balance × Risk %) ÷ (Entry Price − Stop Loss Price)</div>
+    <p>For example: $25,000 account × 2% risk = $500 at risk. If your entry is $150 and your stop is $147 (a $3 distance), your position size is $500 ÷ $3 = 166 shares.</p>
+
+    <h3>Why 1–2% Risk Per Trade?</h3>
+    <p>Professional traders almost universally risk 0.5–2% of their account per trade. This isn't arbitrary — it's the range that keeps you in the game through normal statistical variance. At 1% risk, you'd need 50 consecutive losing trades to lose half your account. At 10% risk, just 7 consecutive losses does the same damage.</p>
+
+    <h3>Adjusting for Market Type</h3>
+    <p><strong>Stocks:</strong> Position size is measured in shares. The formula above applies directly.</p>
+    <p><strong>Forex:</strong> Position size is measured in lots. Standard lot = 100,000 units. Account currency must match or be converted. Use pip value to translate the stop distance.</p>
+    <p><strong>Futures:</strong> Position size is measured in contracts. Each contract has a specific dollar value per tick. Factor in the contract multiplier and margin requirements.</p>
+    <p><strong>Crypto:</strong> Position size is measured in coins/tokens. Many exchanges also support fractional position sizes, giving maximum precision.</p>
+
+    <h3>Common Mistakes to Avoid</h3>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:12px">
+      <li style="display:flex;gap:10px;font-size:14px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span> Sizing based on "how much you can afford to lose" instead of your risk %. Always use the formula.</li>
+      <li style="display:flex;gap:10px;font-size:14px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span> Increasing position size after a win streak to "press your luck." Each trade is independent.</li>
+      <li style="display:flex;gap:10px;font-size:14px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span> Forgetting commissions and slippage — especially important for high-frequency or options traders.</li>
+      <li style="display:flex;gap:10px;font-size:14px;color:var(--muted)"><span style="color:var(--red);font-weight:700;flex-shrink:0">✗</span> Using a wide stop "so you don't get stopped out" and then sizing the same. Wider stop = smaller size.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+var market = 'stocks';
+function setMarket(m, el){
+  market = m;
+  document.querySelectorAll('.mkt-tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  onInput();
+}
+function syncSlider(v){
+  document.getElementById('riskPct').value = v;
+  onInput();
+}
+function onInput(){
+  var r = document.getElementById('riskSlider');
+  var p = document.getElementById('riskPct').value;
+  if(r) r.value = Math.min(p, 5);
+  var bal = parseFloat(document.getElementById('balance').value) || 0;
+  var rp = parseFloat(document.getElementById('riskPct').value) || 0;
+  var dollar = (bal * rp / 100).toFixed(2);
+  document.getElementById('riskDollarHint').textContent = '= $' + parseFloat(dollar).toLocaleString() + ' at risk';
+  var entry = parseFloat(document.getElementById('entry').value) || 0;
+  var sl = parseFloat(document.getElementById('stopLoss').value) || 0;
+  if(entry && sl){
+    var dist = Math.abs(entry - sl);
+    var pct = entry > 0 ? ((dist / entry) * 100).toFixed(2) : 0;
+    document.getElementById('slDistHint').textContent = '$' + dist.toFixed(2) + ' away (' + pct + '%)';
+  }
+  calculate();
+}
+function calculate(){
+  var bal = parseFloat(document.getElementById('balance').value) || 0;
+  var rp = parseFloat(document.getElementById('riskPct').value) || 0;
+  var entry = parseFloat(document.getElementById('entry').value) || 0;
+  var sl = parseFloat(document.getElementById('stopLoss').value) || 0;
+  var tp = parseFloat(document.getElementById('takeProfit').value) || 0;
+  var comm = parseFloat(document.getElementById('commission').value) || 0;
+
+  if(!bal || !rp || !entry || !sl){ return; }
+
+  var riskDollar = bal * (rp / 100);
+  var slDist = Math.abs(entry - sl);
+  if(slDist === 0) return;
+
+  var isLong = entry > sl;
+  var units = riskDollar / slDist;
+  var tradeValue = units * entry;
+  var maxLoss = units * slDist + (comm * 2);
+  var rr = tp && slDist > 0 ? (Math.abs(tp - entry) / slDist).toFixed(2) : null;
+  var profitTarget = tp ? Math.abs(tp - entry) * units : null;
+  var totalComm = comm * 2;
+  var pctOfAccount = (tradeValue / bal * 100).toFixed(1);
+  var bwrPct = rr ? (100 / (parseFloat(rr) + 1)).toFixed(1) : null;
+
+  var unitLabel = market === 'forex' ? 'Units' : market === 'futures' ? 'Contracts' : market === 'crypto' ? 'Coins' : 'Shares';
+
+  var html = `
+  <div class="results-grid">
+    <div class="res-kpi highlight" style="grid-column:1/-1">
+      <div class="res-kpi-label">Position Size</div>
+      <div class="res-kpi-value">${Math.round(units).toLocaleString()} <span style="font-size:16px;font-weight:600;color:var(--muted)">${unitLabel}</span></div>
+      <div class="res-kpi-sub">$${tradeValue.toLocaleString(undefined,{maximumFractionDigits:2})} total position value</div>
+    </div>
+    <div class="res-kpi">
+      <div class="res-kpi-label">Max Risk</div>
+      <div class="res-kpi-value" style="font-size:20px;color:var(--red)">$${maxLoss.toLocaleString(undefined,{maximumFractionDigits:2})}</div>
+      <div class="res-kpi-sub">${rp}% of account</div>
+    </div>
+    <div class="res-kpi">
+      <div class="res-kpi-label">Account Used</div>
+      <div class="res-kpi-value" style="font-size:20px">${pctOfAccount}%</div>
+      <div class="res-kpi-sub">of $${bal.toLocaleString()} balance</div>
+    </div>
+    ${rr ? `<div class="res-kpi"><div class="res-kpi-label">Risk/Reward Ratio</div><div class="res-kpi-value" style="font-size:20px;color:var(--b)">1:${rr}</div><div class="res-kpi-sub">Breakeven: ${bwrPct}% win rate needed</div></div>` : ''}
+    ${profitTarget ? `<div class="res-kpi"><div class="res-kpi-label">Profit Target</div><div class="res-kpi-value" style="font-size:20px;color:var(--g)">$${profitTarget.toLocaleString(undefined,{maximumFractionDigits:2})}</div><div class="res-kpi-sub">If TP hit at $${tp}</div></div>` : ''}
+  </div>
+  <div class="res-breakdown">
+    <div class="res-breakdown-title">Full Breakdown</div>
+    <div class="res-row"><div class="res-row-label">Entry price</div><div class="res-row-value">$${entry}</div></div>
+    <div class="res-row"><div class="res-row-label">Stop loss</div><div class="res-row-value">$${sl}</div></div>
+    <div class="res-row"><div class="res-row-label">Stop distance</div><div class="res-row-value">$${slDist.toFixed(4)}</div></div>
+    <div class="res-row"><div class="res-row-label">Direction</div><div class="res-row-value ${isLong ? 'pos' : 'neg'}">${isLong ? 'LONG ↑' : 'SHORT ↓'}</div></div>
+    <div class="res-row"><div class="res-row-label">Dollar risk</div><div class="res-row-value">$${riskDollar.toFixed(2)}</div></div>
+    <div class="res-row"><div class="res-row-label">Commission (round trip)</div><div class="res-row-value">$${totalComm.toFixed(2)}</div></div>
+  </div>`;
+
+  document.getElementById('resultsPanel').innerHTML = html;
+
+  /* Risk warnings */
+  var warn = document.getElementById('riskWarn');
+  if(rp > 3){
+    warn.textContent = '⚠ You are risking ' + rp + '% per trade — above the recommended 1–2% maximum for most traders. High risk per trade significantly increases the chance of account ruin during drawdowns.';
+    warn.classList.add('show');
+  } else if(parseFloat(pctOfAccount) > 40){
+    warn.textContent = '⚠ This position represents ' + pctOfAccount + '% of your account. Consider splitting into smaller entries or reducing leverage.';
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+}
+
+/* Auto-calculate on load */
+window.addEventListener('DOMContentLoaded', function(){ setTimeout(calculate, 100); });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Position Size Calculator",
+  "description": "Free position size calculator for stocks, forex, futures, and crypto traders.",
+  "url": "https://tradexa.io/tools/position-size.html",
+  "applicationCategory": "FinanceApplication",
+  "offers": {"@type": "Offer","price": "0","priceCurrency": "USD"}
+}
+</script>
+</body>
+</html>

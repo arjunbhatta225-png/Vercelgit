@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Solutions | Tradexa</title>
+  <meta name="description" content="Tradexa is built for every type of serious trader — beginners, prop firm participants, losing traders looking to turn it around, and crypto traders managing multiple chains.">
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box}
+    .sol-hero{text-align:center;padding:80px 28px 64px;max-width:800px;margin:0 auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#FFB732;background:rgba(255,183,50,.08);border:1px solid rgba(255,183,50,.2);border-radius:100px;padding:5px 14px;margin-bottom:24px}
+    .sol-hero h1{font-size:clamp(36px,5vw,56px);font-weight:800;color:#F5F5F5;letter-spacing:-.04em;line-height:1.1;margin:0 0 20px}
+    .sol-hero h1 span{color:#FFB732}
+    .sol-hero p{font-size:17px;color:#A1A1AA;line-height:1.7;margin:0 auto;max-width:600px}
+    .sol-grid{max-width:1100px;margin:0 auto;padding:0 28px 100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:2px}
+    .sol-card{background:#13161b;border:1px solid rgba(255,255,255,.08);border-radius:0;padding:48px;display:flex;flex-direction:column;gap:24px;transition:background .2s;text-decoration:none;color:inherit}
+    .sol-card:first-child{border-radius:16px 0 0 0}
+    .sol-card:nth-child(2){border-radius:0 16px 0 0}
+    .sol-card:nth-child(3){border-radius:0 0 0 16px}
+    .sol-card:last-child{border-radius:0 0 16px 0}
+    .sol-card:hover{background:#1a1d23}
+    .sol-card-icon{width:52px;height:52px;border-radius:12px;background:rgba(255,183,50,.08);border:1px solid rgba(255,183,50,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+    .sol-card-title{font-size:22px;font-weight:700;color:#F5F5F5;letter-spacing:-.02em;margin-bottom:8px}
+    .sol-card-desc{font-size:14px;color:#A1A1AA;line-height:1.7}
+    .sol-card-tags{display:flex;flex-wrap:wrap;gap:7px}
+    .sol-tag{font-size:11px;font-weight:600;color:#5E81AC;background:rgba(94,129,172,.08);border:1px solid rgba(94,129,172,.15);border-radius:6px;padding:4px 10px}
+    .sol-card-cta{margin-top:auto;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#FFB732}
+    .sol-divider{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 28px}
+    .sol-cta-strip{text-align:center;padding:80px 28px;background:#13161b;border-top:1px solid rgba(255,255,255,.06)}
+    .sol-cta-strip h2{font-size:32px;font-weight:800;color:#F5F5F5;letter-spacing:-.03em;margin:0 0 12px}
+    .sol-cta-strip p{font-size:15px;color:#A1A1AA;margin:0 0 32px}
+    .sol-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:10px;text-decoration:none;box-shadow:0 0 28px rgba(255,183,50,.25)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;color:#A1A1AA;font-weight:500;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:all .15s}
+    .btn-ghost:hover{color:#F5F5F5;border-color:rgba(255,255,255,.2)}
+    @media(max-width:600px){.sol-grid{grid-template-columns:1fr}.sol-card{border-radius:12px!important;padding:32px}.sol-card:first-child,.sol-card:nth-child(2),.sol-card:nth-child(3){border-radius:12px!important}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <link rel="canonical" href="https://tradexa.io/solutions/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Solutions | Tradexa"/>
+  <meta property="og:description" content="Tradexa is built for every type of serious trader — beginners, prop firm participants, losing traders looking to turn it around, and crypto traders managing multiple chains."/>
+  <meta property="og:url" content="https://tradexa.io/solutions/"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Solutions | Tradexa"/>
+  <meta name="twitter:description" content="Tradexa is built for every type of serious trader — beginners, prop firm participants, losing traders looking to turn it around, and crypto traders managing multiple chains."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<div class="sol-hero">
+  <div class="eyebrow">✦ Solutions</div>
+  <h1>Built for every kind of <span>serious trader</span></h1>
+  <p>Whether you're just getting started, trying to turn a losing streak around, passing a prop firm evaluation, or trading crypto across chains — Tradexa has a path for you.</p>
+</div>
+
+<div class="sol-grid">
+  <a href="/solutions/beginner-traders.html" class="sol-card">
+    <div class="sol-card-icon">🌱</div>
+    <div>
+      <div class="sol-card-title">Beginner Traders</div>
+      <div class="sol-card-desc">Start your trading journey the right way. Tradexa helps you build proper journaling habits, understand your mistakes early, and grow with structured feedback before bad habits form.</div>
+    </div>
+    <div class="sol-card-tags">
+      <span class="sol-tag">Trade Journal</span>
+      <span class="sol-tag">Habit Tracking</span>
+      <span class="sol-tag">AI Coach</span>
+    </div>
+    <div class="sol-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/solutions/losing-traders.html" class="sol-card">
+    <div class="sol-card-icon">🔄</div>
+    <div>
+      <div class="sol-card-title">Losing Traders</div>
+      <div class="sol-card-desc">Turn losses into a learning system. Tradexa surfaces hidden patterns in your losing trades, identifies recurring mistakes, and gives you an AI-powered roadmap to profitability.</div>
+    </div>
+    <div class="sol-card-tags">
+      <span class="sol-tag">Loss Analysis</span>
+      <span class="sol-tag">Pattern Detection</span>
+      <span class="sol-tag">Weekly Reviews</span>
+    </div>
+    <div class="sol-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/solutions/prop-firm-traders.html" class="sol-card">
+    <div class="sol-card-icon">🏆</div>
+    <div>
+      <div class="sol-card-title">Prop Firm Traders</div>
+      <div class="sol-card-desc">Pass evaluations and stay funded. Tradexa tracks your max drawdown, flags dangerous trading behaviour in your journal data, and helps you build the consistency that prop firms demand.</div>
+    </div>
+    <div class="sol-card-tags">
+      <span class="sol-tag">Rule Enforcement</span>
+      <span class="sol-tag">Drawdown Alerts</span>
+      <span class="sol-tag">Consistency Score</span>
+    </div>
+    <div class="sol-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/solutions/crypto-traders.html" class="sol-card">
+    <div class="sol-card-icon">₿</div>
+    <div>
+      <div class="sol-card-title">Crypto Traders</div>
+      <div class="sol-card-desc">Track performance across every chain. From spot to DeFi, Tradexa consolidates your crypto trades into a single performance view with cross-asset analysis and on-chain context.</div>
+    </div>
+    <div class="sol-card-tags">
+      <span class="sol-tag">Multi-Chain</span>
+      <span class="sol-tag">DeFi Support</span>
+      <span class="sol-tag">Cross-Asset P&L</span>
+    </div>
+    <div class="sol-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+</div>
+
+<div class="sol-cta-strip">
+  <h2>Ready to find your edge?</h2>
+  <p>Join traders who use Tradexa to build consistency and grow their accounts.</p>
+  <div class="sol-cta-btns">
+    <a href="/app/dashboard.html" class="btn-primary">Start Free — No Card Required →</a>
+    <a href="/pricing/" class="btn-ghost">View Pricing</a>
+  </div>
+</div>
+</body>
+</html>

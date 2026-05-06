@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Trading Tools — Position Size, Risk/Reward, Win Rate Calculators | Tradexa</title>
+  <meta name="description" content="Free professional trading calculators: position size calculator, risk/reward calculator, win rate & expectancy calculator, and more. Used by early-access traders."/>
+  <meta name="keywords" content="position size calculator, risk reward calculator, trading tools, win rate calculator, forex calculator, futures calculator"/>
+  <link rel="canonical" href="https://tradexa.io/tools/"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="/assets/nav.js" defer></script>
+  <script src="/assets/monitoring.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F5F5F5;font-family:'Inter',sans-serif;padding-top:64px;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+    .tools-hero{
+      padding:80px 28px 64px;text-align:center;
+      background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,183,50,.08),transparent 60%);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#FFB732;margin-bottom:16px}
+    .eyebrow::before{content:'';width:18px;height:1px;background:#FFB732}
+    .tools-hero h1{font-size:clamp(36px,5vw,60px);font-weight:900;color:#fff;letter-spacing:-.05em;margin-bottom:16px;line-height:1.05}
+    .tools-hero h1 span{background:linear-gradient(135deg,#FFB732,#5E81AC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .tools-hero p{font-size:17px;color:#A1A1AA;max-width:540px;margin:0 auto 40px;line-height:1.75}
+    .cta-bar{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;text-decoration:none;font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;transition:all .2s;box-shadow:0 0 24px rgba(255,183,50,.2)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 0 36px rgba(255,183,50,.35)}
+    .stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+    .stat{text-align:center}
+    .stat-num{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.04em;display:block}
+    .stat-label{font-size:11px;color:#525252;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+
+    /* Tools grid */
+    .tools-grid-section{padding:80px 28px}
+    .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+    .tool-card{
+      background:#13161b;padding:40px 32px;transition:background .2s;position:relative;overflow:hidden;
+      text-decoration:none;display:block;
+    }
+    .tool-card:hover{background:#0d1828}
+    .tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent,#FFB732),transparent)}
+    .tool-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:inline-block;padding:3px 10px;border-radius:100px}
+    .tag-free{background:rgba(255,183,50,.1);color:#FFB732;border:1px solid rgba(255,183,50,.2)}
+    .tag-pro{background:rgba(94,129,172,.1);color:#5E81AC;border:1px solid rgba(94,129,172,.2)}
+    .tool-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .2s}
+    .tool-card:hover .tool-icon{transform:translateY(-2px)}
+    .tool-card h3{font-size:19px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.02em}
+    .tool-card p{font-size:13px;color:#A1A1AA;line-height:1.75;margin-bottom:20px}
+    .tool-use-case{font-size:11px;color:#525252;font-weight:500;display:flex;flex-direction:column;gap:4px;margin-bottom:20px}
+    .tool-use-case span{display:flex;align-items:center;gap:6px}
+    .tool-use-case span::before{content:'→';color:#FFB732;font-weight:700;font-size:10px}
+    .tool-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#FFB732;text-decoration:none;transition:gap .15s}
+    .tool-card:hover .tool-link{gap:10px}
+    .tool-new{position:absolute;top:16px;right:16px;background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.2);color:#FFB732;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.08em}
+
+    /* SEO content */
+    .seo-section{padding:64px 28px;border-top:1px solid rgba(255,255,255,.08);background:#13161b}
+    .seo-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;max-width:900px;margin:0 auto;align-items:start}
+    .seo-block h2{font-size:22px;font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.03em}
+    .seo-block p{font-size:14px;color:#A1A1AA;line-height:1.8;margin-bottom:12px}
+    .seo-block ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .seo-block ul li{font-size:13px;color:#A1A1AA;display:flex;gap:8px;align-items:flex-start}
+    .seo-block ul li::before{content:'✓';color:#FFB732;font-weight:800;flex-shrink:0;margin-top:1px}
+
+    /* CTA bottom */
+    .tools-cta{padding:80px 28px;text-align:center;border-top:1px solid rgba(255,255,255,.08);background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(255,183,50,.08),transparent 60%)}
+    .tools-cta h2{font-size:36px;font-weight:900;color:#fff;letter-spacing:-.04em;margin-bottom:14px}
+    .tools-cta p{font-size:16px;color:#A1A1AA;margin-bottom:32px;line-height:1.7}
+
+    @media(max-width:900px){.tools-grid{grid-template-columns:1fr 1fr}.seo-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.tools-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Free Trading Tools — Position Size, Risk/Reward, Win Rate Calculators | Tradexa"/>
+  <meta property="og:description" content="Free professional trading calculators: position size calculator, risk/reward calculator, win rate & expectancy calculator, and more. Used by early-access traders."/>
+  <meta property="og:url" content="https://tradexa.io/tools/"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Free Trading Tools — Position Size, Risk/Reward, Win Rate Calculators | Tradexa"/>
+  <meta name="twitter:description" content="Free professional trading calculators: position size calculator, risk/reward calculator, win rate & expectancy calculator, and more. Used by early-access traders."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<section class="tools-hero">
+  <div class="eyebrow">Free Professional Tools</div>
+  <h1>Trading calculators that<br><span>actually help you trade better.</span></h1>
+  <p>Built by professional traders and quants. No sign-up required. No hidden paywalls. Just powerful, accurate tools to sharpen your edge.</p>
+  <div class="cta-bar">
+    <a href="/app/dashboard.html" class="btn-primary">
+      Get Full AI Analysis Free →
+    </a>
+    <span style="font-size:13px;color:#525252">All calculators below are 100% free</span>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">14K+</span><div class="stat-label">Active traders</div></div>
+    <div class="stat"><span class="stat-num">—</span><div class="stat-label">Calculations run</div></div>
+    <div class="stat"><span class="stat-num">100%</span><div class="stat-label">Free, always</div></div>
+  </div>
+</section>
+
+<section class="tools-grid-section">
+  <div class="wrap">
+    <div class="tools-grid">
+
+      <a href="/tools/position-size.html" class="tool-card" style="--accent:#FFB732" data-track="tool_position_size">
+        <div class="tool-tag tag-free">Free</div>
+        <div class="tool-icon" style="background:rgba(255,183,50,.07);border:1px solid rgba(255,183,50,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Position Size Calculator</h3>
+        <p>Calculate the exact number of shares, contracts, or units to trade based on your account balance, risk percentage, and stop loss distance.</p>
+        <div class="tool-use-case">
+          <span>Stocks, forex, futures, crypto</span>
+          <span>Percentage or dollar risk</span>
+          <span>Instant R-multiple output</span>
+        </div>
+        <div class="tool-link">Open Calculator <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="/tools/risk-reward.html" class="tool-card" style="--accent:#5E81AC" data-track="tool_risk_reward">
+        <div class="tool-tag tag-free">Free</div>
+        <div class="tool-icon" style="background:rgba(94,129,172,.07);border:1px solid rgba(94,129,172,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5E81AC" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Risk/Reward Calculator</h3>
+        <p>Calculate your risk/reward ratio, required win rate, and expected value from any trade setup. Know if a trade is worth taking before you enter.</p>
+        <div class="tool-use-case">
+          <span>R:R ratio calculation</span>
+          <span>Breakeven win rate</span>
+          <span>Expected value per trade</span>
+        </div>
+        <div class="tool-link">Open Calculator <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="/tools/win-rate.html" class="tool-card" style="--accent:#FFB732" data-track="tool_win_rate">
+        <div class="tool-tag tag-free">Free</div>
+        <div class="tool-new">New</div>
+        <div class="tool-icon" style="background:rgba(245,185,66,.07);border:1px solid rgba(245,185,66,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Win Rate &amp; Expectancy</h3>
+        <p>Calculate your true expectancy per trade, minimum required win rate, and projected account growth from your current stats.</p>
+        <div class="tool-use-case">
+          <span>Expectancy calculation</span>
+          <span>Break-even win rate</span>
+          <span>Monthly P&L projection</span>
+        </div>
+        <div class="tool-link">Open Calculator <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <div class="tool-card tool-card-disabled" style="--accent:#FFB732;cursor:default;opacity:.62" aria-disabled="true">
+        <div class="tool-tag tag-free" style="background:rgba(255,183,50,.12);border-color:rgba(255,183,50,.35);color:#FFB732">Coming Soon</div>
+        <div class="tool-icon" style="background:rgba(255,183,50,.07);border:1px solid rgba(255,183,50,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3>Pip Value Calculator</h3>
+        <p>Calculate the exact pip value in your account currency for any forex pair, lot size, and leverage. Essential for accurate position sizing in FX.</p>
+        <div class="tool-use-case">
+          <span>All major &amp; minor pairs</span>
+          <span>Standard, mini, micro lots</span>
+          <span>Any account currency</span>
+        </div>
+        <div class="tool-link" style="color:#9ca3af">Coming soon</div>
+      </div>
+
+      <div class="tool-card tool-card-disabled" style="--accent:#EF4444;cursor:default;opacity:.62" aria-disabled="true">
+        <div class="tool-tag tag-free" style="background:rgba(255,183,50,.12);border-color:rgba(255,183,50,.35);color:#FFB732">Coming Soon</div>
+        <div class="tool-icon" style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><path d="M22 17l-9.5-9.5-5 5L1 6"/><polyline points="15 17 22 17 22 10"/></svg>
+        </div>
+        <h3>Drawdown Recovery Calculator</h3>
+        <p>See exactly how much gain you need to recover from any drawdown. Understand the compounding math behind account recovery.</p>
+        <div class="tool-use-case">
+          <span>Recovery % required</span>
+          <span>Trades to recover</span>
+          <span>Drawdown risk assessment</span>
+        </div>
+        <div class="tool-link" style="color:#9ca3af">Coming soon</div>
+      </div>
+
+      <div class="tool-card tool-card-disabled" style="--accent:#5E81AC;cursor:default;opacity:.62" aria-disabled="true">
+        <div class="tool-tag tag-free" style="background:rgba(255,183,50,.12);border-color:rgba(255,183,50,.35);color:#FFB732">Coming Soon</div>
+        <div class="tool-icon" style="background:rgba(94,129,172,.07);border:1px solid rgba(94,129,172,.2)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5E81AC" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3>Compound Growth Calculator</h3>
+        <p>Project your account growth with consistent monthly returns. See the power of compounding on your trading returns over 1, 3, and 5 years.</p>
+        <div class="tool-use-case">
+          <span>Monthly &amp; annual growth</span>
+          <span>Compound effect curves</span>
+          <span>Withdrawal scenarios</span>
+        </div>
+        <div class="tool-link" style="color:#9ca3af">Coming soon</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SEO content -->
+<section class="seo-section">
+  <div class="wrap">
+    <div class="seo-grid">
+      <div class="seo-block">
+        <h2>Why position sizing is the #1 skill in trading</h2>
+        <p>Most traders spend hours finding the perfect entry but size their positions based on gut feel. This is the single biggest reason why technically skilled traders blow up accounts.</p>
+        <p>Proper position sizing means you survive the inevitable losing streaks, stay in the game long enough for your edge to play out, and protect capital for your best setups.</p>
+        <ul>
+          <li>Risk no more than 1–2% of account per trade</li>
+          <li>Calculate size BEFORE entry, not after</li>
+          <li>Adjust for market volatility and liquidity</li>
+          <li>Scale down after drawdowns, never up</li>
+        </ul>
+      </div>
+      <div class="seo-block">
+        <h2>Understanding expectancy — the real measure of your edge</h2>
+        <p>Win rate alone means nothing. A trader with a 40% win rate can be more profitable than one with 70% — if their average winner is large enough relative to their losers.</p>
+        <p>Expectancy = (Win Rate × Average Win) − (Loss Rate × Average Loss). A positive expectancy means your strategy has an edge. Knowing your number changes how you approach every trade.</p>
+        <ul>
+          <li>Positive expectancy = tradeable edge</li>
+          <li>Low win rate + high R:R can outperform</li>
+          <li>Track expectancy monthly, not just win rate</li>
+          <li>Use the calculator to stress-test your stats</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="tools-cta">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">Go Further</div>
+    <h2>Calculators tell you the number.<br>Tradexa tells you the why.</h2>
+    <p>Our AI analyzes your trade history to find your actual edge — not just the math, but the specific setups, times, and conditions where you perform best.</p>
+    <a href="/app/dashboard.html" class="btn-primary" style="font-size:15px;padding:14px 32px">Start Free — No Card Required →</a>
+    <p style="margin-top:16px;font-size:12px;color:#525252">Trusted by early-access traders. Free forever plan available.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Free Trading Calculators — Tradexa",
+  "description": "Free professional trading calculators: position size, risk/reward, win rate, and more.",
+  "url": "https://tradexa.io/tools/",
+  "hasPart": [
+    {"@type": "WebPage","name": "Position Size Calculator","url": "https://tradexa.io/tools/position-size.html"},
+    {"@type": "WebPage","name": "Risk/Reward Calculator","url": "https://tradexa.io/tools/risk-reward.html"},
+    {"@type": "WebPage","name": "Win Rate & Expectancy Calculator","url": "https://tradexa.io/tools/win-rate.html"}
+  ]
+}
+</script>
+</body>
+</html>

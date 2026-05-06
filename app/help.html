@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Help Center | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .help-search{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:24px;text-align:center}
+    .help-search-bar{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;max-width:500px;margin:0 auto;transition:border-color .15s}
+    .help-search-bar:focus-within{border-color:var(--green)}
+    .help-search-bar input{background:none;border:none;outline:none;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;width:100%}
+    .help-search-bar input::placeholder{color:var(--dim)}
+    .category-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;cursor:pointer;transition:all .15s;text-decoration:none;display:block}
+    .category-card:hover{border-color:var(--green);background:rgba(255,183,50,.03);transform:translateY(-2px)}
+    .category-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-item:last-child{border-bottom:none}
+    .faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--text);transition:color .15s}
+    .faq-q:hover{color:var(--green)}
+    .faq-icon{color:var(--dim);transition:transform .2s;flex-shrink:0}
+    .faq-item.open .faq-icon{transform:rotate(45deg);color:var(--green)}
+    .faq-a{display:none;padding:0 0 16px;font-size:13px;color:var(--muted);line-height:1.75}
+    .faq-item.open .faq-a{display:block}
+    .article-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:all .12s}
+    .article-row:last-child{border-bottom:none}
+    .article-row:hover .article-title{color:var(--green)}
+    .article-title{font-size:13px;font-weight:500;color:var(--text);transition:color .12s}
+    .contact-wrap{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Help Center'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Help Center</h1>
+      <p class="tx-page-sub">Find answers, tutorials, and support resources.</p>
+    </div>
+    <button class="tx-btn tx-btn-primary">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Contact Support
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="help-search">
+    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">How can we help?</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:16px">Search our documentation, tutorials, and FAQ</div>
+    <div class="help-search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search e.g. 'import trades', 'connect broker', 'AI coach'...">
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <span style="font-size:12px;color:var(--dim)">Popular:</span>
+      <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif">Import CSV</button>
+      <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif">Connect broker</button>
+      <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif">AI Coach setup</button>
+      <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif">Export report</button>
+      <button style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif">Reset password</button>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div style="margin-bottom:24px">
+    <div style="font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">Browse by Category</div>
+    <div class="tx-grid-3" style="gap:12px">
+      <a class="category-card" href="/resources/faq.html">
+        <div class="category-icon" style="background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Getting Started</div>
+        <div style="font-size:12px;color:var(--muted)">Account setup, first trade, onboarding</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">12 articles</div>
+      </a>
+      <a class="category-card" href="/product/broker-sync.html">
+        <div class="category-icon" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Broker Integrations</div>
+        <div style="font-size:12px;color:var(--muted)">Connect brokers, auto-import, sync issues</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">18 articles</div>
+      </a>
+      <a class="category-card" href="/product/ai-coach.html">
+        <div class="category-icon" style="background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">AI Coach</div>
+        <div style="font-size:12px;color:var(--muted)">How AI works, improve accuracy, insights</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">9 articles</div>
+      </a>
+      <a class="category-card" href="/product/analytics.html">
+        <div class="category-icon" style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Analytics & Reports</div>
+        <div style="font-size:12px;color:var(--muted)">Reading metrics, exporting, filtering data</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">14 articles</div>
+      </a>
+      <a class="category-card" href="/pricing/">
+        <div class="category-icon" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Billing & Plans</div>
+        <div style="font-size:12px;color:var(--muted)">Upgrade, cancel, invoices, refunds</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">8 articles</div>
+      </a>
+      <a class="category-card" href="/legal/privacy.html">
+        <div class="category-icon" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Security & Privacy</div>
+        <div style="font-size:12px;color:var(--muted)">2FA, data protection, session management</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px">7 articles</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="tx-grid-2" style="margin-bottom:24px">
+    <!-- FAQ -->
+    <div class="tx-card">
+      <div class="tx-card-title" style="margin-bottom:16px">Frequently Asked Questions</div>
+      <div id="helpFaq">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">How do I connect my broker?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Go to Settings → Integrations → Add Broker. Select your broker from the list of 15+ supported integrations. You'll be redirected to authorize read-only access via OAuth. Trades sync automatically within 2–5 minutes.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">How does trade auto-import work?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Once your broker is connected, Tradexa polls your account every 15 minutes for new closed trades. You can also trigger a manual sync from the Journal page. We only request read-only access and never execute trades.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">Can I import historical trades?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Yes. Use the "Import CSV" button in the Trade Journal. Download our CSV template for the correct format. Most brokers let you export trade history from their platform — use that export with our template.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">How accurate is the AI Coach?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">The AI Coach becomes more accurate as your journal grows. With 50+ trades it can identify basic patterns. With 100+ trades, confidence levels rise significantly. With 200+ trades, the insights are highly personalized and statistically meaningful.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">Is my data secure?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Yes. All data is encrypted at rest with AES-256 and in transit with TLS 1.3. We use read-only OAuth for broker connections. We never store your broker credentials directly. Your data is never sold or shared.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleHelpFaq(this)">How do I cancel my subscription?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
+          <div class="faq-a">Go to Billing → scroll to the bottom → click "Cancel Subscription". Your access continues until the end of the current billing period. Your data is retained for 90 days after cancellation for export.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Articles + Contact -->
+    <div>
+      <div class="tx-card" style="margin-bottom:16px">
+        <div class="tx-card-title" style="margin-bottom:12px">Popular Articles</div>
+        <div class="article-row"><div><div class="article-title">Getting started: your first 30 days</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Getting Started · 5 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="article-row"><div><div class="article-title">How to log your first trade manually</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Trade Journal · 3 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="article-row"><div><div class="article-title">Understanding your AI Coach insights</div><div style="font-size:11px;color:var(--dim);margin-top:2px">AI Coach · 7 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="article-row"><div><div class="article-title">Connecting Interactive Brokers</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Integrations · 4 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="article-row"><div><div class="article-title">Exporting your trades for tax purposes</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Reports · 6 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <div class="article-row"><div><div class="article-title">Setting up risk controls and limits</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Risk · 5 min read</div></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+
+      <!-- Contact Support -->
+      <div class="contact-wrap">
+        <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Still need help?</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Our support team typically responds within 2–4 hours on business days.</div>
+        <div class="tx-form-group">
+          <label class="tx-label">Your Message</label>
+          <textarea class="tx-input" rows="3" placeholder="Describe your issue or question in detail..." style="resize:vertical"></textarea>
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Category</label>
+          <select class="tx-select"><option>General Question</option><option>Technical Issue</option><option>Billing</option><option>Feature Request</option><option>Bug Report</option></select>
+        </div>
+        <button class="tx-btn tx-btn-primary" style="width:100%;justify-content:center">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Send Message
+        </button>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+          <a href="/company/contact.html" style="font-size:12px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:4px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Live Chat
+          </a>
+          <a href="mailto:support@tradexa.io" style="font-size:12px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:4px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email Support
+          </a>
+          <a href="/resources/blog.html" style="font-size:12px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:4px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            Resources & Guides
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+function toggleHelpFaq(btn){
+  var item=btn.closest('.faq-item');
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('#helpFaq .faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+</script>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

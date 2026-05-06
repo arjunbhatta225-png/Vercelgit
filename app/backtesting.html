@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Backtesting | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .strat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;cursor:pointer;transition:all .15s}
+    .strat-card:hover{border-color:var(--border2)}
+    .strat-card.active{border-color:var(--green);background:rgba(255,183,50,.03)}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .result-row:last-child{border-bottom:none}
+    .lesson-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}
+    .lesson-item:last-child{border-bottom:none}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+    .modal-overlay.open{opacity:1;pointer-events:all}
+    .modal{background:var(--surface);border:1px solid var(--border);border-radius:10px;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.6)}
+    .modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .modal-body{padding:24px}
+    .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Backtesting'});</script>
+
+<!-- Add Strategy Modal -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><div style="font-size:16px;font-weight:700;color:var(--text)">Log Backtest Result</div><div style="font-size:12px;color:var(--dim);margin-top:2px">Save a manual backtest or strategy study</div></div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="tx-form-group">
+        <label class="tx-label">Strategy Name</label>
+        <input class="tx-input" type="text" placeholder="e.g. NQ London Open Breakout v2">
+      </div>
+      <div class="modal-grid">
+        <div class="tx-form-group">
+          <label class="tx-label">Market / Asset</label>
+          <input class="tx-input" type="text" placeholder="NQ, ES, BTC...">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Timeframe</label>
+          <select class="tx-select"><option>1m</option><option>5m</option><option>15m</option><option selected>1H</option><option>4H</option><option>Daily</option></select>
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Period Tested</label>
+          <input class="tx-input" type="text" placeholder="e.g. Jan 2024 – Dec 2025">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Total Trades</label>
+          <input class="tx-input" type="number" placeholder="0">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Win Rate %</label>
+          <input class="tx-input" type="number" placeholder="65.0" step="0.1">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Avg R:R</label>
+          <input class="tx-input" type="text" placeholder="1:2.5">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Net Return</label>
+          <input class="tx-input" type="text" placeholder="+24.5%">
+        </div>
+        <div class="tx-form-group">
+          <label class="tx-label">Max Drawdown</label>
+          <input class="tx-input" type="text" placeholder="-8.2%">
+        </div>
+      </div>
+      <div class="tx-form-group">
+        <label class="tx-label">Setup Description</label>
+        <textarea class="tx-input" rows="2" placeholder="Entry rules, exit rules, filters..." style="resize:vertical"></textarea>
+      </div>
+      <div class="tx-form-group">
+        <label class="tx-label">Key Lessons Learned</label>
+        <textarea class="tx-input" rows="3" placeholder="What worked? What didn't? What would you change?" style="resize:vertical"></textarea>
+      </div>
+      <div class="tx-form-group">
+        <label class="tx-label">Status</label>
+        <select class="tx-select"><option>Testing</option><option>Validated</option><option>Live</option><option>Archived</option></select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="tx-btn tx-btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="tx-btn tx-btn-primary">Save Strategy</button>
+    </div>
+  </div>
+</div>
+
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Backtesting Notes</h1>
+      <p class="tx-page-sub">Store, track, and compare your strategy backtests and research.</p>
+    </div>
+    <button class="tx-btn tx-btn-primary" onclick="document.getElementById('addModal').classList.add('open')">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Log Backtest
+    </button>
+  </div>
+
+  <!-- Summary KPIs -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+    <div class="tx-kpi"><div class="tx-kpi-label">Strategies Logged</div><div class="tx-kpi-value">6</div><div class="tx-kpi-change neu">2 live, 3 validated</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Best Win Rate</div><div class="tx-kpi-value">82%</div><div class="tx-kpi-change pos">NQ Breakout</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Best Net Return</div><div class="tx-kpi-value">+38%</div><div class="tx-kpi-change pos">12-month backtest</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">In Progress</div><div class="tx-kpi-value">1</div><div class="tx-kpi-change neu">Currently testing</div></div>
+  </div>
+
+  <div class="tx-grid-aside-lg">
+    <!-- Strategy List -->
+    <div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div class="strat-card active">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">NQ London Open Breakout</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span class="tx-badge tx-badge-green-border">Live</span>
+                <span class="tx-badge tx-badge-blue">NQ Futures · 5m</span>
+                <span class="tx-badge tx-badge-gray">Jan 2024 – Apr 2026</span>
+              </div>
+            </div>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm">Edit</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px">
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center">
+              <div style="font-size:16px;font-weight:700;color:var(--profit)">82%</div>
+              <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Win Rate</div>
+            </div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center">
+              <div style="font-size:16px;font-weight:700;color:var(--text)">1:3.1</div>
+              <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Avg R:R</div>
+            </div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center">
+              <div style="font-size:16px;font-weight:700;color:var(--profit)">+38%</div>
+              <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Net Return</div>
+            </div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center">
+              <div style="font-size:16px;font-weight:700;color:var(--loss)">-4.2%</div>
+              <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Max DD</div>
+            </div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center">
+              <div style="font-size:16px;font-weight:700;color:var(--text)">284</div>
+              <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Trades</div>
+            </div>
+          </div>
+          <div style="background:var(--bg);border-radius:6px;padding:12px">
+            <div class="tx-card-title" style="margin-bottom:8px">Key Lessons</div>
+            <div class="lesson-item">
+              <div class="tx-dot tx-dot-green" style="margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--muted)">Only valid 09:00–09:45 EST. Outside this window, win rate drops to 41%.</div>
+            </div>
+            <div class="lesson-item">
+              <div class="tx-dot tx-dot-green" style="margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--muted)">Must have pre-market range contraction. Wide ranges invalidate the setup.</div>
+            </div>
+            <div class="lesson-item">
+              <div class="tx-dot tx-dot-red" style="margin-top:4px;flex-shrink:0"></div>
+              <div style="font-size:12px;color:var(--muted)">Avoid on FOMC days and CPI releases — news events distort the pattern.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="strat-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">ES Pullback to VWAP</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span class="tx-badge tx-badge-green-border">Live</span>
+                <span class="tx-badge tx-badge-blue">ES Futures · 15m</span>
+              </div>
+            </div>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm">Edit</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--profit)">71%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Win Rate</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--text)">1:2.2</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Avg R:R</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--profit)">+24%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Net Return</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--loss)">-7.1%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Max DD</div></div>
+          </div>
+        </div>
+
+        <div class="strat-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">BTC Asia Range Break</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span class="tx-badge tx-badge-yellow">Testing</span>
+                <span class="tx-badge tx-badge-blue">BTC/USD · 1H</span>
+              </div>
+            </div>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm">Edit</button>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--warn)">54%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Win Rate</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--text)">1:1.8</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Avg R:R</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--profit)">+9%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Net Return</div></div>
+            <div style="background:var(--bg);border-radius:6px;padding:10px;text-align:center"><div style="font-size:15px;font-weight:700;color:var(--loss)">-12%</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Max DD</div></div>
+          </div>
+          <div style="margin-top:12px;padding:10px;background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.15);border-radius:6px;font-size:12px;color:var(--warn)">⚠ Still testing — needs more data before going live. Drawdown too high for current risk model.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="tx-card">
+        <div class="tx-card-title">Strategy Comparison</div>
+        <div class="result-row">
+          <div style="font-size:12px;color:var(--muted)">NQ Breakout</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="tx-progress-bg" style="width:80px"><div class="tx-progress-fill" style="width:82%;background:var(--profit)"></div></div>
+            <span style="font-size:11px;font-weight:600;color:var(--profit)">82%</span>
+          </div>
+        </div>
+        <div class="result-row">
+          <div style="font-size:12px;color:var(--muted)">ES VWAP Pull</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="tx-progress-bg" style="width:80px"><div class="tx-progress-fill" style="width:71%;background:var(--profit)"></div></div>
+            <span style="font-size:11px;font-weight:600;color:var(--profit)">71%</span>
+          </div>
+        </div>
+        <div class="result-row">
+          <div style="font-size:12px;color:var(--muted)">BTC Asia Break</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="tx-progress-bg" style="width:80px"><div class="tx-progress-fill" style="width:54%;background:var(--warn)"></div></div>
+            <span style="font-size:11px;font-weight:600;color:var(--warn)">54%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tx-card">
+        <div class="tx-card-title">Research Ideas</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">Gold Pre-NY Session</div>
+            <div style="font-size:11px;color:var(--dim)">Hypothesis: GLD gaps at 08:30 EST tend to fill within 90 mins</div>
+          </div>
+          <div style="padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">SPY Monday Reversal</div>
+            <div style="font-size:11px;color:var(--dim)">Hypothesis: Monday opens against prior Friday trend reverse by 10:30</div>
+          </div>
+        </div>
+        <button class="tx-btn tx-btn-ghost tx-btn-sm" style="margin-top:10px;width:100%;justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add Research Idea
+        </button>
+      </div>
+
+      <div class="tx-card">
+        <div class="tx-card-title">Quick Stats</div>
+        <div class="result-row"><span style="font-size:12px;color:var(--muted)">Total backtested trades</span><span style="font-size:13px;font-weight:600;color:var(--text)">842</span></div>
+        <div class="result-row"><span style="font-size:12px;color:var(--muted)">Avg validated win rate</span><span style="font-size:13px;font-weight:600;color:var(--profit)">68.4%</span></div>
+        <div class="result-row"><span style="font-size:12px;color:var(--muted)">Best period tested</span><span style="font-size:13px;font-weight:600;color:var(--text)">2 years</span></div>
+        <div class="result-row"><span style="font-size:12px;color:var(--muted)">Strategies in live use</span><span style="font-size:13px;font-weight:600;color:var(--text)">2</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+function closeModal(){document.getElementById('addModal').classList.remove('open')}
+document.getElementById('addModal').addEventListener('click',function(e){if(e.target===this)closeModal()})
+</script>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Reports | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .export-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:22px;cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:16px}
+    .export-card:hover{border-color:var(--green);background:rgba(255,183,50,.03)}
+    .export-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .report-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .report-row:last-child{border-bottom:none}
+    .date-picker{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Reports'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Reports & Export</h1>
+      <p class="tx-page-sub">Download your data, generate tax reports, and share performance summaries.</p>
+    </div>
+    <div class="date-picker">
+      <select class="tx-select" style="width:130px"><option>This Month</option><option>Last 30 days</option><option>Last 90 days</option><option>YTD</option><option>Custom Range</option></select>
+      <button class="tx-btn tx-btn-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Export All
+      </button>
+    </div>
+  </div>
+
+  <!-- Export Options -->
+  <div style="margin-bottom:24px">
+    <div style="font-size:13px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">Export Formats</div>
+    <div class="tx-grid-3">
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Trade CSV</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Full trade history with all fields — compatible with Excel, Google Sheets, and analysis tools.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Download CSV</button>
+        </div>
+      </div>
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><rect x="8" y="12" width="8" height="6" rx="1"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">PDF Performance Report</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Professionally formatted report with charts, stats, and key insights. Great for sharing or archiving.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Generate PDF</button>
+        </div>
+      </div>
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2"><path d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Tax Export</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Realized P&L by asset class for tax year. Formatted for common accounting workflows. Consult your tax advisor.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Export Tax CSV</button>
+        </div>
+      </div>
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Analytics JSON</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Raw analytics data export for developers or third-party analysis tools. Includes all computed metrics.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Export JSON</button>
+        </div>
+      </div>
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Share Performance Card</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Generate a shareable performance summary card with key stats. Perfect for social sharing or coaching sessions.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Create Card</button>
+        </div>
+      </div>
+      <div class="export-card">
+        <div class="export-icon" style="background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">Weekly Review PDF</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Export any weekly review as a formatted PDF for coaching, mentorship, or personal records.</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm">Export Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Summaries -->
+  <div class="tx-card" style="margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="tx-card-title" style="margin:0">Monthly Performance Summaries</div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm">Download All</button>
+    </div>
+    <div class="tx-table-wrap">
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Trades</th>
+            <th>Win Rate</th>
+            <th>Net P&L</th>
+            <th>Return</th>
+            <th>Profit Factor</th>
+            <th>Max DD</th>
+            <th>Discipline Score</th>
+            <th>Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>May 2026</strong> <span class="tx-badge tx-badge-green-border tx-badge" style="font-size:9px">Current</span></td>
+            <td>48</td><td>68.2%</td>
+            <td style="color:var(--profit);font-weight:700">+$12,450</td>
+            <td style="color:var(--profit)">+8.4%</td>
+            <td>2.34</td><td style="color:var(--loss)">-3.7%</td>
+            <td><span class="tx-badge tx-badge-green">87/100</span></td>
+            <td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td>
+          </tr>
+          <tr>
+            <td><strong>April 2026</strong></td>
+            <td>62</td><td>65.4%</td>
+            <td style="color:var(--profit);font-weight:700">+$10,400</td>
+            <td style="color:var(--profit)">+7.2%</td>
+            <td>2.11</td><td style="color:var(--loss)">-5.1%</td>
+            <td><span class="tx-badge tx-badge-green">79/100</span></td>
+            <td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td>
+          </tr>
+          <tr>
+            <td><strong>March 2026</strong></td>
+            <td>54</td><td>70.4%</td>
+            <td style="color:var(--profit);font-weight:700">+$9,200</td>
+            <td style="color:var(--profit)">+6.8%</td>
+            <td>2.28</td><td style="color:var(--loss)">-4.2%</td>
+            <td><span class="tx-badge tx-badge-green">84/100</span></td>
+            <td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td>
+          </tr>
+          <tr>
+            <td><strong>February 2026</strong></td>
+            <td>38</td><td>50.0%</td>
+            <td style="color:var(--loss);font-weight:700">-$1,400</td>
+            <td style="color:var(--loss)">-1.0%</td>
+            <td>0.88</td><td style="color:var(--loss)">-9.4%</td>
+            <td><span class="tx-badge tx-badge-red">61/100</span></td>
+            <td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td>
+          </tr>
+          <tr>
+            <td><strong>January 2026</strong></td>
+            <td>44</td><td>61.4%</td>
+            <td style="color:var(--profit);font-weight:700">+$6,100</td>
+            <td style="color:var(--profit)">+4.5%</td>
+            <td>1.92</td><td style="color:var(--loss)">-6.2%</td>
+            <td><span class="tx-badge tx-badge-yellow">72/100</span></td>
+            <td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tax Summary -->
+  <div class="tx-card">
+    <div class="tx-card-title">Tax Year Summary (2026 — Partial)</div>
+    <div style="padding:14px;background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.15);border-radius:6px;font-size:12px;color:var(--warn);margin-bottom:14px">
+      ⚠ This is for informational purposes only. Always consult a qualified tax professional for tax advice.
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:var(--profit)">+$34,450</div><div style="font-size:11px;color:var(--dim);margin-top:4px">Total Realized P&L</div></div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:var(--text)">$28,200</div><div style="font-size:11px;color:var(--dim);margin-top:4px">Short-term Gains</div></div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:var(--text)">$6,250</div><div style="font-size:11px;color:var(--dim);margin-top:4px">Long-term Gains</div></div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:var(--loss)">-$7,840</div><div style="font-size:11px;color:var(--dim);margin-top:4px">Total Losses</div></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="tx-btn tx-btn-ghost">Download 2026 Tax CSV</button>
+      <button class="tx-btn tx-btn-ghost">Download 2025 Tax CSV</button>
+    </div>
+  </div>
+</main>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

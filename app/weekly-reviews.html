@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="view-transition" content="same-origin">
+<style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+<title>Weekly Reviews | Tradexa</title>
+<script src="/assets/tx-router.js" defer></script>
+<script src="/assets/app-sidebar.js" defer></script>
+<script src="/assets/trades-data.js" defer></script>
+<style>
+  .review-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+  .review-card:hover{border-color:var(--border2)}
+  .review-card.active{border-color:var(--green)}
+  .review-card-header{padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+  .win-item,.mistake-item,.improvement-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .win-item:last-child,.mistake-item:last-child,.improvement-item:last-child{border-bottom:none}
+  .improvement-num{width:24px;height:24px;border-radius:50%;background:rgba(255,183,50,.15);border:1px solid rgba(255,183,50,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);flex-shrink:0;margin-top:1px}
+  .wr-empty{font-size:13px;color:var(--muted);padding:18px 0;line-height:1.6}
+  .wr-loading{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);padding:18px 0}
+  .wr-spin{width:14px;height:14px;border:2px solid rgba(255,183,50,.25);border-top-color:#FFB732;border-radius:50%;animation:wr-rot .8s linear infinite}
+  @keyframes wr-rot{to{transform:rotate(360deg)}}
+  .wr-error{font-size:12px;color:#fca5a5;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:6px;padding:10px 12px}
+  .tx-btn-primary[disabled]{opacity:.55;cursor:not-allowed}
+</style>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+<meta name="description" content="Real Gemini-powered weekly performance reviews — wins, mistakes, and next-week focus from your actual trades."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Weekly Reviews'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Weekly Reviews</h1>
+      <p class="tx-page-sub">Real AI-generated performance reviews from your journal — wins, mistakes, and focus for next week.</p>
+    </div>
+    <button class="tx-btn tx-btn-primary" id="wr-generate">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      <span id="wr-generate-label">Generate This Week's Review</span>
+    </button>
+  </div>
+
+  <div class="tx-grid-aside" style="gap:20px">
+    <!-- Left: Current Review -->
+    <div>
+      <!-- Current Week Banner -->
+      <div id="wr-banner" style="background:#1a1d23;border:1px solid var(--gold-border);border-radius:8px;padding:20px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:4px" id="wr-week-range">This Week</div>
+            <div style="font-size:20px;font-weight:700;color:var(--text)" id="wr-title">No review yet</div>
+            <div style="font-size:13px;color:#A1A1AA;margin-top:4px" id="wr-summary">Click "Generate This Week's Review" to have Gemini analyze your trades from this week and produce a structured performance review.</div>
+          </div>
+          <div style="text-align:center" id="wr-score-wrap" hidden>
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="28" fill="none" stroke="#222222" stroke-width="6"/>
+              <circle id="wr-score-arc" cx="36" cy="36" r="28" fill="none" stroke="#FFB732" stroke-width="6" stroke-dasharray="0 176" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 36 36)"/>
+              <text id="wr-score-num" x="36" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" font-family="Inter,sans-serif">—</text>
+            </svg>
+            <div style="font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Score</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="wr-stats">
+          <div style="background:rgba(0,0,0,.2);border-radius:6px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--text)" id="wr-stat-pnl">—</div><div style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Net P&L</div></div>
+          <div style="background:rgba(0,0,0,.2);border-radius:6px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--text)" id="wr-stat-wr">—</div><div style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Win Rate</div></div>
+          <div style="background:rgba(0,0,0,.2);border-radius:6px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--text)" id="wr-stat-trades">—</div><div style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Trades</div></div>
+          <div style="background:rgba(0,0,0,.2);border-radius:6px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:var(--text)" id="wr-stat-rr">—</div><div style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:.06em;margin-top:2px">Avg R:R</div></div>
+        </div>
+      </div>
+
+      <div id="wr-error" class="wr-error" hidden></div>
+
+      <!-- Wins -->
+      <div class="tx-card" style="margin-bottom:16px">
+        <div class="tx-card-title" style="color:var(--profit)">✓ Wins This Week</div>
+        <div id="wr-wins"><div class="wr-empty">No review generated yet. Click the Generate button above to have Gemini extract this week's wins from your journal.</div></div>
+      </div>
+
+      <!-- Mistakes -->
+      <div class="tx-card" style="margin-bottom:16px">
+        <div class="tx-card-title" style="color:var(--loss)">⚠ Mistakes Repeated</div>
+        <div id="wr-mistakes"><div class="wr-empty">Mistakes will be identified by Gemini after generation. Real ones, with specific trades cited.</div></div>
+      </div>
+
+      <!-- Focus -->
+      <div class="tx-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <div class="tx-card-title" style="margin:0">Next Week's Focus</div>
+        </div>
+        <div id="wr-focus"><div class="wr-empty">Three concrete focus items will appear here after generation.</div></div>
+      </div>
+    </div>
+
+    <!-- Right: Past Reviews + meta -->
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">Past Reviews</div>
+      <div id="wr-past-list" style="display:flex;flex-direction:column;gap:8px">
+        <div class="wr-empty" style="font-size:12px;padding:8px 0">No past reviews yet — generate your first one.</div>
+      </div>
+
+      <div class="tx-card" style="margin-top:16px">
+        <div class="tx-card-title">How this works</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">
+          Each review is generated by Gemini 2.5 from <b style="color:var(--text)">your real trade entries</b> for the selected week — not templates.
+          Reviews are cached locally so you can revisit them; click any past week to load it.
+        </div>
+      </div>
+
+      <div class="tx-card" style="margin-top:16px">
+        <div class="tx-card-title">Discipline Score Trend</div>
+        <div id="wr-trend" style="display:flex;align-items:flex-end;gap:6px;height:60px;margin:10px 0"></div>
+        <div id="wr-trend-labels" style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim)"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="/assets/tradebot.js" defer></script>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   Weekly Reviews — real Gemini integration
+   Storage: localStorage 'txWeeklyReviews_v1' = { 'YYYY-Wxx': review }
+   ───────────────────────────────────────────────────────────── */
+(function(){
+  var STORE_KEY = 'txWeeklyReviews_v1';
+  var API_BASE = (window.TX_API_BASE || '').replace(/\/$/, '');
+
+  /* Per-user scoping (Supabase user id when available, else 'anon'). */
+  function userKey(){
+    try { if (window.TxAuth && window.TxAuth.userKey) return window.TxAuth.userKey() || 'anon'; }
+    catch(e){}
+    return 'anon';
+  }
+  function readAll(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }catch(e){ return {}; } }
+  function readStore(){ var all = readAll(); return all[userKey()] || {}; }
+  function writeStore(s){
+    try {
+      var all = readAll();
+      all[userKey()] = s;
+      localStorage.setItem(STORE_KEY, JSON.stringify(all));
+    } catch(e){}
+  }
+
+  function pad(n){ return n<10?'0'+n:''+n; }
+  function fmtDate(d){ return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+  function isoDate(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+
+  /* Mon→Sun week containing `ref` */
+  function weekRange(ref){
+    var d = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate());
+    var dow = (d.getDay() + 6) % 7;          // Mon=0
+    var start = new Date(d); start.setDate(d.getDate() - dow);
+    var end = new Date(start); end.setDate(start.getDate() + 6); end.setHours(23,59,59,999);
+    return {start: start, end: end};
+  }
+  function weekKey(start){
+    var jan1 = new Date(start.getFullYear(),0,1);
+    var w = Math.ceil(((start - jan1)/86400000 + jan1.getDay()+1)/7);
+    return start.getFullYear() + '-W' + pad(w);
+  }
+
+  function tradesInWeek(start, end){
+    if(!window.TxTradeData) return [];
+    var all = TxTradeData.getTrades();
+    return all.filter(function(t){
+      if(!t.date) return false;
+      var td = new Date(t.date);
+      return td >= start && td <= end;
+    });
+  }
+
+  function quickStats(trades){
+    /* trades-data.js _normalizeTrade() guarantees pnl is numeric, but defensive
+       parseFloat keeps this resilient against any callers that bypass the
+       central store (e.g. test fixtures). */
+    function _n(v){ var x=parseFloat(v); return isFinite(x)?x:0; }
+    var wins = trades.filter(function(t){return _n(t.pnl)>0;});
+    var losses = trades.filter(function(t){return _n(t.pnl)<0;});
+    var totalPnl = trades.reduce(function(s,t){return s+_n(t.pnl);},0);
+    var winRate = trades.length ? Math.round(wins.length/trades.length*1000)/10 : 0;
+    var rrTrades = trades.filter(function(t){return _n(t.rr)>0;});
+    var avgRR = rrTrades.length ? Math.round(rrTrades.reduce(function(s,t){return s+_n(t.rr);},0)/rrTrades.length*10)/10 : 0;
+    var totWin = wins.reduce(function(s,t){return s+_n(t.pnl);},0);
+    var totLoss = losses.reduce(function(s,t){return s+_n(t.pnl);},0);
+    /* Match getStats() convention: Infinity for wins-with-no-losses, 0 otherwise.
+       Display sites already handle Infinity via TxTradeData.formatPF. */
+    var profitFactor;
+    if(totLoss !== 0)      profitFactor = Math.round(Math.abs(totWin/totLoss)*100)/100;
+    else if(totWin > 0)    profitFactor = Infinity;
+    else                   profitFactor = 0;
+    function emoCount(label){ return trades.filter(function(t){return (t.emotion||[]).indexOf(label)>-1;}).length; }
+    return {
+      total: trades.length, wins: wins.length, losses: losses.length,
+      winRate: winRate, totalPnl: Math.round(totalPnl*100)/100, avgRR: avgRR, profitFactor: profitFactor,
+      calmCount: emoCount('Calm'), fomoCount: emoCount('FOMO'),
+      revengeCount: emoCount('Revenge'), greedyCount: emoCount('Greedy')
+    };
+  }
+
+  function setLoading(state){
+    var btn = document.getElementById('wr-generate');
+    var label = document.getElementById('wr-generate-label');
+    btn.disabled = state;
+    label.textContent = state ? 'Analyzing your week…' : "Generate This Week's Review";
+  }
+  function showError(msg, allowRetry){
+    var e = document.getElementById('wr-error');
+    e.innerHTML = '';
+    var span = document.createElement('span'); span.textContent = msg; e.appendChild(span);
+    if (allowRetry) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Retry';
+      btn.style.cssText = 'margin-left:10px;font-size:11px;font-weight:600;color:#FFB732;background:rgba(255,183,50,.08);border:1px solid rgba(255,183,50,.25);border-radius:4px;padding:3px 9px;cursor:pointer';
+      btn.addEventListener('click', function(){ clearError(); generateForCurrentWeek(); });
+      e.appendChild(btn);
+    }
+    e.hidden = false;
+  }
+  function clearError(){ var e=document.getElementById('wr-error'); e.hidden=true; e.innerHTML=''; }
+
+  function fmtMoney(n){
+    var v = +n || 0;
+    var s = (v >= 0 ? '+$' : '-$') + Math.abs(v).toLocaleString(undefined,{maximumFractionDigits:0});
+    return s;
+  }
+
+  function renderReview(r, range){
+    document.getElementById('wr-week-range').textContent = fmtDate(range.start) + ' – ' + fmtDate(range.end) + ', ' + range.start.getFullYear();
+    document.getElementById('wr-title').textContent = r.title || 'Weekly Review';
+    document.getElementById('wr-summary').textContent = r.summary || '';
+    var pnlEl = document.getElementById('wr-stat-pnl');
+    pnlEl.textContent = fmtMoney(r.netPnl);
+    pnlEl.style.color = (r.netPnl >= 0) ? 'var(--profit)' : 'var(--loss)';
+    document.getElementById('wr-stat-wr').textContent     = (r.stats && r.stats.winRate != null ? r.stats.winRate + '%' : '—');
+    document.getElementById('wr-stat-trades').textContent = (r.tradeCount != null ? r.tradeCount : '—');
+    document.getElementById('wr-stat-rr').textContent     = (r.stats && r.stats.avgRR != null ? '1:' + r.stats.avgRR : '—');
+
+    /* Score arc */
+    var score = Math.max(0, Math.min(100, +r.score || 0));
+    var circ = 2 * Math.PI * 28;
+    var arc  = document.getElementById('wr-score-arc');
+    var num  = document.getElementById('wr-score-num');
+    document.getElementById('wr-score-wrap').hidden = false;
+    arc.setAttribute('stroke-dasharray', (circ * score / 100).toFixed(1) + ' ' + circ.toFixed(1));
+    arc.setAttribute('stroke', score >= 80 ? '#22C55E' : score >= 60 ? '#FFB732' : '#EF4444');
+    num.textContent = score;
+
+    function fillList(containerId, items, kind){
+      var el = document.getElementById(containerId);
+      el.innerHTML = '';
+      if(!items || !items.length){ el.innerHTML = '<div class="wr-empty">None this week.</div>'; return; }
+      items.forEach(function(it){
+        var dotClass = kind === 'win' ? 'tx-dot-green' : (it.severity === 'red' ? 'tx-dot-red' : 'tx-dot-yellow');
+        var row = document.createElement('div');
+        row.className = (kind === 'win' ? 'win-item' : 'mistake-item');
+        var dot = document.createElement('div');
+        dot.className = 'tx-dot ' + dotClass;
+        dot.style.cssText = 'margin-top:4px;flex-shrink:0';
+        var content = document.createElement('div');
+        var title = document.createElement('div');
+        title.style.cssText = 'font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px';
+        title.textContent = it.title || '';
+        var detail = document.createElement('div');
+        detail.style.cssText = 'font-size:12px;color:var(--muted);line-height:1.55';
+        detail.textContent = it.detail || '';
+        content.appendChild(title); content.appendChild(detail);
+        row.appendChild(dot); row.appendChild(content); el.appendChild(row);
+      });
+    }
+    fillList('wr-wins', r.wins, 'win');
+    fillList('wr-mistakes', r.mistakes, 'mis');
+
+    /* Focus */
+    var focusEl = document.getElementById('wr-focus');
+    focusEl.innerHTML = '';
+    (r.focus || []).forEach(function(f, i){
+      var row = document.createElement('div');
+      row.className = 'improvement-item';
+      var n = document.createElement('div'); n.className = 'improvement-num'; n.textContent = (i+1);
+      var c = document.createElement('div');
+      var t = document.createElement('div');
+      t.style.cssText = 'font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px';
+      t.textContent = f.title || '';
+      var d = document.createElement('div');
+      d.style.cssText = 'font-size:12px;color:var(--muted);line-height:1.55';
+      d.textContent = f.detail || '';
+      c.appendChild(t); c.appendChild(d);
+      row.appendChild(n); row.appendChild(c); focusEl.appendChild(row);
+    });
+  }
+
+  function renderPastList(){
+    var store = readStore();
+    var keys = Object.keys(store).sort().reverse();
+    var listEl = document.getElementById('wr-past-list');
+    var trend = document.getElementById('wr-trend');
+    var labels = document.getElementById('wr-trend-labels');
+    if(keys.length === 0){
+      listEl.innerHTML = '<div class="wr-empty" style="font-size:12px;padding:8px 0">No past reviews yet — generate your first one.</div>';
+      trend.innerHTML = ''; labels.innerHTML = '';
+      return;
+    }
+    listEl.innerHTML = '';
+    keys.slice(0,6).forEach(function(k, i){
+      var r = store[k];
+      var card = document.createElement('div');
+      card.className = 'review-card' + (i === 0 ? ' active' : '');
+      card.dataset.weekKey = k;
+      var pnlClass = (r.netPnl >= 0) ? 'var(--profit)' : 'var(--loss)';
+      var dateRange = (r._range ? (r._range.startLabel + ' – ' + r._range.endLabel) : k);
+      card.innerHTML =
+        '<div class="review-card-header">' +
+          '<div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text)">' + dateRange + '</div>' +
+            '<div style="font-size:11px;color:var(--dim);margin-top:1px">' + (r.tradeCount||0) + ' trade' + ((r.tradeCount||0)===1?'':'s') + '</div>' +
+          '</div>' +
+          '<div style="text-align:right">' +
+            '<div style="font-size:13px;font-weight:700;color:'+pnlClass+'">' + fmtMoney(r.netPnl) + '</div>' +
+            '<div style="font-size:10px;color:var(--muted);font-weight:600">Score: ' + (r.score||0) + '</div>' +
+          '</div>' +
+        '</div>';
+      card.addEventListener('click', function(){ loadFromStore(k); });
+      listEl.appendChild(card);
+    });
+
+    /* Trend */
+    var recent = keys.slice(0, 6).reverse();
+    trend.innerHTML = '';
+    labels.innerHTML = '';
+    recent.forEach(function(k, idx){
+      var r = store[k];
+      var s = Math.max(0, Math.min(100, +r.score || 0));
+      var bar = document.createElement('div');
+      var color = s >= 80 ? 'var(--profit)' : s >= 60 ? '#FFB732' : 'var(--loss)';
+      bar.style.cssText = 'flex:1;background:'+color+';opacity:.85;border-radius:2px 2px 0 0;height:'+Math.max(10,s)+'%;align-self:flex-end';
+      bar.title = k + ': ' + s;
+      trend.appendChild(bar);
+      var lbl = document.createElement('span');
+      lbl.textContent = (idx === recent.length - 1) ? 'Now' : 'W'+(idx+1);
+      if(idx === recent.length - 1) lbl.style.cssText = 'color:var(--green);font-weight:700';
+      labels.appendChild(lbl);
+    });
+  }
+
+  function loadFromStore(key){
+    var store = readStore();
+    var r = store[key];
+    if(!r || !r._range) return;
+    var range = { start: new Date(r._range.startISO), end: new Date(r._range.endISO) };
+    renderReview(r, range);
+    document.querySelectorAll('.review-card').forEach(function(c){
+      c.classList.toggle('active', c.dataset.weekKey === key);
+    });
+  }
+
+  function generateForCurrentWeek(){
+    if(!window.TxTradeData){ showError('Trade data is not loaded yet — refresh the page and try again.'); return; }
+    clearError();
+    var range = weekRange(new Date());
+    var key = weekKey(range.start);
+    var trades = tradesInWeek(range.start, range.end);
+    if(trades.length === 0){
+      showError('No trades logged for this week (' + fmtDate(range.start) + ' – ' + fmtDate(range.end) + '). Log some trades in the Journal first.');
+      return;
+    }
+    var stats = quickStats(trades);
+    setLoading(true);
+
+    var hdrs = {'Content-Type':'application/json'};
+    var tokenP = (window.TxAuth && window.TxAuth.getToken)
+      ? window.TxAuth.getToken().catch(function(){return null;})
+      : Promise.resolve(null);
+    /* JSON.stringify turns Infinity into null — semantically misleading
+       for the AI prompt ("Profit factor: None"). Send a sanitized copy
+       that maps Infinity to the string '∞' so the server-side prompt
+       retains the meaning of "wins, no losses". */
+    var safeStats = Object.assign({}, stats);
+    if(safeStats.profitFactor === Infinity) safeStats.profitFactor = '∞';
+    tokenP.then(function(tok){
+      if(tok) hdrs['Authorization'] = 'Bearer ' + tok;
+      return fetch((API_BASE || '') + '/api/weekly-review', {
+        method: 'POST',
+        headers: hdrs,
+        body: JSON.stringify({
+          weekStart: isoDate(range.start),
+          weekEnd:   isoDate(range.end),
+          stats:     safeStats,
+          trades:    trades
+        })
+      });
+    })
+    .then(function(r){
+      /* Guard against non-JSON responses (e.g. static-host returning HTML
+         404 page → "Unexpected token '<' is not valid JSON"). */
+      return r.text().then(function(raw){
+        var d = {};
+        try { d = raw ? JSON.parse(raw) : {}; }
+        catch(e){
+          d = { error: r.status === 404
+            ? 'AI features are not available on this deployment. Deploy the API backend to enable Weekly Reviews.'
+            : 'AI service returned an unreadable response (' + r.status + ').' };
+        }
+        return { ok: r.ok, status: r.status, data: d };
+      });
+    })
+    .then(function(res){
+      setLoading(false);
+      if(!res.ok || res.data.error){
+        showError(res.data.error || ('AI service returned ' + res.status), true);
+        return;
+      }
+      var review = res.data;
+      review._range = {
+        startISO: isoDate(range.start), endISO: isoDate(range.end),
+        startLabel: fmtDate(range.start), endLabel: fmtDate(range.end)
+      };
+      review.stats = stats;
+      var store = readStore();
+      store[key] = review;
+      writeStore(store);
+      renderReview(review, range);
+      renderPastList();
+    })
+    .catch(function(err){
+      setLoading(false);
+      showError('Could not reach the AI review service. Check your connection and try again.', true);
+      console.error('weekly-review error:', err);
+    });
+  }
+
+  function init(){
+    document.getElementById('wr-generate').addEventListener('click', generateForCurrentWeek);
+    /* Auto-load most recent cached review if present, else show empty banner */
+    var store = readStore();
+    var keys = Object.keys(store).sort().reverse();
+    if(keys.length){
+      loadFromStore(keys[0]);
+    } else {
+      /* Fill banner stats from this week's trades so the page isn't blank */
+      var range = weekRange(new Date());
+      var trades = tradesInWeek(range.start, range.end);
+      document.getElementById('wr-week-range').textContent = fmtDate(range.start) + ' – ' + fmtDate(range.end) + ', ' + range.start.getFullYear();
+      if(trades.length){
+        var s = quickStats(trades);
+        document.getElementById('wr-stat-pnl').textContent    = fmtMoney(s.totalPnl);
+        document.getElementById('wr-stat-pnl').style.color    = s.totalPnl >= 0 ? 'var(--profit)' : 'var(--loss)';
+        document.getElementById('wr-stat-wr').textContent     = s.winRate + '%';
+        document.getElementById('wr-stat-trades').textContent = s.total;
+        document.getElementById('wr-stat-rr').textContent     = '1:' + s.avgRR;
+      }
+    }
+    renderPastList();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>
+</body>
+</html>

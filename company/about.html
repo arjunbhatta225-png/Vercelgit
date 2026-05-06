@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Tradexa</title>
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F9FAFB;font-family:'Inter',sans-serif;overflow-x:hidden}
+    .page-hero{padding:80px 24px 72px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,183,50,.12) 0%,transparent 70%);z-index:0}
+    .page-hero>*{position:relative;z-index:1}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:12px}
+    .page-title{font-size:clamp(32px,5vw,52px);font-weight:600;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px}
+    .page-sub{font-size:16px;color:#A1A1AA;max-width:560px;margin:0 auto;line-height:1.7}
+    .container{max-width:1100px;margin:0 auto}
+    section{padding:72px 24px}
+    .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .mission-content h2{font-size:32px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:20px;letter-spacing:-0.02em}
+    .mission-content p{font-size:14.5px;color:#A1A1AA;line-height:1.75;margin-bottom:16px}
+    .values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .value-card{background:#0d0f12;padding:32px}
+    .value-icon{width:40px;height:40px;border-radius:2px;background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:#3B82F6}
+    .value-card h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:8px}
+    .value-card p{font-size:13px;color:#A1A1AA;line-height:1.65}
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);margin-top:48px}
+    .stat-cell{background:#0d0f12;padding:28px 24px;text-align:center}
+    .stat-num{font-size:32px;font-weight:600;color:#fff;margin-bottom:6px}
+    .stat-label{font-size:12px;color:#525252;text-transform:uppercase;letter-spacing:.06em}
+    .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px;background:rgba(255,255,255,.06)}
+    .team-card{background:#0d0f12;padding:32px;text-align:center}
+    .team-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:600;color:#fff}
+    .team-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+    .team-role{font-size:12px;color:#A1A1AA;margin-bottom:12px}
+    .team-bio{font-size:12.5px;color:#525252;line-height:1.6}
+    .trust-section{background:#0d0f12;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+    .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .trust-card{background:#0d0f12;padding:32px}
+    .trust-card h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+    .trust-card p{font-size:13px;color:#A1A1AA;line-height:1.65}
+    @media(max-width:768px){.mission-grid{grid-template-columns:1fr}.values-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(2,1fr)}.trust-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <link rel="canonical" href="https://tradexa.io/company/about.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="About Us | Tradexa"/>
+  <meta property="og:description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta property="og:url" content="https://tradexa.io/company/about.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="About Us | Tradexa"/>
+  <meta name="twitter:description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="section-label">About Us</div>
+  <h1 class="page-title">Built by Traders,<br>for Traders</h1>
+  <p class="page-sub">Tradexa was founded with one mission: give every serious trader access to the kind of structured performance review and honest analytics that helps them genuinely improve.</p>
+</div>
+
+<section>
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-content">
+        <h2>Our Mission</h2>
+        <p>Most traders lose money not because they lack ability, but because they lack structure. They trade without reviewing. They repeat the same mistakes without realising it. They have no clear picture of what their actual edge is — or whether they have one at all.</p>
+        <p>Tradexa is a professional trading journal and performance analytics platform. It helps traders log every trade, review their performance data honestly, understand their behavioral patterns, and build the kind of process consistency that actually leads to improvement.</p>
+        <p>We are not an AI signal provider. We do not execute trades or hold capital. We are a structured review tool — and we believe that honest, data-driven self-review is the highest-leverage habit a trader can build.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Trust First</h3>
+          <p>Every feature we build starts with the question: does this actually protect and serve the trader?</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 110 20A10 10 0 0112 2z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>Continuous Improvement</h3>
+          <p>We ship new features weekly based on direct trader feedback. The platform evolves with the markets.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+          <h3>Radical Transparency</h3>
+          <p>Our AI explains its reasoning. Our analytics are auditable. No black boxes, no mystery signals.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h3>Community Driven</h3>
+          <p>Our best features come from traders. Every roadmap decision involves direct community input.</p>
+        </div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-num">2025</div><div class="stat-label">Founded</div></div>
+      <div class="stat-cell"><div class="stat-num">Beta</div><div class="stat-label">Currently in Beta</div></div>
+      <div class="stat-cell"><div class="stat-num">5</div><div class="stat-label">Team Members</div></div>
+      <div class="stat-cell"><div class="stat-num">15+</div><div class="stat-label">Broker Integrations</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-section">
+  <div class="container">
+    <div class="section-label">Why Trust Us</div>
+    <h2 style="font-size:28px;font-weight:600;color:#fff;margin-bottom:40px;letter-spacing:-0.02em">Our Commitment to You</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Data Security
+        </h3>
+        <p>Your trading data is encrypted at rest and in transit. We never sell or share your data with third parties. SOC 2 Type II compliant.</p>
+      </div>
+      <div class="trust-card">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          No Conflict of Interest
+        </h3>
+        <p>We're a pure software platform. We have no affiliation with any broker, market maker, or data vendor. Our only incentive is your success.</p>
+      </div>
+      <div class="trust-card">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Transparent AI
+        </h3>
+        <p>Our AI coach always explains its reasoning. You'll know exactly why it flagged a trade or recommended a change — not just what it recommends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Leadership</div>
+    <h2 style="font-size:28px;font-weight:600;color:#fff;margin-bottom:40px;letter-spacing:-0.02em">Meet the Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:#FFB732">AK</div>
+        <div class="team-name">Alex Kim</div>
+        <div class="team-role">CEO & Co-Founder</div>
+        <div class="team-bio">Quantitative analyst and fintech founder. Background in systematic trading and financial software development.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#198038">SR</div>
+        <div class="team-name">Sarah Reynolds</div>
+        <div class="team-role">CTO & Co-Founder</div>
+        <div class="team-bio">Engineering leader with deep experience in high-performance data systems, financial software architecture, and ML infrastructure.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#6929c4">MP</div>
+        <div class="team-name">Marcus Park</div>
+        <div class="team-role">Chief AI Officer</div>
+        <div class="team-bio">Machine learning engineer with extensive background in financial market data analysis and trading analytics systems.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#9f1853">LT</div>
+        <div class="team-name">Lisa Torres</div>
+        <div class="team-role">Head of Product</div>
+        <div class="team-bio">Trading software product leader with extensive experience building analytical tools for active traders and workflow simplification.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0d0f12;border-top:1px solid rgba(255,255,255,.05);padding:56px 24px;text-align:center">
+  <div class="container">
+    <h2 style="font-size:24px;font-weight:600;color:#fff;margin-bottom:12px">Join the Tradexa community</h2>
+    <p style="color:#A1A1AA;margin-bottom:28px;font-size:15px">traders building discipline with Tradexa to get their edge. Be next.</p>
+    <a href="/app/dashboard.html" style="display:inline-flex;align-items:center;gap:8px;background:#FFB732;color:#fff;text-decoration:none;font-size:14px;font-weight:500;padding:12px 28px;border-radius:2px">Get Started Free</a>
+  </div>
+</section>
+
+</body>
+</html>

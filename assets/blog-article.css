@@ -1,0 +1,189 @@
+/* ============================================================
+   Tradexa Blog Article — Shared Enhancement Styles
+   TOC sidebar | Share buttons | Prev/Next nav | Progress bar
+   ============================================================ */
+
+/* Reading progress bar */
+#read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: #FFB732;
+  width: 0%;
+  z-index: 9999;
+  transition: width .1s linear;
+}
+
+/* ---- Layout: article content + TOC sidebar grid ---- */
+.article-layout-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 64px;
+  align-items: start;
+}
+.article-body .container {
+  max-width: none;
+}
+@media (max-width: 960px) {
+  .article-layout-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .toc-sidebar { display: none !important; }
+}
+
+/* ---- Table of Contents Sidebar ---- */
+.toc-sidebar {
+  position: sticky;
+  top: 88px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.toc-sidebar::-webkit-scrollbar { display: none; }
+.toc-inner {
+  background: #111;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 3px;
+  padding: 20px;
+}
+.toc-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #525252;
+  margin-bottom: 14px;
+}
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toc-list li {
+  margin-bottom: 0;
+}
+.toc-list a {
+  display: block;
+  font-size: 12.5px;
+  color: #6B7280;
+  text-decoration: none;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid transparent;
+  line-height: 1.45;
+  transition: color .15s, border-color .15s;
+}
+.toc-list a:hover {
+  color: #D1D5DB;
+  border-left-color: rgba(255,183,50,.4);
+}
+.toc-list a.toc-active {
+  color: #FFB732;
+  border-left-color: #FFB732;
+  font-weight: 500;
+}
+
+/* ---- Share buttons ---- */
+.share-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  flex-wrap: wrap;
+}
+.share-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #525252;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: #1a1d23;
+  color: #A1A1AA;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .15s;
+  font-family: inherit;
+}
+.share-btn:hover {
+  border-color: rgba(255,183,50,.35);
+  color: #FFB732;
+  background: rgba(255,183,50,.06);
+}
+.share-btn svg { flex-shrink: 0; }
+.share-btn.copied {
+  color: #22C55E;
+  border-color: rgba(34,197,94,.4);
+}
+
+/* ---- Prev / Next navigation ---- */
+.prev-next-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: rgba(255,255,255,.05);
+  margin-top: 64px;
+}
+.prev-next-nav a {
+  background: #0d0f12;
+  padding: 24px 28px;
+  text-decoration: none;
+  transition: background .15s;
+  display: block;
+}
+.prev-next-nav a:hover { background: #111; }
+.pn-direction {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #525252;
+  margin-bottom: 8px;
+}
+.pn-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #D1D5DB;
+  line-height: 1.4;
+}
+.pn-next { text-align: right; }
+.pn-placeholder {
+  background: #0d0f12;
+  padding: 24px 28px;
+}
+@media (max-width: 600px) {
+  .prev-next-nav { grid-template-columns: 1fr; }
+  .pn-next { text-align: left; }
+}
+
+/* ---- Blog card hover — glow + lift (injected into blog.html via this file) ---- */
+.post-card {
+  transition: background .2s, transform .2s, box-shadow .2s !important;
+}
+.post-card:hover {
+  background: #0e0e18 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(255,183,50,.2), 0 8px 32px rgba(0,0,0,.4);
+}
+.featured-post {
+  transition: border-color .2s, transform .2s, box-shadow .2s !important;
+}
+.featured-post:hover {
+  border-color: rgba(255,183,50,.4) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+}

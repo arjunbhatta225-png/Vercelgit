@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Settings | Tradexa</title>
+  <script src="/assets/trades-data.js"></script>
+  <script src="/assets/capital-tracker.js"></script>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .settings-wrap{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
+    .settings-nav{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;position:sticky;top:80px}
+    .settings-nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .12s}
+    .settings-nav-item:hover{background:rgba(255,255,255,.04);color:var(--text)}
+    .settings-nav-item.active{background:var(--gold-dim);color:var(--text)}
+    .settings-nav-item.active svg{color:var(--gold)}
+    .settings-nav-icon{width:16px;height:16px;flex-shrink:0;opacity:.6}
+    .settings-nav-item.active .settings-nav-icon{opacity:1}
+    .settings-panel{display:none}
+    .settings-panel.active{display:block}
+    .settings-section{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:22px;margin-bottom:16px}
+    .settings-section-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.01em}
+    .settings-section-sub{font-size:12px;color:var(--dim);margin-bottom:18px}
+    .settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .settings-row:last-child{border-bottom:none}
+    .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .avatar-upload{width:72px;height:72px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;cursor:pointer;position:relative;overflow:hidden}
+    .avatar-upload:hover::after{content:'Edit';position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff}
+    .session-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .session-row:last-child{border-bottom:none}
+    .device-icon{width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}
+    .danger-zone{background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:22px}
+    .cap-stat{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;text-align:center}
+    .cap-stat-val{font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .cap-stat-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Settings'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Settings</h1>
+      <p class="tx-page-sub">Manage your account, preferences, and security.</p>
+    </div>
+    <button class="tx-btn tx-btn-primary" id="saveBtn" onclick="saveSettings()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      Save Changes
+    </button>
+  </div>
+
+  <div class="settings-wrap">
+    <!-- Settings Nav -->
+    <div class="settings-nav">
+      <div class="settings-nav-item active" onclick="switchPanel(this,'profile')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>Profile
+      </div>
+      <div class="settings-nav-item" onclick="switchPanel(this,'preferences')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Preferences
+      </div>
+      <div class="settings-nav-item" onclick="switchPanel(this,'trading')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Trading Prefs
+      </div>
+      <div class="settings-nav-item" onclick="switchPanel(this,'capital')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Capital
+      </div>
+      <div class="settings-nav-item" onclick="switchPanel(this,'integrations')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Integrations
+      </div>
+      <div class="settings-nav-item" onclick="window.location='/app/security.html'">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Security ↗
+      </div>
+      <div class="settings-nav-item" onclick="switchPanel(this,'notifications-settings')">
+        <svg class="settings-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Notifications
+      </div>
+    </div>
+
+    <!-- Panels -->
+    <div>
+      <!-- PROFILE -->
+      <div class="settings-panel active" id="panel-profile">
+        <div class="settings-section">
+          <div class="settings-section-title">Profile Information</div>
+          <div class="settings-section-sub">This is how you appear across the platform.</div>
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+            <div class="avatar-upload">AR</div>
+            <div>
+              <button class="tx-btn tx-btn-ghost tx-btn-sm">Upload Photo</button>
+              <div style="font-size:11px;color:var(--dim);margin-top:4px">PNG, JPG up to 5MB</div>
+            </div>
+          </div>
+          <div class="settings-grid">
+            <div class="tx-form-group">
+              <label class="tx-label">First Name</label>
+              <input class="tx-input" type="text" value="Alex">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Last Name</label>
+              <input class="tx-input" type="text" value="Rivera">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Email Address</label>
+              <input class="tx-input" type="email" value="alex@example.com">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Username</label>
+              <input class="tx-input" type="text" value="alexrivera_trades">
+            </div>
+          </div>
+          <div class="tx-form-group">
+            <label class="tx-label">Bio (optional)</label>
+            <textarea class="tx-input" rows="2" placeholder="Brief description of your trading style..." style="resize:vertical">Futures trader focusing on NQ and ES. London & NY sessions.</textarea>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Change Password</div>
+          <div class="settings-section-sub">Use a strong, unique password for your account.</div>
+          <div class="settings-grid">
+            <div class="tx-form-group">
+              <label class="tx-label">Current Password</label>
+              <input class="tx-input" type="password" placeholder="••••••••">
+            </div>
+            <div style=""></div>
+            <div class="tx-form-group">
+              <label class="tx-label">New Password</label>
+              <input class="tx-input" type="password" placeholder="••••••••">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Confirm New Password</label>
+              <input class="tx-input" type="password" placeholder="••••••••">
+            </div>
+          </div>
+          <button class="tx-btn tx-btn-ghost">Update Password</button>
+        </div>
+      </div>
+
+      <!-- PREFERENCES -->
+      <div class="settings-panel" id="panel-preferences">
+        <div class="settings-section">
+          <div class="settings-section-title">Display Preferences</div>
+          <div class="settings-section-sub">Control how the platform looks and feels.</div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Theme</div></div>
+            <div style="display:flex;gap:6px">
+              <button class="tx-btn tx-btn-ghost tx-btn-sm" style="background:rgba(255,183,50,.1);border-color:var(--green-border);color:var(--green)">Dark</button>
+              <button class="tx-btn tx-btn-ghost tx-btn-sm">Light</button>
+              <button class="tx-btn tx-btn-ghost tx-btn-sm">System</button>
+            </div>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Currency Display</div></div>
+            <select class="tx-select" style="width:140px"><option selected>USD ($)</option><option>EUR (€)</option><option>GBP (£)</option><option>CAD (CA$)</option></select>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Timezone</div></div>
+            <select class="tx-select" style="width:200px"><option selected>EST (UTC-5)</option><option>PST (UTC-8)</option><option>GMT (UTC+0)</option><option>CET (UTC+1)</option></select>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Date Format</div></div>
+            <select class="tx-select" style="width:160px"><option selected>MM/DD/YYYY</option><option>DD/MM/YYYY</option><option>YYYY-MM-DD</option></select>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Number Format</div></div>
+            <select class="tx-select" style="width:160px"><option selected>1,234.56</option><option>1.234,56</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRADING PREFS -->
+      <div class="settings-panel" id="panel-trading">
+        <div class="settings-section">
+          <div class="settings-section-title">Trading Preferences</div>
+          <div class="settings-section-sub">Default values used when logging new trades.</div>
+          <div class="settings-grid">
+            <div class="tx-form-group">
+              <label class="tx-label">Default Risk % per Trade</label>
+              <input class="tx-input" type="number" value="1.0" step="0.1" min="0.1" max="10">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Account Size (Base)</label>
+              <input class="tx-input" type="number" value="50000">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Default Broker</label>
+              <select class="tx-select"><option selected>Interactive Brokers</option><option>Coinbase Pro</option><option>Tradovate</option></select>
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Default Timeframe</label>
+              <select class="tx-select"><option>1m</option><option>5m</option><option selected>15m</option><option>1H</option></select>
+            </div>
+          </div>
+          <div class="tx-form-group">
+            <label class="tx-label">Daily Loss Limit ($)</label>
+            <input class="tx-input" type="number" value="500">
+          </div>
+          <div class="tx-form-group">
+            <label class="tx-label">Max Daily Trades</label>
+            <input class="tx-input" type="number" value="8">
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Auto-Tags</div>
+          <div class="settings-section-sub">Automatically tag trades based on rules.</div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Auto-tag FOMO entries (early entry detection)</div></div>
+            <label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Auto-tag overtrading sessions</div></div>
+            <label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Auto-tag news event trades</div></div>
+            <label class="tx-toggle"><input type="checkbox"><span class="tx-toggle-slider"></span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPITAL -->
+      <div class="settings-panel" id="panel-capital">
+        <div class="settings-section">
+          <div class="settings-section-title">Capital Overview</div>
+          <div class="settings-section-sub">Live view of your tracked capital from the journal.</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px" id="capOverview">
+            <div class="cap-stat"><div class="cap-stat-val" id="capStarting">—</div><div class="cap-stat-label">Starting Capital</div></div>
+            <div class="cap-stat"><div class="cap-stat-val" id="capPnl">—</div><div class="cap-stat-label">Total P&amp;L</div></div>
+            <div class="cap-stat"><div class="cap-stat-val" id="capCurrent">—</div><div class="cap-stat-label">Current Balance</div></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="tx-btn tx-btn-ghost" onclick="document.dispatchEvent(new CustomEvent('txCapital:openSetup'))">Edit Capital Setup</button>
+            <button class="tx-btn tx-btn-ghost" onclick="document.dispatchEvent(new CustomEvent('txCapital:openTransaction'))">Record Deposit / Withdrawal</button>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Capital Targets</div>
+          <div class="settings-section-sub">Set goals for your trading capital.</div>
+          <div class="settings-grid">
+            <div class="tx-form-group">
+              <label class="tx-label">Starting Capital ($)</label>
+              <input class="tx-input" type="number" id="inputStartCap" placeholder="50000">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Target Capital ($)</label>
+              <input class="tx-input" type="number" id="inputTargetCap" placeholder="100000">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Max Risk per Trade (%)</label>
+              <input class="tx-input" type="number" id="inputMaxRisk" placeholder="1.0" step="0.1" min="0.1" max="5">
+            </div>
+            <div class="tx-form-group">
+              <label class="tx-label">Daily Loss Limit ($)</label>
+              <input class="tx-input" type="number" id="inputDailyLimit" placeholder="500">
+            </div>
+          </div>
+          <button class="tx-btn tx-btn-primary" onclick="saveCapitalSettings()">Save Capital Settings</button>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Transaction History</div>
+          <div class="settings-section-sub">Recent deposits and withdrawals recorded in your journal.</div>
+          <div id="capTxnHistory">
+            <div style="text-align:center;color:var(--dim);font-size:13px;padding:12px 0">Loading…</div>
+          </div>
+          <a href="/app/portfolio.html" class="tx-btn tx-btn-ghost" style="margin-top:12px">View Full Portfolio →</a>
+        </div>
+      </div>
+
+      <!-- INTEGRATIONS -->
+      <div class="settings-panel" id="panel-integrations">
+        <div class="settings-section">
+          <div class="settings-section-title">Broker Connections</div>
+          <div class="settings-section-sub">Manage your connected broker accounts.</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="settings-row">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:6px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--blue)">IB</div><div><div style="font-size:13px;color:var(--text)">Interactive Brokers</div><div style="font-size:11px;color:var(--profit)">✓ Connected · Live sync</div></div></div>
+              <button class="tx-btn tx-btn-danger tx-btn-sm">Disconnect</button>
+            </div>
+            <div class="settings-row">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:6px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.15);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warn)">CB</div><div><div style="font-size:13px;color:var(--text)">Coinbase Pro</div><div style="font-size:11px;color:var(--profit)">✓ Connected · Live sync</div></div></div>
+              <button class="tx-btn tx-btn-danger tx-btn-sm">Disconnect</button>
+            </div>
+            <div class="settings-row">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--dim)">+</div><div><div style="font-size:13px;color:var(--muted)">Add New Broker</div><div style="font-size:11px;color:var(--dim)">15+ available</div></div></div>
+              <button class="tx-btn tx-btn-primary tx-btn-sm">Connect</button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">Other Integrations</div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">Google Sign-In</div><div style="font-size:11px;color:var(--profit);margin-top:2px">✓ Connected</div></div>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm">Disconnect</button>
+          </div>
+          <div class="settings-row">
+            <div><div style="font-size:13px;color:var(--text)">TradingView Webhook</div><div style="font-size:11px;color:var(--dim);margin-top:2px">Not connected</div></div>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm">Connect</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTIFICATIONS SETTINGS -->
+      <div class="settings-panel" id="panel-notifications-settings">
+        <div class="settings-section">
+          <div class="settings-section-title">Email Notifications</div>
+          <div class="settings-section-sub">Control which emails Tradexa sends you.</div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Weekly AI Review ready</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Billing receipts &amp; alerts</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Risk control alerts</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Monthly performance summary</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Product updates &amp; news</div></div><label class="tx-toggle"><input type="checkbox"><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Tips and trading content</div></div><label class="tx-toggle"><input type="checkbox"><span class="tx-toggle-slider"></span></label></div>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">In-App Notifications</div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">AI Coach insights</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Risk warnings (daily loss limit)</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Overtrading alerts</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+          <div class="settings-row"><div><div style="font-size:13px;color:var(--text)">Feature announcements</div></div><label class="tx-toggle"><input type="checkbox" checked><span class="tx-toggle-slider"></span></label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+function switchPanel(el, id){
+  document.querySelectorAll('.settings-nav-item').forEach(function(n){ n.classList.remove('active'); });
+  document.querySelectorAll('.settings-panel').forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+function saveSettings(){
+  var btn = document.getElementById('saveBtn');
+  btn.textContent = '✓ Saved';
+  btn.style.background = '#ffc55c';
+  setTimeout(function(){
+    btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Save Changes';
+    btn.style.background = '';
+  }, 2000);
+}
+
+function saveCapitalSettings(){
+  try {
+    var raw = localStorage.getItem('txCapital_v1');
+    var cap = raw ? JSON.parse(raw) : {};
+    var sc = parseFloat(document.getElementById('inputStartCap').value);
+    var tc = parseFloat(document.getElementById('inputTargetCap').value);
+    if(!isNaN(sc) && sc > 0) cap.startingCapital = sc;
+    if(!isNaN(tc) && tc > 0) cap.targetCapital = tc;
+    localStorage.setItem('txCapital_v1', JSON.stringify(cap));
+    var btn = event.target;
+    btn.textContent = '✓ Saved';
+    btn.style.background = '#22C55E';
+    setTimeout(function(){ btn.textContent = 'Save Capital Settings'; btn.style.background = ''; loadCapitalPanel(); }, 1500);
+  } catch(e) {}
+}
+
+function loadCapitalPanel(){
+  try {
+    var capRaw = localStorage.getItem('txCapital_v1');
+    var cap = capRaw ? JSON.parse(capRaw) : {};
+    var histRaw = localStorage.getItem('txCapitalHistory_v1');
+    var hist = histRaw ? JSON.parse(histRaw) : [];
+
+    if(typeof TxTradeData !== 'undefined'){
+      var s = TxTradeData.getStats(TxTradeData.getTrades());
+      var start = cap.startingCapital || 0;
+      var pnl = s.totalPnl || 0;
+      var curr = start + pnl;
+      var pnlColor = pnl >= 0 ? 'var(--profit)' : 'var(--loss)';
+
+      var el = document.getElementById('capStarting');
+      if(el) el.textContent = start > 0 ? '$'+start.toLocaleString() : '—';
+      el = document.getElementById('capPnl');
+      if(el){ el.textContent = (pnl>=0?'+':'')+'$'+Math.round(Math.abs(pnl)).toLocaleString(); el.style.color = pnlColor; }
+      el = document.getElementById('capCurrent');
+      if(el) el.textContent = curr > 0 ? '$'+Math.round(curr).toLocaleString() : '—';
+
+      if(cap.startingCapital) document.getElementById('inputStartCap').value = cap.startingCapital;
+      if(cap.targetCapital) document.getElementById('inputTargetCap').value = cap.targetCapital;
+    }
+
+    var txnEl = document.getElementById('capTxnHistory');
+    if(txnEl){
+      if(!hist.length){
+        txnEl.innerHTML = '<div style="color:var(--dim);font-size:13px;text-align:center;padding:12px 0">No transactions yet. <a href="#" onclick="document.dispatchEvent(new CustomEvent(\'txCapital:openTransaction\'))" style="color:var(--gold)">Record one →</a></div>';
+      } else {
+        txnEl.innerHTML = hist.slice().reverse().slice(0,5).map(function(h){
+          var amtColor = h.type==='deposit' ? 'var(--profit)' : 'var(--loss)';
+          var amt = h.type==='deposit' ? '+$'+h.amount.toLocaleString() : '-$'+h.amount.toLocaleString();
+          var date = h.date ? new Date(h.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+          return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)">'+
+            '<div><div style="font-size:13px;font-weight:600;color:var(--text)">'+(h.type==='deposit'?'Deposit':'Withdrawal')+'</div>'+
+              '<div style="font-size:11px;color:var(--dim)">'+date+(h.note?' · '+h.note:'')+'</div></div>'+
+            '<div style="font-size:13px;font-weight:700;color:'+amtColor+'">'+amt+'</div>'+
+          '</div>';
+        }).join('');
+      }
+    }
+  } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  if(typeof TxTradeData === 'undefined') return;
+  loadCapitalPanel();
+  document.querySelectorAll('.settings-nav-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      if(this.getAttribute('onclick') && this.getAttribute('onclick').includes('capital')) {
+        setTimeout(loadCapitalPanel, 50);
+      }
+    });
+  });
+});
+</script>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

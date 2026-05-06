@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Data & Backups | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .backup-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .backup-row:last-child{border-bottom:none}
+    .backup-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .data-type-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .data-type-row:last-child{border-bottom:none}
+    .retention-bar{height:8px;border-radius:100px;overflow:hidden;background:var(--bg);margin-top:6px}
+    .retention-fill{height:100%;border-radius:100px}
+    .export-option{display:flex;align-items:center;gap:12px;padding:13px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .15s;margin-bottom:8px}
+    .export-option:hover{border-color:var(--green)}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Data & Backups'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Data & Backups</h1>
+      <p class="tx-page-sub">Your data is encrypted, backed up daily, and always yours to export.</p>
+    </div>
+    <button class="tx-btn tx-btn-primary" data-track="request_full_backup">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Request Full Backup
+    </button>
+  </div>
+
+  <!-- Storage KPIs -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+    <div class="tx-kpi"><div class="tx-kpi-label">Data Used</div><div class="tx-kpi-value">2.4 GB</div><div class="tx-kpi-change neu">of 50 GB included</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Trades Stored</div><div class="tx-kpi-value">208</div><div class="tx-kpi-change neu">All time</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Last Backup</div><div class="tx-kpi-value" style="font-size:16px">2h ago</div><div class="tx-kpi-change pos">Automated · Daily</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Backup Status</div><div class="tx-kpi-value" style="color:var(--profit)">✓</div><div class="tx-kpi-change pos">All systems healthy</div></div>
+  </div>
+
+  <div class="tx-grid-2" style="margin-bottom:20px">
+    <!-- Storage Breakdown -->
+    <div class="tx-card">
+      <div class="tx-card-title">Storage Breakdown</div>
+      <div class="data-type-row">
+        <div><div style="font-size:13px;color:var(--text)">Trade Journal</div><div style="font-size:11px;color:var(--dim)">208 trades, all fields, notes, tags</div></div>
+        <div style="text-align:right"><div style="font-size:13px;font-weight:600;color:var(--text)">1.2 GB</div><div class="retention-bar" style="width:80px"><div class="retention-fill" style="width:50%;background:var(--green)"></div></div></div>
+      </div>
+      <div class="data-type-row">
+        <div><div style="font-size:13px;color:var(--text)">Chart Screenshots</div><div style="font-size:11px;color:var(--dim)">124 images attached to trades</div></div>
+        <div style="text-align:right"><div style="font-size:13px;font-weight:600;color:var(--text)">890 MB</div><div class="retention-bar" style="width:80px"><div class="retention-fill" style="width:37%;background:var(--blue)"></div></div></div>
+      </div>
+      <div class="data-type-row">
+        <div><div style="font-size:13px;color:var(--text)">Weekly Reviews</div><div style="font-size:11px;color:var(--dim)">18 AI-generated reviews stored</div></div>
+        <div style="text-align:right"><div style="font-size:13px;font-weight:600;color:var(--text)">180 MB</div><div class="retention-bar" style="width:80px"><div class="retention-fill" style="width:7%;background:var(--blue)"></div></div></div>
+      </div>
+      <div class="data-type-row">
+        <div><div style="font-size:13px;color:var(--text)">Backtest Notes</div><div style="font-size:11px;color:var(--dim)">6 strategies, results, lessons</div></div>
+        <div style="text-align:right"><div style="font-size:13px;font-weight:600;color:var(--text)">68 MB</div><div class="retention-bar" style="width:80px"><div class="retention-fill" style="width:3%;background:var(--warn)"></div></div></div>
+      </div>
+      <div class="data-type-row">
+        <div><div style="font-size:13px;color:var(--text)">AI Coach History</div><div style="font-size:11px;color:var(--dim)">18 sessions, all chat logs</div></div>
+        <div style="text-align:right"><div style="font-size:13px;font-weight:600;color:var(--text)">62 MB</div><div class="retention-bar" style="width:80px"><div class="retention-fill" style="width:3%;background:var(--muted)"></div></div></div>
+      </div>
+      <div style="margin-top:14px;padding:10px;background:var(--bg);border-radius:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:var(--muted)">Total Used</span><span style="font-size:12px;font-weight:600;color:var(--text)">2.4 GB of 50 GB</span></div>
+        <div class="tx-progress-bg" style="height:8px"><div class="tx-progress-fill" style="width:4.8%;background:var(--green)"></div></div>
+      </div>
+    </div>
+
+    <!-- Backup Schedule -->
+    <div class="tx-card">
+      <div class="tx-card-title">Automated Backup Schedule</div>
+      <div class="backup-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="backup-icon" style="background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--text)">Daily Incremental</div><div style="font-size:11px;color:var(--dim)">New trades + changes only · 2:00 AM EST</div></div>
+        </div>
+        <span class="tx-badge tx-badge-green">Active</span>
+      </div>
+      <div class="backup-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="backup-icon" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--text)">Weekly Full Backup</div><div style="font-size:11px;color:var(--dim)">Complete snapshot · Sunday 3:00 AM EST</div></div>
+        </div>
+        <span class="tx-badge tx-badge-green">Active</span>
+      </div>
+      <div class="backup-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="backup-icon" style="background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.15)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--text)">Monthly Archive</div><div style="font-size:11px;color:var(--dim)">Retained for 12 months · 1st of month</div></div>
+        </div>
+        <span class="tx-badge tx-badge-green">Active</span>
+      </div>
+      <div class="backup-row">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="backup-icon" style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.15)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+          <div><div style="font-size:13px;font-weight:600;color:var(--text)">Cross-Region Replication</div><div style="font-size:11px;color:var(--dim)">US-East + EU-West mirrors · Real-time</div></div>
+        </div>
+        <span class="tx-badge tx-badge-green">Active</span>
+      </div>
+      <div style="margin-top:14px;padding:12px;background:rgba(255,183,50,.04);border:1px solid var(--green-border);border-radius:6px">
+        <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:4px">✓ Backup Health</div>
+        <div style="font-size:12px;color:#A1A1AA">Last successful backup: 2 hours ago. All backups encrypted with AES-256. Recovery tested monthly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backup History -->
+  <div class="tx-card" style="margin-bottom:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div class="tx-card-title" style="margin:0">Backup History</div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm">View All</button>
+    </div>
+    <div class="tx-table-wrap">
+      <table class="tx-table">
+        <thead><tr><th>Date & Time</th><th>Type</th><th>Size</th><th>Status</th><th>Region</th><th>Restore</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--dim)">May 2, 02:00 AM</td><td>Incremental</td><td>4.2 MB</td><td><span class="tx-badge tx-badge-green">Complete</span></td><td><span class="tx-badge tx-badge-gray">US-East</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">Restore</button></td></tr>
+          <tr><td style="color:var(--dim)">May 1, 02:00 AM</td><td>Incremental</td><td>3.8 MB</td><td><span class="tx-badge tx-badge-green">Complete</span></td><td><span class="tx-badge tx-badge-gray">US-East</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">Restore</button></td></tr>
+          <tr><td style="color:var(--dim)">Apr 28, 03:00 AM</td><td>Weekly Full</td><td>2.4 GB</td><td><span class="tx-badge tx-badge-green">Complete</span></td><td><span class="tx-badge tx-badge-gray">US-East + EU</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">Restore</button></td></tr>
+          <tr><td style="color:var(--dim)">Apr 27, 02:00 AM</td><td>Incremental</td><td>2.1 MB</td><td><span class="tx-badge tx-badge-green">Complete</span></td><td><span class="tx-badge tx-badge-gray">US-East</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">Restore</button></td></tr>
+          <tr><td style="color:var(--dim)">Apr 1, 03:00 AM</td><td>Monthly Archive</td><td>1.8 GB</td><td><span class="tx-badge tx-badge-green">Complete</span></td><td><span class="tx-badge tx-badge-gray">US-East + EU</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">Restore</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Export Your Data -->
+  <div class="tx-card">
+    <div class="tx-card-title" style="margin-bottom:4px">Export Your Data</div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:16px">You own your data. Export everything at any time in multiple formats.</div>
+    <div class="export-option" onclick="this.style.borderColor='var(--green)'">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">📊</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Full Data Export (ZIP)</div><div style="font-size:11px;color:var(--dim)">All trades, reviews, notes, screenshots, settings in one archive. ~2.4 GB.</div></div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm" data-track="export_full_zip">Request Export</button>
+    </div>
+    <div class="export-option">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">📋</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Trade Journal CSV</div><div style="font-size:11px;color:var(--dim)">All 208 trades with every field. Downloads immediately.</div></div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm">Download CSV</button>
+    </div>
+    <div class="export-option">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">📄</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--text)">Account Data (JSON)</div><div style="font-size:11px;color:var(--dim)">Settings, profile, custom tags, backtest notes in structured format.</div></div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm">Download JSON</button>
+    </div>
+    <div style="margin-top:14px;padding:12px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:6px;font-size:12px;color:var(--muted)">
+      ⚠ <strong style="color:var(--loss)">Account Deletion:</strong> You can request full account deletion under <a href="/app/settings.html" style="color:var(--blue)">Settings → Security → Danger Zone</a>. Your data will be permanently deleted within 30 days per GDPR Article 17.
+    </div>
+  </div>
+</main>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

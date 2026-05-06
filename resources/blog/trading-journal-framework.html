@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building a Trading Journal That Actually Makes You Better — Tradexa Blog</title>
+  <meta name="description" content="Most traders keep journals. Few use them to actually improve. Here's a structured framework for extracting actionable insights from your trading journal data — with real examples."/>
+  <meta name="keywords" content="trading journal, how to keep a trading journal, trade journal framework, trading performance improvement, trading self-review, Tradexa"/>
+  <meta property="og:title" content="Building a Trading Journal That Actually Makes You Better (With Real Examples)"/>
+  <meta property="og:description" content="Most traders keep journals. Few use them to improve. Here's a structured framework with real examples for extracting actionable insights from your trade data."/>
+  <meta property="og:type" content="article"/>
+  <link rel="canonical" href="https://tradexa.io/resources/blog/trading-journal-framework.html"/>
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F5F5F5;font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
+    .article-hero{padding:80px 24px 56px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 0%,rgba(255,183,50,.09) 0%,transparent 70%);z-index:0}
+    .article-hero>*{position:relative;z-index:1}
+    .container{max-width:740px;margin:0 auto}
+    .container-wide{max-width:1100px;margin:0 auto}
+    .breadcrumb{font-size:12px;color:#525252;margin-bottom:24px}
+    .breadcrumb a{color:#525252;text-decoration:none}
+    .breadcrumb a:hover{color:#FFB732}
+    .article-category{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:16px}
+    .article-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:20px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:#525252;flex-wrap:wrap}
+    .article-meta .author{color:#D1D5DB;font-weight:500}
+    .article-body{padding:56px 24px 80px}
+    .article-body p{font-size:16px;color:#D1D5DB;margin-bottom:20px;line-height:1.8}
+    .article-body h2{font-size:22px;font-weight:600;color:#fff;margin:44px 0 16px;letter-spacing:-0.01em}
+    .article-body h3{font-size:17px;font-weight:600;color:#E5E5E5;margin:28px 0 12px}
+    .article-body ul,.article-body ol{padding-left:24px;margin-bottom:20px}
+    .article-body li{font-size:16px;color:#D1D5DB;margin-bottom:8px;line-height:1.7}
+    .article-body strong{color:#F5F5F5;font-weight:600}
+    .article-body blockquote{border-left:3px solid #FFB732;padding:16px 24px;background:#1a1d23;margin:28px 0;border-radius:0 3px 3px 0}
+    .article-body blockquote p{color:#E5E5E5;font-style:italic;margin-bottom:0}
+    .example-box{background:#0F1F10;border:1px solid rgba(34,197,94,.2);border-radius:3px;padding:24px;margin:28px 0}
+    .example-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#22C55E;margin-bottom:12px}
+    .example-box p{font-size:14px;color:#C5D8C7;margin-bottom:8px;line-height:1.7}
+    .example-box p:last-child{margin-bottom:0}
+    .bad-example{background:#1a0c0c;border:1px solid rgba(239,68,68,.2);border-radius:3px;padding:24px;margin:28px 0}
+    .bad-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#EF4444;margin-bottom:12px}
+    .bad-example p{font-size:14px;color:#D8B5B5;margin-bottom:0;line-height:1.7}
+    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .field-item{background:#1a1d23;border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:16px 20px}
+    .field-name{font-size:12px;font-weight:700;color:#FFB732;margin-bottom:6px}
+    .field-desc{font-size:13px;color:#A1A1AA;line-height:1.5}
+    .callout{background:#1a1d23;border:1px solid rgba(255,183,50,.25);border-radius:3px;padding:24px;margin:32px 0}
+    .callout-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:10px}
+    .callout p{font-size:15px;color:#D1D5DB;margin-bottom:0}
+    .article-cta{background:#1a1d23;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:40px;text-align:center;margin:56px 0 0}
+    .article-cta h3{font-size:20px;font-weight:600;color:#fff;margin-bottom:12px}
+    .article-cta p{font-size:14px;color:#A1A1AA;margin-bottom:24px}
+    .btn-gold{display:inline-block;background:#FFB732;color:#0d0f12;font-weight:600;font-size:14px;padding:12px 28px;border-radius:2px;text-decoration:none;transition:opacity .15s}
+    .btn-gold:hover{opacity:.85}
+    .author-card{display:flex;align-items:center;gap:20px;padding:32px;background:#1a1d23;border:1px solid rgba(255,255,255,.07);border-radius:3px;margin-top:56px}
+    .author-avatar{width:56px;height:56px;background:#22262e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#FFB732;flex-shrink:0}
+    .author-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+    .author-bio{font-size:13px;color:#A1A1AA;line-height:1.6}
+    .divider{height:1px;background:rgba(255,255,255,.06);margin:48px 0}
+    .related-posts{padding:56px 24px}
+    .related-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#A1A1AA;margin-bottom:24px}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .related-card{background:#0d0f12;padding:24px;text-decoration:none;display:block;transition:background .2s}
+    .related-card:hover{background:#111}
+    .related-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:8px}
+    .related-title{font-size:14px;font-weight:600;color:#E5E5E5;line-height:1.4}
+    @media(max-width:640px){.related-grid{grid-template-columns:1fr}.author-card{flex-direction:column;text-align:center}.field-grid{grid-template-columns:1fr}}
+  </style>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Building a Trading Journal That Actually Makes You Better — Tradexa"/>
+  <meta name="twitter:description" content="Most traders keep journals. Few use them to actually improve. A structured framework for extracting actionable insights."/>
+  <link rel="stylesheet" href="/assets/blog-article.css"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Building a Trading Journal That Actually Makes You Better (With Real Examples)",
+    "description": "Most traders keep journals. Few use them to actually improve. A structured framework for extracting actionable insights.",
+    "author": { "@type": "Organization", "name": "Tradexa Editorial" },
+    "publisher": { "@type": "Organization", "name": "Tradexa", "url": "https://tradexa.io" },
+    "datePublished": "2026-03-24",
+    "url": "https://tradexa.io/resources/blog/trading-journal-framework.html",
+    "keywords": ["trading journal", "trade journaling", "trading improvement", "Brett Steenbarger", "Tradexa"]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:url" content="https://tradexa.io/resources/blog/trading-journal-framework.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="article-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/resources/blog.html">Blog</a> / Education</div>
+    <div class="article-category">Education</div>
+    <h1 class="article-title">Building a Trading Journal That Actually Makes You Better (With Real Examples)</h1>
+    <div class="article-meta">
+      <span class="author">Tradexa Editorial</span>
+      <span>·</span>
+      <span>March 24, 2026</span>
+      <span>·</span>
+      <span>8 min read</span>
+    </div>
+  </div>
+</div>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>Most traders keep some form of trading journal. Very few of them get meaningfully better because of it. The gap between those two groups isn't effort or intention — it's structure. A journal that records trades without a clear framework for extracting insights is not a performance tool. It's a diary that makes you feel like you're doing something productive without actually improving anything.</p>
+
+    <p>The traders who genuinely use their journals to accelerate development share three characteristics: they record structured, queryable data (not just free-form notes), they review that data on a scheduled cadence with specific questions in mind, and they translate insights into explicit behavioral changes with measurable targets.</p>
+
+    <p>This article gives you that framework — the specific fields to track, the review cadence that works, and real examples of how journal data turns into concrete performance improvement.</p>
+
+    <h2>Why Most Trading Journals Fail</h2>
+
+    <p>The most common journal failure mode is logging P&amp;L and nothing else. Win: good day. Loss: bad day. Zero insight generated. The second most common failure is recording extensive notes in free-form text that are never reviewed, searched, or connected to patterns — effectively a write-only system.</p>
+
+    <p>A third failure mode is more subtle: journals that record enough data but are reviewed only during winning streaks (where you look for confirmation of what you're doing right) and abandoned during drawdowns (when you most need the honest feedback). A journal reviewed selectively is worse than useless — it generates false confidence.</p>
+
+    <p>The solution to all three problems is the same: a structured, consistent data model that makes the journal queryable, and a review cadence that's mandatory regardless of whether you're up or down on the week.</p>
+
+    <h2>The Minimum Viable Journal: What to Record</h2>
+
+    <p>Every trade log entry needs at minimum two categories of data: <strong>objective trade data</strong> (the facts that don't change) and <strong>subjective trade context</strong> (your assessment in the moment).</p>
+
+    <h3>Objective trade data (required for every trade)</h3>
+    <div class="field-grid">
+      <div class="field-item">
+        <div class="field-name">Instrument</div>
+        <div class="field-desc">Ticker, futures contract, or pair — specific enough to look up the price history</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Direction</div>
+        <div class="field-desc">Long or short — seems obvious, but critical for filtering and pattern analysis</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Entry price &amp; time</div>
+        <div class="field-desc">Exact price and timestamp — time-of-day analysis is only possible with timestamps</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Exit price &amp; time</div>
+        <div class="field-desc">Actual exit, not planned — the gap between planned and actual exit is its own data point</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Position size</div>
+        <div class="field-desc">Shares, contracts, or units — needed to calculate accurate dollar and R-based P&amp;L</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Planned stop</div>
+        <div class="field-desc">Your stop at entry — the basis for R-multiple calculation and risk management analysis</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">R-multiple result</div>
+        <div class="field-desc">(Exit − Entry) ÷ Risk per share — the single most important normalized performance metric</div>
+      </div>
+      <div class="field-item">
+        <div class="field-name">Setup type</div>
+        <div class="field-desc">Your label for the setup — e.g., "breakout pullback," "opening range break," "mean reversion" — must be consistent across all trades</div>
+      </div>
+    </div>
+
+    <h3>Subjective trade context (assessed at entry and exit)</h3>
+    <ul>
+      <li><strong>Setup grade</strong> (A/B/C): Your pre-trade assessment of how well the setup met your criteria</li>
+      <li><strong>Emotional state at entry</strong> (1-5 scale, 1=calm/focused, 5=anxious/revenge-trading)</li>
+      <li><strong>Trade thesis</strong> (2-3 sentences): Why you took the trade — what had to happen for it to work</li>
+      <li><strong>Execution grade</strong> (A/B/C): How well you executed the plan, assessed at exit — regardless of outcome</li>
+      <li><strong>Exit quality</strong>: Did you exit as planned, early, or late? If deviating from plan, why?</li>
+      <li><strong>Post-trade notes</strong>: What did you observe during the trade? What would you do differently?</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">Critical Distinction</div>
+      <p>Execution grade is separate from outcome. A trade can be a good execution (you followed your plan precisely) and a loss. A trade can be a poor execution (you deviated from your rules) and a win. Conflating the two — grading execution by outcome — is one of the most common and damaging analysis errors traders make.</p>
+    </div>
+
+    <h2>What Good Journal Entries Actually Look Like</h2>
+
+    <p>Here's the difference between a journal entry that generates no insight and one that does.</p>
+
+    <div class="bad-example">
+      <div class="bad-label">Weak Entry — Generates No Insight</div>
+      <p>"AAPL long. Was looking good, got stopped out. Bad day. Should have been more patient."</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-label">Strong Entry — Queryable and Actionable</div>
+      <p><strong>Instrument:</strong> AAPL | <strong>Direction:</strong> Long | <strong>Setup:</strong> Pullback to 8 EMA with market-structure support</p>
+      <p><strong>Entry:</strong> $186.40 at 10:22 ET | <strong>Planned stop:</strong> $185.80 (below structure) | <strong>Target:</strong> $187.80</p>
+      <p><strong>Position size:</strong> 200 shares | <strong>Setup grade:</strong> B (entered before full confirmation — first touch of EMA, no rejection bar yet)</p>
+      <p><strong>Emotional state:</strong> 3/5 — slightly pressured after yesterday's loss, wanted to make it back</p>
+      <p><strong>Exit:</strong> $185.82 (stopped out) | <strong>R-multiple:</strong> -1.0R | <strong>Execution grade:</strong> C</p>
+      <p><strong>Notes:</strong> Should have waited for rejection confirmation before entering. Entered early because I felt pressure to be in the trade. The setup eventually worked 40 minutes later — I was just positioned too early. This is the second time this week I've entered a B-setup at first touch while emotionally pressured.</p>
+    </div>
+
+    <p>The strong entry is queryable. Three months from now, you can filter for: all B-setups, emotional state ≥ 3, first-touch entries — and immediately see whether this is a systematic pattern and what the aggregate performance of these trades looks like. The weak entry produces only a vague memory of a bad day.</p>
+
+    <h2>The Review Cadence That Works</h2>
+
+    <p>Without a scheduled review cadence, journals accumulate without generating insights. The cadence that works for most active traders:</p>
+
+    <h3>Daily review (5 minutes, same time every evening)</h3>
+    <p>Review each trade from the session against your plan. Grade execution for each trade. Note any deviations — entries made before confirmation, sizes larger than planned, trades taken outside your defined session window. Don't analyze patterns at this stage — just record accurately. The goal is honest documentation while the session is fresh.</p>
+
+    <h3>Weekly review (30-45 minutes, end of week)</h3>
+    <p>This is where pattern analysis happens. Run these specific questions across the week's trades:</p>
+    <ul>
+      <li>What was my win rate on A-setups vs. B-setups this week?</li>
+      <li>What was my average R-multiple by setup type?</li>
+      <li>Did I trade outside my defined session window? What was the performance of those trades?</li>
+      <li>What was my emotional state distribution across all trades this week?</li>
+      <li>Were there any execution deviations? What drove them?</li>
+    </ul>
+    <p>Document one specific behavioral target for the following week based on what the data shows. One target — not five. Specific and measurable: "I will not enter any trade with emotional state ≥ 4" or "I will only take A-setup entries this week."</p>
+
+    <h3>Monthly review (90 minutes, end of month)</h3>
+    <p>Broader pattern analysis across 30+ days of data. Look at your performance by market condition (trending vs. range), by time of month (are you trading differently in drawdown periods?), and by setup type over a large enough sample to draw meaningful conclusions. Compare your actual performance to your targets from the previous month's review. Update your trading plan if the data supports changes.</p>
+
+    <h2>Real Example: How Journal Data Drives Improvement</h2>
+
+    <p>Here's a concrete example of how this process works in practice.</p>
+
+    <p>A trader notices after eight weeks of structured journaling that their win rate on their primary breakout setup is 54% — but when they filter for entries with emotional state ≥ 3 at entry, the win rate drops to 31%. The setup isn't the problem. Emotional state at entry is the problem, and it shows up clearly only because emotional state was being recorded as a queryable field.</p>
+
+    <p>The behavioral target for the following month: no entries when emotional state self-assessment is ≥ 3. This means building a pre-trade checklist that includes the emotional state question, and writing the number down before every entry. After four weeks of implementing this rule strictly, their overall win rate rises because the high-emotional-state trades — which were systematically underperforming — are simply not being taken anymore.</p>
+
+    <p>This kind of insight is invisible without structured journaling. With it, the path from pattern recognition to behavior change to performance improvement is direct, measurable, and repeatable.</p>
+
+    <h2>Building the Habit: Practical Starting Points</h2>
+
+    <p>The hardest part of journaling is not the analysis — it's building the daily logging habit in the first place. A few practical approaches that help:</p>
+
+    <ul>
+      <li><strong>Log immediately after exit, not at end of day.</strong> The detail and accuracy of your trade notes degrades significantly after a few hours. Log while the trade is fresh — even a 90-second voice note that you transcribe later is better than waiting.</li>
+      <li><strong>Use a template, not a blank page.</strong> Pre-defined fields that you fill in are far faster and more consistent than free-form writing. If it takes more than 3 minutes to log a trade, your process is too friction-heavy to sustain.</li>
+      <li><strong>Commit to the cadence regardless of performance.</strong> The review is most valuable — and most uncomfortable — when you're in a drawdown. If you only review during winning periods, you're selecting out the most important feedback your data can give you.</li>
+    </ul>
+
+    <p>The journal doesn't make you a better trader by itself. It creates the conditions for systematic self-improvement — by making your patterns visible, your deviations measurable, and your progress trackable. That's the entire job. It's not glamorous, but it's the foundation that every consistently profitable trader we've observed has in common.</p>
+
+    <div class="divider"></div>
+
+    <h2>References &amp; Further Reading</h2>
+    <ol style="padding-left:22px;margin-bottom:0">
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Steenbarger, B.N. (2002). <em>The Psychology of Trading: Tools and Techniques for Minding the Markets</em>. Wiley. — The most practically useful book on trading journal methodology and behavioral pattern identification. Steenbarger's approach of using journal data to identify performance patterns (rather than just record them) is the foundational framework for the structured review process described in this article.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Steenbarger, B.N. (2006). <em>Enhancing Trader Performance: Proven Strategies from the Cutting Edge of Trading Psychology</em>. Wiley. — Extends the journaling framework with specific techniques for using performance data to design targeted practice, including how to convert journal insights into explicit behavioral change protocols with measurable outcomes.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Douglas, M. (2000). <em>Trading in the Zone: Master the Market with Confidence, Discipline, and a Winning Attitude</em>. Prentice Hall Press. — While primarily focused on trading psychology, Douglas's analysis of why traders resist accurate self-assessment — and the role of a structured journal in creating the honest feedback loops necessary for improvement — remains highly relevant to the behavioral accountability function of journaling.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:0;line-height:1.7">Ericsson, K.A., Krampe, R.T., &amp; Tesch-Römer, C. (1993). "The Role of Deliberate Practice in the Acquisition of Expert Performance." <em>Psychological Review</em>, 100(3), 363–406. — The research basis for why structured, feedback-rich practice produces expertise while unstructured experience alone does not. The trading journal, used as described in this article, is the mechanism that converts trading experience into deliberate practice.</li>
+    </ol>
+
+    <div class="divider"></div>
+
+    <div class="article-cta">
+      <h3>Journal every trade with built-in analytics</h3>
+      <p>Tradexa's trade journal automatically calculates R-multiples, surfaces behavioral patterns, and runs your weekly review for you — so you spend time on insights, not spreadsheets.</p>
+      <a href="/app/dashboard.html" class="btn-gold">Start Free — No Card Required →</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="author-card">
+      <div class="author-avatar">TX</div>
+      <div>
+        <div class="author-name">Tradexa Editorial</div>
+        <div class="author-bio">The Tradexa editorial team covers trading psychology, systematic strategy development, performance analytics, and platform updates. All articles reference primary sources and verified research. We are building a trading journal and analytics platform — not an execution system — and our writing reflects that focus.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="related-posts">
+  <div class="container-wide">
+    <div class="related-label">Related Articles</div>
+    <div class="related-grid">
+      <a href="/resources/blog/optimal-entry-timing.html" class="related-card">
+        <div class="related-cat">Market Analysis</div>
+        <div class="related-title">What Trade Data Reveals About Optimal Entry Timing</div>
+      </a>
+      <a href="/resources/blog/ai-pattern-recognition.html" class="related-card">
+        <div class="related-cat">AI &amp; Technology</div>
+        <div class="related-title">How AI Pattern Recognition Is Changing the Way Individual Traders Compete</div>
+      </a>
+      <a href="/resources/blog/dynamic-position-sizing.html" class="related-card">
+        <div class="related-cat">Risk Management</div>
+        <div class="related-title">The 2% Rule Isn't Enough: How to Build a Dynamic Position Sizing Framework</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/blog-article.js" defer></script>
+</body>
+</html>

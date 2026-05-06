@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Billing | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .plan-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:22px;position:relative;transition:border-color .15s}
+    .plan-card.current{border-color:var(--green);background:rgba(255,183,50,.03)}
+    .plan-card .plan-top-bar{position:absolute;top:0;left:0;right:0;height:2px;border-radius:8px 8px 0 0;background:var(--green)}
+    .plan-price{font-size:36px;font-weight:800;color:var(--text);letter-spacing:-.04em}
+    .plan-price sup{font-size:16px;font-weight:500;color:var(--muted);vertical-align:top;margin-top:10px}
+    .plan-price sub{font-size:13px;font-weight:400;color:var(--muted)}
+    .plan-feat{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);padding:4px 0}
+    .plan-feat::before{content:"✓";color:var(--profit);font-weight:700;flex-shrink:0}
+    .invoice-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .invoice-row:last-child{border-bottom:none}
+    .usage-wrap{display:flex;flex-direction:column;gap:12px}
+    .usage-row{display:flex;flex-direction:column;gap:6px}
+    .card-visual{background:linear-gradient(135deg,#222222 0%,#1a1d23 100%);border:1px solid #374151;border-radius:10px;padding:18px 22px;position:relative;overflow:hidden}
+    .card-visual::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,183,50,.06)}
+    .card-num{font-size:15px;font-weight:600;color:var(--text);letter-spacing:.15em;margin:14px 0 10px}
+    .card-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--dim)}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Billing'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Billing & Subscription</h1>
+      <p class="tx-page-sub">Manage your plan, payment method, and invoices.</p>
+    </div>
+    <div style="background:#1a1d23;border:1px solid var(--gold-border);border-radius:8px;padding:10px 16px;display:flex;align-items:center;gap:10px">
+      <div class="tx-dot tx-dot-green"></div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text)">Pro Plan — Active</div>
+        <div style="font-size:11px;color:var(--green)">Renews June 2, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Plan Usage -->
+  <div class="tx-grid-2" style="margin-bottom:20px">
+    <div class="tx-card">
+      <div class="tx-card-title">Current Usage This Period</div>
+      <div class="usage-wrap">
+        <div class="usage-row">
+          <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Trades Logged</span><span style="font-size:12px;font-weight:600;color:var(--text)">208 / Unlimited</span></div>
+          <div class="tx-progress-bg"><div class="tx-progress-fill" style="width:100%;background:var(--profit)"></div></div>
+        </div>
+        <div class="usage-row">
+          <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Broker Connections</span><span style="font-size:12px;font-weight:600;color:var(--text)">4 / 10</span></div>
+          <div class="tx-progress-bg"><div class="tx-progress-fill" style="width:40%;background:var(--blue)"></div></div>
+        </div>
+        <div class="usage-row">
+          <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">AI Coach Sessions</span><span style="font-size:12px;font-weight:600;color:var(--text)">18 / Unlimited</span></div>
+          <div class="tx-progress-bg"><div class="tx-progress-fill" style="width:100%;background:var(--profit)"></div></div>
+        </div>
+        <div class="usage-row">
+          <div style="display:flex;justify-content:space-between"><span style="font-size:12px;color:var(--muted)">Storage Used</span><span style="font-size:12px;font-weight:600;color:var(--text)">2.4 GB / 50 GB</span></div>
+          <div class="tx-progress-bg"><div class="tx-progress-fill" style="width:5%;background:var(--blue)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="tx-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div class="tx-card-title" style="margin:0">Payment Method</div>
+        <button class="tx-btn tx-btn-ghost tx-btn-sm">Update</button>
+      </div>
+      <div class="card-visual">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)">Visa</div>
+          <svg width="32" height="22" viewBox="0 0 32 22" style="opacity:.4"><circle cx="11" cy="11" r="11" fill="#EF4444" opacity=".8"/><circle cx="21" cy="11" r="11" fill="#EAB308" opacity=".8"/></svg>
+        </div>
+        <div class="card-num">•••• •••• •••• 4242</div>
+        <div class="card-meta">
+          <div><div style="font-size:9px;margin-bottom:2px">CARD HOLDER</div><div style="font-size:12px;font-weight:600;color:var(--text)">Alex Rivera</div></div>
+          <div><div style="font-size:9px;margin-bottom:2px">EXPIRES</div><div style="font-size:12px;font-weight:600;color:var(--text)">09/28</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="tx-btn tx-btn-ghost tx-btn-sm">Replace Card</button>
+        <button class="tx-btn tx-btn-ghost tx-btn-sm">Add Backup Card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plans -->
+  <div style="margin-bottom:24px">
+    <div style="font-size:13px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px">Available Plans</div>
+    <div class="tx-grid-3">
+      <div class="plan-card">
+        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">Free</div>
+        <div class="plan-price"><sup>$</sup>0<sub>/mo</sub></div>
+        <div style="height:1px;background:var(--border);margin:14px 0"></div>
+        <div class="plan-feat">Trade Journal (unlimited)</div>
+        <div class="plan-feat">Basic Analytics</div>
+        <div class="plan-feat">1 Broker Connection</div>
+        <div class="plan-feat" style="opacity:.4;color:var(--dim)">AI Coach</div>
+        <div class="plan-feat" style="opacity:.4;color:var(--dim)">Backtesting</div>
+        <button class="tx-btn tx-btn-ghost" style="width:100%;justify-content:center;margin-top:16px">Downgrade</button>
+      </div>
+      <div class="plan-card current">
+        <div class="plan-top-bar"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="font-size:16px;font-weight:700;color:var(--text)">Pro</div>
+          <span class="tx-badge tx-badge-green-border">Current Plan</span>
+        </div>
+        <div class="plan-price"><sup>$</sup>79<sub>/mo</sub></div>
+        <div style="height:1px;background:rgba(255,183,50,.2);margin:14px 0"></div>
+        <div class="plan-feat">Everything in Free</div>
+        <div class="plan-feat">AI Coach Dashboard</div>
+        <div class="plan-feat">10 Broker Connections</div>
+        <div class="plan-feat">Advanced Analytics</div>
+        <div class="plan-feat">Backtesting (20yr data)</div>
+        <div class="plan-feat">Risk Controls</div>
+        <div class="plan-feat">Trade Replay</div>
+        <button class="tx-btn tx-btn-ghost" style="width:100%;justify-content:center;margin-top:16px" disabled>Active Plan</button>
+      </div>
+      <div class="plan-card">
+        <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">Enterprise</div>
+        <div class="plan-price" style="font-size:28px">Custom</div>
+        <div style="height:1px;background:var(--border);margin:14px 0"></div>
+        <div class="plan-feat">Everything in Pro</div>
+        <div class="plan-feat">Unlimited Connections</div>
+        <div class="plan-feat">Custom AI Training</div>
+        <div class="plan-feat">Multi-user Teams</div>
+        <div class="plan-feat">SLA Guarantee</div>
+        <div class="plan-feat">White-label Options</div>
+        <a href="/company/contact.html" class="tx-btn tx-btn-ghost" style="width:100%;justify-content:center;margin-top:16px;display:flex">Contact Sales</a>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:12px 16px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:6px;font-size:12px;color:var(--blue);display:flex;align-items:center;gap:8px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/><path d="M12 8v4l3 3"/></svg>
+      Save 20% with annual billing — switch at any time. Your $79/mo becomes $63/mo billed annually.
+      <button class="tx-btn tx-btn-ghost tx-btn-sm" style="margin-left:auto;white-space:nowrap">Switch to Annual</button>
+    </div>
+  </div>
+
+  <!-- Invoice History -->
+  <div class="tx-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="tx-card-title" style="margin:0">Invoice History</div>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm">Download All</button>
+    </div>
+    <div class="tx-table-wrap">
+      <table class="tx-table">
+        <thead>
+          <tr><th>Date</th><th>Invoice</th><th>Plan</th><th>Amount</th><th>Status</th><th>Receipt</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="color:var(--dim)">May 2, 2026</td><td style="color:var(--muted)">#INV-2026-05</td><td>Pro Monthly</td><td style="font-weight:600">$79.00</td><td><span class="tx-badge tx-badge-green">Paid</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td></tr>
+          <tr><td style="color:var(--dim)">Apr 2, 2026</td><td style="color:var(--muted)">#INV-2026-04</td><td>Pro Monthly</td><td style="font-weight:600">$79.00</td><td><span class="tx-badge tx-badge-green">Paid</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td></tr>
+          <tr><td style="color:var(--dim)">Mar 2, 2026</td><td style="color:var(--muted)">#INV-2026-03</td><td>Pro Monthly</td><td style="font-weight:600">$79.00</td><td><span class="tx-badge tx-badge-green">Paid</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td></tr>
+          <tr><td style="color:var(--dim)">Feb 2, 2026</td><td style="color:var(--muted)">#INV-2026-02</td><td>Pro Monthly</td><td style="font-weight:600">$79.00</td><td><span class="tx-badge tx-badge-green">Paid</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td></tr>
+          <tr><td style="color:var(--dim)">Jan 2, 2026</td><td style="color:var(--muted)">#INV-2026-01</td><td>Pro Monthly</td><td style="font-weight:600">$79.00</td><td><span class="tx-badge tx-badge-green">Paid</span></td><td><button class="tx-btn tx-btn-ghost tx-btn-sm">↓ PDF</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:13px;color:var(--muted)">Need to cancel your subscription?</div>
+      <button class="tx-btn tx-btn-danger tx-btn-sm">Cancel Subscription</button>
+    </div>
+  </div>
+</main>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

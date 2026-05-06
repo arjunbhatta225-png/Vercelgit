@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Risk/Reward Calculator — Free Trading Tool | Tradexa</title>
+  <meta name="description" content="Free risk/reward ratio calculator for traders. Calculate your R:R ratio, required win rate, and expected value per trade instantly."/>
+  <link rel="canonical" href="https://tradexa.io/tools/risk-reward.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--g:#FFB732;--g2:#b08c1f;--b:#5E81AC;--red:#EF4444;--gold:#FFB732;--bg:#0d0f12;--s1:#13161b;--border:rgba(255,255,255,.08);--text:#F5F5F5;--muted:#A1A1AA;--dim:#525252}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding-top:64px;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+    .breadcrumb{padding:20px 28px;font-size:12px;color:var(--dim);max-width:1100px;margin:0 auto;display:flex;gap:6px;align-items:center}
+    .breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:#fff}
+    .tool-hero{padding:40px 28px 60px;max-width:1100px;margin:0 auto}
+    .tool-tag{display:inline-block;background:rgba(94,129,172,.1);border:1px solid rgba(94,129,172,.2);color:var(--b);font-size:10px;font-weight:700;padding:3px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+    .tool-hero h1{font-size:clamp(32px,4.5vw,52px);font-weight:900;color:#fff;letter-spacing:-.05em;margin-bottom:12px;line-height:1.05}
+    .tool-hero p{font-size:16px;color:var(--muted);line-height:1.75;max-width:560px}
+    .calc-wrap{padding:0 28px 60px;max-width:1100px;margin:0 auto}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    .calc-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .calc-card-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .calc-card-header h2{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+    .calc-body{padding:24px}
+    .field{margin-bottom:18px}
+    .field-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+    .field-hint{font-size:10px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+    .input-wrap{position:relative;display:flex}
+    .input-prefix,.input-suffix{display:flex;align-items:center;padding:0 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--dim);font-size:13px;font-weight:500;flex-shrink:0}
+    .input-prefix{border-right:none;border-radius:8px 0 0 8px}
+    .input-suffix{border-left:none;border-radius:0 8px 8px 0}
+    .field-input{flex:1;background:var(--bg);border:1px solid var(--border);color:#fff;font-size:15px;font-family:'Inter',sans-serif;padding:12px 14px;outline:none;transition:border-color .15s;-moz-appearance:textfield}
+    .field-input::-webkit-inner-spin-button,.field-input::-webkit-outer-spin-button{-webkit-appearance:none}
+    .field-input:focus{border-color:rgba(94,129,172,.4)}
+    .calc-btn{width:100%;background:linear-gradient(135deg,var(--b),#3b82f6);color:#fff;border:none;border-radius:10px;padding:16px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;margin-top:8px;letter-spacing:-.01em;display:flex;align-items:center;justify-content:center;gap:8px}
+    .calc-btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+
+    /* Gauge */
+    .rr-gauge{padding:28px 24px;text-align:center;border-bottom:1px solid var(--border)}
+    .gauge-svg{display:block;margin:0 auto}
+    .rr-value{font-size:40px;font-weight:900;color:#fff;letter-spacing:-.06em;line-height:1;margin-top:12px}
+    .rr-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+    .rr-verdict{
+      display:inline-block;margin-top:10px;padding:5px 16px;border-radius:100px;
+      font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    }
+    .verdict-great{background:rgba(255,183,50,.1);color:var(--g);border:1px solid rgba(255,183,50,.25)}
+    .verdict-ok{background:rgba(94,129,172,.1);color:var(--b);border:1px solid rgba(94,129,172,.25)}
+    .verdict-poor{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+
+    /* Stats grid */
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+    .stat-cell{padding:18px 20px;background:var(--s1)}
+    .stat-cell-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px}
+    .stat-cell-value{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
+    .stat-cell-sub{font-size:11px;color:var(--muted);margin-top:4px}
+
+    /* Expectancy table */
+    .exp-table{padding:20px 24px}
+    .exp-table-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:14px}
+    .exp-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+    .exp-row:last-child{border-bottom:none}
+    .exp-row-label{color:var(--muted)}
+    .exp-row-value{font-weight:700;color:#fff}
+    .pos{color:var(--g)}.neg{color:var(--red)}
+
+    /* Win rate bar */
+    .wr-needed-bar{margin:16px 24px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .wr-bar-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;font-weight:600}
+    .wr-bar-bg{height:8px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;margin-bottom:6px}
+    .wr-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+    .wr-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--dim)}
+
+    /* Scenario comparison */
+    .scenarios{padding:20px 24px;border-top:1px solid var(--border)}
+    .scenarios-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px}
+    .scen-row{display:grid;grid-template-columns:40px 1fr 1fr 1fr;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+    .scen-row:last-child{border-bottom:none}
+    .scen-wr{color:var(--muted)}.scen-val{font-weight:700;text-align:right}
+
+    .guide{padding:60px 28px;border-top:1px solid var(--border);background:var(--s1)}
+    .guide-inner{max-width:800px;margin:0 auto}
+    .guide-inner h2{font-size:24px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-.03em}
+    .guide-inner h3{font-size:17px;font-weight:700;color:#fff;margin:24px 0 10px}
+    .guide-inner p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px}
+    .guide-formula{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-size:13px;color:#A1A1AA;font-family:monospace;margin:12px 0}
+
+    @media(max-width:768px){.calc-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Risk/Reward Calculator — Free Trading Tool | Tradexa"/>
+  <meta property="og:description" content="Free risk/reward ratio calculator for traders. Calculate your R:R ratio, required win rate, and expected value per trade instantly."/>
+  <meta property="og:url" content="https://tradexa.io/tools/risk-reward.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Risk/Reward Calculator — Free Trading Tool | Tradexa"/>
+  <meta name="twitter:description" content="Free risk/reward ratio calculator for traders. Calculate your R:R ratio, required win rate, and expected value per trade instantly."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<div class="breadcrumb"><a href="/">Home</a><span style="color:#374151">›</span><a href="/tools/">Tools</a><span style="color:#374151">›</span>Risk/Reward Calculator</div>
+
+<div class="tool-hero">
+  <div class="tool-tag">Free Calculator</div>
+  <h1>Risk/Reward Calculator</h1>
+  <p>Calculate your R:R ratio, breakeven win rate, and expected value per trade. Know instantly whether a setup is worth taking before you enter.</p>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-grid">
+    <!-- Inputs -->
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5E81AC" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h2>Trade Setup</h2>
+      </div>
+      <div class="calc-body">
+        <div class="field">
+          <div class="field-label">Entry Price</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="entry" value="150.00" step="0.01" min="0" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Stop Loss Price</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="stop" value="147.00" step="0.01" min="0" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Take Profit Price</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="tp" value="159.00" step="0.01" min="0" oninput="calculate()"/></div>
+        </div>
+        <div class="field" style="border-top:1px solid var(--border);padding-top:18px">
+          <div class="field-label">Account Balance <span class="field-hint">For expectancy calc</span></div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="balance" value="25000" step="1000" min="0" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Your Historical Win Rate</div>
+          <div class="input-wrap"><input type="number" class="field-input" id="wr" value="55" step="1" min="1" max="99" style="border-radius:8px 0 0 8px"/><div class="input-suffix">%</div></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Risk Per Trade</div>
+          <div class="input-wrap"><input type="number" class="field-input" id="riskPct" value="2" step="0.5" min="0.1" style="border-radius:8px 0 0 8px"/><div class="input-suffix">%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="calc-card" id="resultsCard">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h2>Results</h2>
+      </div>
+      <div id="rr-output">
+        <div style="padding:48px 24px;text-align:center">
+          <div style="font-size:13px;color:var(--dim)">Enter your trade parameters to see results</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;background:linear-gradient(135deg,rgba(94,129,172,.05),rgba(255,183,50,.04));border:1px solid rgba(94,129,172,.15);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Track your real R:R with every trade</div>
+      <div style="font-size:13px;color:var(--muted)">Tradexa automatically calculates your actual vs planned R:R and shows you patterns over time.</div>
+    </div>
+    <a href="/app/dashboard.html" style="background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;text-decoration:none;font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;white-space:nowrap">Start Free →</a>
+  </div>
+</div>
+
+<section class="guide">
+  <div class="guide-inner">
+    <h2>Understanding Risk/Reward Ratio</h2>
+    <p>The risk/reward ratio compares how much you stand to lose on a trade versus how much you could gain. A 1:2 R:R means you risk $1 to make $2. Most professional traders require a minimum 1:2 or 1:3 before entering a trade.</p>
+    <div class="guide-formula">R:R = (Take Profit − Entry) ÷ (Entry − Stop Loss)</div>
+    <h3>Breakeven Win Rate</h3>
+    <p>For any given R:R, there's a minimum win rate required to be profitable. At 1:1, you need to win more than 50% to profit. At 1:2, you only need 33%+ wins to be net positive — giving you more room for error.</p>
+    <div class="guide-formula">Breakeven Win Rate = 1 ÷ (1 + R:R Ratio)</div>
+    <h3>Expected Value</h3>
+    <p>Expected value (EV) is the average dollar amount you expect to make or lose per trade. Positive EV means your strategy is mathematically sound. Negative EV means even with good execution, you'll lose money long-term.</p>
+    <div class="guide-formula">EV = (Win Rate × Avg Win) − (Loss Rate × Avg Loss)</div>
+  </div>
+</section>
+
+<script>
+function calculate(){
+  var entry = parseFloat(document.getElementById('entry').value) || 0;
+  var stop = parseFloat(document.getElementById('stop').value) || 0;
+  var tp = parseFloat(document.getElementById('tp').value) || 0;
+  var bal = parseFloat(document.getElementById('balance').value) || 25000;
+  var wr = parseFloat(document.getElementById('wr').value) || 55;
+  var rp = parseFloat(document.getElementById('riskPct').value) || 2;
+  if(!entry || !stop || !tp) return;
+
+  var risk = Math.abs(entry - stop);
+  var reward = Math.abs(tp - entry);
+  var rr = reward / risk;
+  var bwr = (1 / (1 + rr) * 100);
+  var isLong = tp > entry;
+  var riskDollar = bal * (rp / 100);
+  var rewardDollar = riskDollar * rr;
+  var wrFrac = wr / 100;
+  var ev = (wrFrac * rewardDollar) - ((1 - wrFrac) * riskDollar);
+  var evPct = ((ev / riskDollar) * 100).toFixed(1);
+  var isGoodRR = rr >= 2;
+  var isOkRR = rr >= 1;
+
+  var verdictClass = isGoodRR ? 'verdict-great' : isOkRR ? 'verdict-ok' : 'verdict-poor';
+  var verdictText = isGoodRR ? '✓ Strong Setup' : isOkRR ? '~ Acceptable' : '✗ Poor Risk/Reward';
+
+  /* SVG arc gauge */
+  var maxRR = 4;
+  var pct = Math.min(rr / maxRR, 1);
+  var angle = pct * 180;
+  var rad = angle * Math.PI / 180;
+  var cx = 100, cy = 90, r = 72;
+  var startX = cx - r, startY = cy;
+  var endX = cx + Math.cos(Math.PI - rad) * r;
+  var endY = cy - Math.sin(Math.PI - rad) * r;
+  var largeArc = angle > 180 ? 1 : 0;
+  var trackPath = `M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}`;
+  var fillColor = rr >= 2 ? '#FFB732' : rr >= 1 ? '#5E81AC' : '#EF4444';
+  var arcPath = `M ${cx-r} ${cy} A ${r} ${r} 0 ${largeArc} 1 ${endX} ${endY}`;
+
+  /* Scenario table rows */
+  var scens = [40, 45, 50, 55, 60, 65, 70];
+  var scenRows = scens.map(function(w){
+    var ev100 = ((w/100) * rewardDollar - (1-w/100) * riskDollar) * 100;
+    var isCur = w === Math.round(wr / 5) * 5;
+    return `<div class="scen-row" style="${isCur?'background:rgba(255,183,50,.04)':''}">
+      <div class="scen-wr">${w}%</div>
+      <div class="scen-val ${ev100 > 0 ? 'pos' : 'neg'}">${ev100 > 0 ? '+' : ''}$${Math.round(ev100).toLocaleString()}</div>
+      <div class="scen-val" style="color:var(--muted)">${(w/(100/(1+rr))*100-100).toFixed(0)}% ${w >= bwr ? 'above' : 'below'} break-even</div>
+      <div class="scen-val" style="font-size:10px;color:${ev100>0?'var(--g)':'var(--red)'}">${ev100>0?'✓ Profitable':'✗ Losing'}</div>
+    </div>`;
+  }).join('');
+
+  var wrBarWidth = Math.min(bwr / 80 * 100, 100);
+  var wrBarColor = bwr < 40 ? '#FFB732' : bwr < 55 ? '#5E81AC' : '#EF4444';
+
+  document.getElementById('rr-output').innerHTML = `
+    <div class="rr-gauge">
+      <svg class="gauge-svg" width="200" height="100" viewBox="0 0 200 100">
+        <path d="${trackPath}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="10" stroke-linecap="round"/>
+        <path d="${arcPath}" fill="none" stroke="${fillColor}" stroke-width="10" stroke-linecap="round" style="filter:drop-shadow(0 0 6px ${fillColor}40)"/>
+      </svg>
+      <div class="rr-value">1:${rr.toFixed(2)}</div>
+      <div class="rr-label">Risk / Reward Ratio</div>
+      <div class="rr-verdict ${verdictClass}">${verdictText}</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-cell"><div class="stat-cell-label">Risk</div><div class="stat-cell-value neg">$${riskDollar.toFixed(0)}</div><div class="stat-cell-sub">${rp}% of account</div></div>
+      <div class="stat-cell"><div class="stat-cell-label">Potential Reward</div><div class="stat-cell-value pos">$${rewardDollar.toFixed(0)}</div><div class="stat-cell-sub">${(rp * rr).toFixed(1)}% of account</div></div>
+      <div class="stat-cell"><div class="stat-cell-label">Breakeven Win Rate</div><div class="stat-cell-value" style="color:${wr >= bwr ? 'var(--g)' : 'var(--red)'}">${bwr.toFixed(1)}%</div><div class="stat-cell-sub">Your rate: ${wr}% — ${wr >= bwr ? 'profitable' : 'losing'}</div></div>
+      <div class="stat-cell"><div class="stat-cell-label">Expected Value</div><div class="stat-cell-value ${ev >= 0 ? 'pos' : 'neg'}">${ev >= 0 ? '+' : ''}$${ev.toFixed(0)}</div><div class="stat-cell-sub">Per trade at ${wr}% win rate</div></div>
+    </div>
+    <div class="wr-needed-bar">
+      <div class="wr-bar-label">Breakeven Win Rate Required: ${bwr.toFixed(1)}%</div>
+      <div class="wr-bar-bg"><div class="wr-bar-fill" style="width:${wrBarWidth}%;background:${wrBarColor}"></div></div>
+      <div class="wr-bar-labels"><span>0%</span><span>40%</span><span>60%</span><span>80%+</span></div>
+    </div>
+    <div class="scenarios">
+      <div class="scenarios-title">Expected Value by Win Rate (per 100 trades)</div>
+      <div class="scen-row" style="margin-bottom:4px"><div style="color:var(--dim);font-size:10px">Win Rate</div><div style="color:var(--dim);font-size:10px;text-align:right">Total P&L</div><div style="color:var(--dim);font-size:10px;text-align:right">vs Breakeven</div><div></div></div>
+      ${scenRows}
+    </div>`;
+}
+window.addEventListener('DOMContentLoaded', function(){ calculate(); });
+</script>
+</body>
+</html>

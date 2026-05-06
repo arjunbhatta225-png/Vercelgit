@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Portfolio Tracker | Tradexa</title>
+  <meta name="description" content="Monitor your trading accounts, capital allocation, asset mix, and total portfolio performance in one professional dashboard.">
+  <meta name="keywords" content="trading portfolio, capital tracker, account performance, trade portfolio, asset allocation, trading account">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Portfolio Tracker — Tradexa Trading Journal">
+  <meta property="og:description" content="All accounts, positions, and capital overview in one place. Real-time portfolio analytics for serious traders.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tradexa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0d0f12">
+  <script src="/assets/trades-data.js"></script>
+  <script src="/assets/capital-tracker.js"></script>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .account-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;transition:border-color .15s;cursor:pointer}
+    .account-card:hover{border-color:var(--green)}
+    .account-card.active{border-color:var(--green);background:rgba(255,183,50,.04)}
+    .alloc-bar{height:12px;border-radius:100px;overflow:hidden;display:flex;margin-bottom:8px}
+    .alloc-seg{height:100%}
+    .alloc-legend{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+    .alloc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .txn-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .txn-row:last-child{border-bottom:none}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Portfolio'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Portfolio Tracker</h1>
+      <p class="tx-page-sub">All accounts, positions, and capital overview in one place.</p>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="tx-btn tx-btn-ghost" onclick="document.dispatchEvent(new CustomEvent('txCapital:openSetup'))">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Capital Setup
+      </button>
+      <a href="/app/reports.html" class="tx-btn tx-btn-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Export
+      </a>
+    </div>
+  </div>
+
+  <!-- Top KPIs -->
+  <div class="tx-kpi-grid" style="margin-bottom:20px">
+    <div class="tx-kpi"><div class="tx-kpi-label">Total Capital</div><div class="tx-kpi-value" id="kpi-capital">—</div><div class="tx-kpi-change" id="kpi-capital-sub">—</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Realized P&amp;L (All Time)</div><div class="tx-kpi-value" id="kpi-pnl" style="color:var(--profit)">—</div><div class="tx-kpi-change" id="kpi-pnl-sub">—</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Win Rate</div><div class="tx-kpi-value" id="kpi-wr">—</div><div class="tx-kpi-change" id="kpi-wr-sub">—</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Total Trades</div><div class="tx-kpi-value" id="kpi-trades">—</div><div class="tx-kpi-change" id="kpi-trades-sub">—</div></div>
+    <div class="tx-kpi"><div class="tx-kpi-label">Total Deposits</div><div class="tx-kpi-value" id="kpi-deposits">—</div><div class="tx-kpi-change" id="kpi-deposits-sub">—</div></div>
+  </div>
+
+  <div class="tx-grid-aside" style="margin-bottom:20px">
+    <!-- Accounts -->
+    <div>
+      <div class="tx-card" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div class="tx-card-title" style="margin:0">Accounts</div>
+          <a href="/app/settings.html" class="tx-btn tx-btn-ghost tx-btn-sm">Manage</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px" id="accountsList">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Performance by Setup -->
+      <div class="tx-card">
+        <div class="tx-card-title">Top Setups</div>
+        <div style="margin-top:4px" id="setupList"></div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <!-- Asset Allocation -->
+      <div class="tx-card">
+        <div class="tx-card-title">Asset Mix</div>
+        <div id="allocBar" class="alloc-bar" style="margin-top:8px"></div>
+        <div class="alloc-legend" id="allocLegend"></div>
+      </div>
+
+      <!-- Open Positions placeholder -->
+      <div class="tx-card">
+        <div class="tx-card-title">Performance Summary</div>
+        <div id="perfSummary"></div>
+      </div>
+
+      <!-- Capital Transactions -->
+      <div class="tx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div class="tx-card-title" style="margin:0">Capital Transactions</div>
+          <button class="tx-btn tx-btn-ghost tx-btn-sm" onclick="document.dispatchEvent(new CustomEvent('txCapital:openTransaction'))">+ Add</button>
+        </div>
+        <div id="txnList">
+          <div style="text-align:center;color:var(--dim);font-size:13px;padding:16px 0">Loading…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var COLORS = ['#FFB732','#3B82F6','#EAB308','#8B5CF6','#22C55E','#EF4444'];
+
+  function fmt(v){ return (v>=0?'+':'')+'\$'+Math.abs(Math.round(v)).toLocaleString(); }
+  function fmtAbs(v){ return '\$'+Math.abs(Math.round(v)).toLocaleString(); }
+  function el(id){ return document.getElementById(id); }
+
+  function init(){
+    if(typeof TxTradeData === 'undefined' || typeof TxCapital === 'undefined'){
+      setTimeout(init, 80); return;
+    }
+
+    var trades = TxTradeData.getTrades();
+    var s = TxTradeData.getStats(trades);
+    var cap = TxCapital.getCapitalStats ? TxCapital.getCapitalStats() : null;
+    var history = TxCapital.getHistory ? TxCapital.getHistory() : [];
+
+    // Capital KPI
+    var totalCapital = cap ? cap.currentBalance : (cap && cap.startingCapital ? cap.startingCapital : 0);
+    var startCap = cap ? (cap.startingCapital || 0) : 0;
+    var capitalChange = s.totalPnl;
+    var pnlColor = s.totalPnl >= 0 ? 'var(--profit)' : 'var(--loss)';
+    var returnPct = startCap > 0 ? Math.round(s.totalPnl / startCap * 1000) / 10 : 0;
+
+    el('kpi-capital').textContent = totalCapital > 0 ? fmtAbs(totalCapital) : fmtAbs(startCap + s.totalPnl);
+    el('kpi-capital').style.color = 'var(--text)';
+    el('kpi-capital-sub').textContent = cap && cap.targetCapital ? 'Target: '+fmtAbs(cap.targetCapital) : 'Capital tracked';
+    el('kpi-capital-sub').className = 'tx-kpi-change neu';
+
+    el('kpi-pnl').textContent = fmt(s.totalPnl);
+    el('kpi-pnl').style.color = pnlColor;
+    el('kpi-pnl-sub').textContent = returnPct !== 0 ? returnPct+'% return' : s.total+' trades';
+    el('kpi-pnl-sub').className = 'tx-kpi-change '+(s.totalPnl>=0?'pos':'neg');
+
+    el('kpi-wr').textContent = s.winRate+'%';
+    el('kpi-wr').style.color = s.winRate >= 50 ? 'var(--profit)' : 'var(--loss)';
+    el('kpi-wr-sub').textContent = s.wins+' wins / '+s.losses+' losses';
+    el('kpi-wr-sub').className = 'tx-kpi-change '+(s.winRate>=50?'pos':'neg');
+
+    el('kpi-trades').textContent = s.total;
+    el('kpi-trades-sub').textContent = 'Avg R:R '+s.avgRR;
+    el('kpi-trades-sub').className = 'tx-kpi-change neu';
+
+    var totalDeposits = history.filter(function(h){ return h.type==='deposit'; }).reduce(function(sum,h){ return sum+h.amount; }, 0);
+    el('kpi-deposits').textContent = totalDeposits > 0 ? fmtAbs(totalDeposits) : (startCap > 0 ? fmtAbs(startCap) : '—');
+    el('kpi-deposits-sub').textContent = history.filter(function(h){ return h.type==='deposit'; }).length+' deposit'+(history.filter(function(h){ return h.type==='deposit'; }).length!==1?'s':'');
+    el('kpi-deposits-sub').className = 'tx-kpi-change neu';
+
+    // Accounts list
+    var accts = [];
+    if(cap && cap.accounts && cap.accounts.length){
+      accts = cap.accounts;
+    } else {
+      accts = [
+        { name: cap && cap.accountName ? cap.accountName : 'Main Account', type:'Primary', color:'var(--gold)', initials:'MA', balance: totalCapital || startCap, pnl: s.totalPnl, active: true }
+      ];
+    }
+    renderAccounts(accts, s);
+
+    // Asset allocation from real trades
+    renderAlloc(s.assetStats);
+
+    // Setup performance
+    renderSetups(s.setupWinRates);
+
+    // Performance summary
+    renderPerfSummary(s);
+
+    // Capital transactions
+    renderTransactions(history, cap);
+  }
+
+  function renderAccounts(accts, s){
+    var accountColors = ['rgba(59,130,246,.15)','rgba(234,179,8,.1)','rgba(255,183,50,.1)','rgba(239,68,68,.08)'];
+    var borderColors  = ['rgba(59,130,246,.25)','rgba(234,179,8,.2)','rgba(255,183,50,.2)','rgba(239,68,68,.15)'];
+    var textColors    = ['var(--blue)','var(--warn)','var(--green)','var(--loss)'];
+
+    var defaultAccts = [
+      { name:'Interactive Brokers', sub:'Futures & Equities · Live', initials:'IB', balance:null, pnl:null, active:true },
+      { name:'Coinbase Pro',         sub:'Crypto · Live',            initials:'CB', balance:null, pnl:null, active:true },
+      { name:'Alpaca Markets',       sub:'Equities · Paper',         initials:'AL', balance:null, pnl:null, active:false, paper:true },
+    ];
+
+    var html = '';
+    defaultAccts.forEach(function(a, i){
+      var badge = a.paper ? '<span class="tx-badge tx-badge-blue">Paper</span>' : '<span class="tx-badge tx-badge-green-border">Active</span>';
+      html +=
+        '<div class="account-card'+(i===0?' active':'')+'" onclick="this.parentNode.querySelectorAll(\'.account-card\').forEach(function(c){c.classList.remove(\'active\')});this.classList.add(\'active\')">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'+
+            '<div style="display:flex;align-items:center;gap:10px">'+
+              '<div style="width:36px;height:36px;border-radius:6px;background:'+accountColors[i]+';border:1px solid '+borderColors[i]+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:'+textColors[i]+'">'+a.initials+'</div>'+
+              '<div><div style="font-size:13px;font-weight:600;color:var(--text)">'+a.name+'</div><div style="font-size:11px;color:var(--dim)">'+a.sub+'</div></div>'+
+            '</div>'+
+            badge+
+          '</div>'+
+        '</div>';
+    });
+    el('accountsList').innerHTML = html;
+  }
+
+  function renderAlloc(assetStats){
+    var cats = { Futures:0, Equities:0, Crypto:0, Forex:0 };
+    var futuresKeys = ['NQ','ES','CL','GC','ZB','SI'];
+    var cryptoKeys  = ['BTC','ETH','SOL','ADA','XRP'];
+    var forexKeys   = ['EUR','GBP','USD','JPY','CHF','AUD'];
+
+    Object.keys(assetStats).forEach(function(k){
+      var cnt = assetStats[k].count || assetStats[k].total || 0;
+      var kUp = k.toUpperCase();
+      if(futuresKeys.some(function(f){ return kUp.startsWith(f) || kUp.includes('FUTURES'); })) cats.Futures += cnt;
+      else if(cryptoKeys.some(function(f){ return kUp.startsWith(f); })) cats.Crypto += cnt;
+      else if(forexKeys.some(function(f){ return kUp.startsWith(f); })) cats.Forex += cnt;
+      else cats.Equities += cnt;
+    });
+
+    var total = Object.values(cats).reduce(function(s,v){ return s+v; }, 0) || 1;
+    var catColors = { Futures:'#FFB732', Equities:'#3B82F6', Crypto:'#EAB308', Forex:'#8B5CF6' };
+    var barHtml = '', legendHtml = '';
+    Object.keys(cats).forEach(function(k){
+      var pct = Math.round(cats[k]/total*100);
+      if(pct === 0) return;
+      barHtml += '<div class="alloc-seg" style="width:'+pct+'%;background:'+catColors[k]+'"></div>';
+      legendHtml += '<div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)"><div class="alloc-dot" style="background:'+catColors[k]+'"></div>'+k+' '+pct+'%</div>';
+    });
+    el('allocBar').innerHTML = barHtml || '<div class="alloc-seg" style="width:100%;background:var(--border)"></div>';
+    el('allocLegend').innerHTML = legendHtml || '<div style="color:var(--dim);font-size:12px">No trades yet</div>';
+  }
+
+  function renderSetups(setupWinRates){
+    var sorted = Object.keys(setupWinRates).map(function(k){
+      var d = setupWinRates[k];
+      return { name:k, wr: d.total ? Math.round(d.wins/d.total*100) : 0, total:d.total, pnl:d.pnl };
+    }).sort(function(a,b){ return b.wr-a.wr; }).slice(0,5);
+
+    if(!sorted.length){
+      el('setupList').innerHTML = '<div style="color:var(--dim);font-size:13px;text-align:center;padding:12px">No tagged setups yet</div>';
+      return;
+    }
+    var html = '';
+    sorted.forEach(function(item){
+      var color = item.wr >= 65 ? 'var(--profit)' : item.wr >= 50 ? 'var(--blue)' : 'var(--loss)';
+      var pnlColor = item.pnl >= 0 ? 'var(--profit)' : 'var(--loss)';
+      html += '<div class="txn-row">'+
+        '<div><div style="font-size:13px;font-weight:600;color:var(--text)">'+item.name+'</div>'+
+          '<div style="font-size:11px;color:var(--dim)">'+item.total+' trade'+(item.total!==1?'s':'')+'</div></div>'+
+        '<div style="text-align:right"><div style="font-size:13px;font-weight:700;color:'+color+'">'+item.wr+'% WR</div>'+
+          '<div style="font-size:11px;color:'+pnlColor+'">'+fmt(item.pnl)+'</div></div>'+
+      '</div>';
+    });
+    el('setupList').innerHTML = html;
+  }
+
+  function renderPerfSummary(s){
+    var html =
+      '<div class="txn-row"><div style="font-size:13px;color:var(--muted)">Profit Factor</div>'+
+        '<div style="font-size:13px;font-weight:700;color:'+(s.profitFactor>=1.5?'var(--profit)':'var(--blue)')+'">'+TxTradeData.formatPF(s.profitFactor)+'</div></div>'+
+      '<div class="txn-row"><div style="font-size:13px;color:var(--muted)">Avg R:R</div>'+
+        '<div style="font-size:13px;font-weight:700;color:'+(s.avgRR>=2?'var(--profit)':'var(--blue)')+'">1:'+s.avgRR+'</div></div>'+
+      '<div class="txn-row"><div style="font-size:13px;color:var(--muted)">Avg Win</div>'+
+        '<div style="font-size:13px;font-weight:700;color:var(--profit)">'+fmtAbs(s.avgWin)+'</div></div>'+
+      '<div class="txn-row"><div style="font-size:13px;color:var(--muted)">Avg Loss</div>'+
+        '<div style="font-size:13px;font-weight:700;color:var(--loss)">'+fmtAbs(s.avgLoss)+'</div></div>'+
+      '<div class="txn-row"><div style="font-size:13px;color:var(--muted)">Current Streak</div>'+
+        '<div style="font-size:13px;font-weight:700;color:'+(s.currentStreakType==='win'?'var(--profit)':'var(--loss)')+'">'+
+        (s.currentStreak>=2 ? s.currentStreak+' '+s.currentStreakType+'s' : 'None')+'</div></div>';
+    el('perfSummary').innerHTML = html;
+  }
+
+  function renderTransactions(history, cap){
+    var allTxns = [];
+
+    history.slice().reverse().forEach(function(h){
+      allTxns.push({
+        label: h.type === 'deposit' ? 'Deposit' : 'Withdrawal',
+        note: h.note || 'Main Account',
+        date: h.date ? new Date(h.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—',
+        amount: h.type === 'deposit' ? h.amount : -h.amount,
+        color: h.type === 'deposit' ? 'var(--profit)' : 'var(--loss)'
+      });
+    });
+
+    if(!allTxns.length){
+      if(cap && cap.startingCapital){
+        allTxns.push({
+          label:'Initial Capital', note:'Starting balance', date:'—',
+          amount: cap.startingCapital, color:'var(--profit)'
+        });
+      } else {
+        el('txnList').innerHTML = '<div style="text-align:center;color:var(--dim);font-size:13px;padding:16px 0">No transactions yet.<br><a href="#" onclick="document.dispatchEvent(new CustomEvent(\'txCapital:openTransaction\'))" style="color:var(--gold)">Record a deposit →</a></div>';
+        return;
+      }
+    }
+
+    var html = allTxns.slice(0,6).map(function(t){
+      return '<div class="txn-row">'+
+        '<div><div style="font-size:12px;font-weight:600;color:var(--text)">'+t.label+'</div>'+
+          '<div style="font-size:11px;color:var(--dim)">'+t.date+(t.note?' · '+t.note:'')+'</div></div>'+
+        '<div style="font-size:13px;font-weight:700;color:'+t.color+'">'+(t.amount>=0?'+':'')+'\$'+Math.abs(t.amount).toLocaleString()+'</div>'+
+      '</div>';
+    }).join('');
+
+    if(allTxns.length > 6){
+      html += '<div style="text-align:center;padding:10px 0"><a href="/app/backups.html" style="font-size:12px;color:var(--gold)">View all '+(allTxns.length)+' transactions →</a></div>';
+    }
+    el('txnList').innerHTML = html;
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

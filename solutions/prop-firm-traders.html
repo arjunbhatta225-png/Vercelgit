@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tradexa for Prop Firm Traders — Pass Evaluations, Stay Funded</title>
+  <meta name="description" content="Tradexa helps prop firm traders track their rules, stay within drawdown limits, and build the consistency that FTMO, MyFundedFx, and other firms demand.">
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box}
+    .pg-wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+    .hero{padding:80px 0 72px;text-align:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#FFB732;background:rgba(245,185,66,.08);border:1px solid rgba(245,185,66,.2);border-radius:100px;padding:5px 14px;margin-bottom:24px}
+    .hero h1{font-size:clamp(34px,5vw,54px);font-weight:800;color:#F5F5F5;letter-spacing:-.04em;line-height:1.1;margin:0 0 20px}
+    .hero h1 span{color:#FFB732}
+    .hero p{font-size:17px;color:#A1A1AA;line-height:1.7;max-width:620px;margin:0 auto 36px}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:10px;text-decoration:none;box-shadow:0 0 28px rgba(255,183,50,.2)}
+    .btn-g{display:inline-flex;align-items:center;gap:8px;color:#A1A1AA;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1)}
+    .rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:0 0 72px}
+    .rule-card{background:#13161b;border:1px solid rgba(245,185,66,.15);border-radius:14px;padding:24px;text-align:center}
+    .rule-num{font-size:28px;font-weight:800;color:#FFB732;letter-spacing:-.03em;margin-bottom:6px}
+    .rule-label{font-size:12px;color:#A1A1AA;line-height:1.5}
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:0 0 80px}
+    .feat{background:#13161b;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:32px}
+    .feat-icon{width:44px;height:44px;border-radius:10px;background:rgba(255,183,50,.08);border:1px solid rgba(255,183,50,.18);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:18px}
+    .feat h3{font-size:17px;font-weight:700;color:#F5F5F5;margin:0 0 10px;letter-spacing:-.01em}
+    .feat p{font-size:13.5px;color:#A1A1AA;line-height:1.7;margin:0}
+    .quote{background:#13161b;border:1px solid rgba(245,185,66,.2);border-radius:16px;padding:40px;margin:0 0 80px;position:relative}
+    .quote::before{content:'"';font-size:80px;color:rgba(245,185,66,.1);position:absolute;top:12px;left:28px;line-height:1;font-family:Georgia,serif}
+    .quote-text{font-size:18px;color:#F5F5F5;line-height:1.7;font-style:italic;padding-left:16px}
+    .quote-author{margin-top:20px;display:flex;align-items:center;gap:12px;padding-left:16px}
+    .quote-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,185,66,.3),rgba(239,68,68,.1));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+    .quote-name{font-size:13px;font-weight:600;color:#F5F5F5}
+    .quote-role{font-size:12px;color:#525252}
+    .cta-strip{text-align:center;padding:80px 0;background:#13161b;border-top:1px solid rgba(255,255,255,.06);border-radius:20px;margin-bottom:60px}
+    .cta-strip h2{font-size:32px;font-weight:800;color:#F5F5F5;letter-spacing:-.03em;margin:0 0 12px}
+    .cta-strip p{font-size:15px;color:#A1A1AA;margin:0 0 32px}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    @media(max-width:700px){.rules-grid{grid-template-columns:repeat(2,1fr)}.feat-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <link rel="canonical" href="https://tradexa.io/solutions/prop-firm-traders.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Tradexa for Prop Firm Traders — Pass Evaluations, Stay Funded"/>
+  <meta property="og:description" content="Tradexa helps prop firm traders track their rules, stay within drawdown limits, and build the consistency that FTMO, MyFundedFx, and other firms demand."/>
+  <meta property="og:url" content="https://tradexa.io/solutions/prop-firm-traders.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Tradexa for Prop Firm Traders — Pass Evaluations, Stay Funded"/>
+  <meta name="twitter:description" content="Tradexa helps prop firm traders track their rules, stay within drawdown limits, and build the consistency that FTMO, MyFundedFx, and other firms demand."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<div class="pg-wrap">
+  <div class="hero">
+    <div class="eyebrow">🏆 Prop Firm Traders</div>
+    <h1>Pass the evaluation. <span>Stay funded. Scale up.</span></h1>
+    <p>Prop firms demand consistency, discipline, and strict rule adherence. Tradexa tracks your drawdown limits, surfaces every rules violation in your journal data, and helps you build the track record that gets you funded — and keeps you funded.</p>
+    <div class="hero-btns">
+      <a href="/app/dashboard.html" class="btn-p">Start Free — No Card Required →</a>
+      <a href="/product/risk-controls.html" class="btn-g">See Risk Controls →</a>
+    </div>
+  </div>
+
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">5%</div><div class="rule-label">Daily loss limit tracked in real time with alerts before you breach it</div></div>
+    <div class="rule-card"><div class="rule-num">10%</div><div class="rule-label">Max drawdown monitored continuously across your entire account</div></div>
+    <div class="rule-card"><div class="rule-num">0</div><div class="rule-label">Rule violations missed — every deviation from your plan is flagged instantly</div></div>
+    <div class="rule-card"><div class="rule-num">100%</div><div class="rule-label">Trade history exportable for firm submission and audit trail</div></div>
+  </div>
+
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-icon">🛡️</div>
+      <h3>Real-Time Drawdown Tracking</h3>
+      <p>Set your max daily loss and max overall drawdown thresholds in your journal. Tradexa tracks your logged P&amp;L and warns you at 50%, 75%, and 90% of your limit — so you decide to stop before you breach.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📋</div>
+      <h3>Rule Violation Alerts</h3>
+      <p>Define your personal trading rules: no trades in news, only A+ setups, max 3 trades per day. Tradexa flags every trade that violates your criteria automatically.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📈</div>
+      <h3>Consistency Score</h3>
+      <p>Prop firms look for consistent, not lucky, traders. Your Tradexa Consistency Score measures how repeatably you follow your strategy — the metric that gets you funded and scaled.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📤</div>
+      <h3>Trade History Export</h3>
+      <p>Export your complete trade history in the format required by FTMO, MyFundedFx, E8, and other firms. Full audit trail, clean and professional.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⏱️</div>
+      <h3>Session Time Controls</h3>
+      <p>Many prop firm rules restrict trading during news or outside specific sessions. Tradexa tracks your trades against session windows and flags out-of-rule activity.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🎯</div>
+      <h3>Profit Target Progress</h3>
+      <p>Track your progress towards the 8% or 10% profit target in real time. Know exactly where you stand, how many days remain, and what daily run rate you need.</p>
+    </div>
+  </div>
+
+  <div class="quote">
+    <div class="quote-text">I failed three FTMO challenges before finding Tradexa. The problem was I kept breaching my daily loss limit on bad days. Tradexa started alerting me at 3% loss and I learned to stop. Passed the next challenge with a week to spare.</div>
+    <div class="quote-author">
+      <div class="quote-av">DK</div>
+      <div><div class="quote-name">Daniel K.</div><div class="quote-role">FTMO-funded trader — passed after 3 failed attempts</div></div>
+    </div>
+  </div>
+
+  <div class="cta-strip">
+    <h2>Your funded account is within reach</h2>
+    <p>Free 14-day Pro trial. No credit card. Start your evaluation today.</p>
+    <div class="cta-btns">
+      <a href="/app/dashboard.html" class="btn-p">Create Free Account →</a>
+      <a href="/product/risk-controls.html" class="btn-g">See Risk Controls</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

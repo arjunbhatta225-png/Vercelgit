@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trading Intelligence Blog | Tradexa</title>
+  <meta name="description" content="Strategies, AI insights, platform updates, and the science of becoming a better trader. Trading journal and analytics guidance from the Tradexa editorial team."/>
+  <meta property="og:title" content="Trading Intelligence Blog — Tradexa"/>
+  <meta property="og:description" content="Strategies, AI insights, and the science of becoming a better trader."/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Trading Intelligence Blog — Tradexa"/>
+  <meta name="twitter:description" content="Strategies, AI insights, and the science of becoming a better trader."/>
+  <link rel="canonical" href="https://tradexa.io/resources/blog.html"/>
+  <script src="/assets/nav.js" defer></script>
+  <link rel="stylesheet" href="/assets/blog-article.css"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F9FAFB;font-family:'Inter',sans-serif;overflow-x:hidden}
+    .page-hero{padding:72px 24px 56px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(255,183,50,.11) 0%,transparent 70%);z-index:0}
+    .page-hero>*{position:relative;z-index:1}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:12px}
+    .page-title{font-size:clamp(28px,4vw,42px);font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:16px}
+    .page-sub{font-size:15px;color:#A1A1AA;max-width:480px;margin:0 auto}
+    .container{max-width:1100px;margin:0 auto}
+    section{padding:64px 24px}
+
+    /* Filter tags */
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .tag{background:#1a1d23;border:1px solid rgba(255,255,255,.08);color:#A1A1AA;font-size:12px;padding:5px 12px;border-radius:100px;cursor:pointer;transition:all .15s;user-select:none}
+    .tag:hover{background:rgba(255,183,50,.08);border-color:rgba(255,183,50,.2);color:#FFB732}
+    .tag.active{background:rgba(255,183,50,.14);border-color:rgba(255,183,50,.4);color:#FFB732;font-weight:600}
+
+    /* Search bar */
+    .search-wrapper{position:relative;margin-bottom:32px;max-width:420px}
+    .search-wrapper svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#525252;pointer-events:none}
+    .search-input{width:100%;background:#1a1d23;border:1px solid rgba(255,255,255,.08);color:#F5F5F5;font-size:13px;font-family:inherit;padding:10px 14px 10px 38px;border-radius:3px;outline:none;transition:border-color .15s}
+    .search-input::placeholder{color:#525252}
+    .search-input:focus{border-color:rgba(255,183,50,.35)}
+
+    /* Featured post */
+    .featured-post{background:#1a1d23;border:1px solid rgba(255,255,255,.08);border-radius:3px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;margin-bottom:40px;text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s}
+    .featured-post:hover{border-color:rgba(255,183,50,.4);transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,0,0,.5)}
+    .featured-post[hidden]{display:none}
+    .featured-img{background:linear-gradient(135deg,#0c1a3a 0%,#0d0f12 100%);display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;overflow:hidden}
+    .featured-img-inner{width:80%;text-align:center}
+    .featured-chart{display:flex;align-items:flex-end;gap:6px;justify-content:center;height:120px}
+    .featured-chart div{width:18px;border-radius:2px 2px 0 0}
+    .featured-content{padding:40px}
+    .post-category{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:12px}
+    .post-title{font-size:22px;font-weight:600;color:#fff;line-height:1.25;margin-bottom:12px}
+    .post-excerpt{font-size:13.5px;color:#A1A1AA;line-height:1.7;margin-bottom:20px}
+    .post-meta{display:flex;align-items:center;gap:16px;font-size:12px;color:#525252}
+    .post-author{color:#D1D5DB;font-weight:500}
+
+    /* Grid cards */
+    .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .posts-grid:empty{background:none}
+    .post-card{background:#0d0f12;padding:0;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:background .2s,transform .2s,box-shadow .2s}
+    .post-card:hover{background:#0e0e18;transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,183,50,.18),0 8px 32px rgba(0,0,0,.4)}
+    .post-card[hidden]{display:none!important}
+    .post-card-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;overflow:hidden}
+    .post-card-body{padding:24px;flex:1;display:flex;flex-direction:column}
+    .post-card-body .post-title{font-size:16px;margin-bottom:10px;line-height:1.35}
+    .post-card-body .post-excerpt{font-size:12.5px;flex:1}
+    .post-card-body .post-meta{margin-top:16px}
+
+    /* Empty state */
+    .empty-state{text-align:center;padding:60px 24px;color:#525252;font-size:14px;display:none}
+    .empty-state.visible{display:block}
+    .no-search-results{text-align:center;padding:60px 24px;color:#525252;font-size:14px;display:none}
+    .no-search-results.visible{display:block}
+
+    @media(max-width:768px){.featured-post{grid-template-columns:1fr}.posts-grid{grid-template-columns:1fr}}
+    @media(max-width:520px){.posts-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:url" content="https://tradexa.io/resources/blog.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="section-label">Blog</div>
+  <h1 class="page-title">Trading Intelligence Blog</h1>
+  <p class="page-sub">Strategies, AI insights, platform updates, and the science of becoming a better trader.</p>
+</div>
+
+<section>
+  <div class="container">
+
+    <!-- Category filter tabs -->
+    <div class="tags" id="tag-bar">
+      <span class="tag active" data-filter="all">All</span>
+      <span class="tag" data-filter="ai-technology">AI &amp; Technology</span>
+      <span class="tag" data-filter="strategy">Strategy</span>
+      <span class="tag" data-filter="risk-management">Risk Management</span>
+      <span class="tag" data-filter="market-analysis">Market Analysis</span>
+      <span class="tag" data-filter="product-updates">Product Updates</span>
+      <span class="tag" data-filter="education">Education</span>
+      <span class="tag" data-filter="equity-curve-analysis">Equity Curve Analysis</span>
+    </div>
+
+    <!-- Search bar -->
+    <div class="search-wrapper">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" id="blog-search" type="search" placeholder="Search articles by title or topic…" autocomplete="off" spellcheck="false"/>
+    </div>
+
+    <!-- Featured post: AI & Technology + Equity Curve Analysis -->
+    <a href="/resources/blog/ai-pattern-recognition.html"
+       class="featured-post"
+       data-category="ai-technology equity-curve-analysis"
+       data-title="how ai pattern recognition is changing the way individual traders compete equity curve"
+       id="featured-post">
+      <div class="featured-img">
+        <div class="featured-img-inner">
+          <div class="featured-chart">
+            <div style="height:40%;background:linear-gradient(#FFB732,rgba(255,183,50,.3))"></div>
+            <div style="height:55%;background:linear-gradient(#FFB732,rgba(255,183,50,.3))"></div>
+            <div style="height:35%;background:linear-gradient(#EF4444,rgba(239,68,68,.3))"></div>
+            <div style="height:70%;background:linear-gradient(#FFB732,rgba(255,183,50,.3))"></div>
+            <div style="height:85%;background:linear-gradient(#22C55E,rgba(66,190,101,.3))"></div>
+            <div style="height:75%;background:linear-gradient(#22C55E,rgba(66,190,101,.3))"></div>
+            <div style="height:90%;background:linear-gradient(#22C55E,rgba(66,190,101,.3))"></div>
+          </div>
+          <p style="font-size:12px;color:#525252;margin-top:12px">Equity Curve Analysis</p>
+        </div>
+      </div>
+      <div class="featured-content">
+        <div class="post-category">⭐ Featured · AI &amp; Technology</div>
+        <h2 class="post-title">How AI Pattern Recognition Is Changing the Way Individual Traders Compete</h2>
+        <p class="post-excerpt">For decades, pattern recognition in trading was the domain of expensive quant teams at hedge funds. New AI models are changing the equation — here's what it means for the independent trader.</p>
+        <div class="post-meta">
+          <span class="post-author">Tradexa Editorial</span>
+          <span>·</span>
+          <span>April 28, 2026</span>
+          <span>·</span>
+          <span>9 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="posts-grid" id="posts-grid">
+
+      <a href="/resources/blog/dynamic-position-sizing.html"
+         class="post-card" data-category="risk-management"
+         data-title="the 2% rule isn't enough how to build a dynamic position sizing framework volatility">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#0c1a3a,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,50,.5)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Risk Management</div>
+          <h3 class="post-title">The 2% Rule Isn't Enough: How to Build a Dynamic Position Sizing Framework</h3>
+          <p class="post-excerpt">Static position sizing leaves performance on the table. A data-driven framework for sizing dynamically based on volatility and account equity.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Apr 21, 2026</span><span>·</span><span>7 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/backtesting-mistakes.html"
+         class="post-card" data-category="strategy"
+         data-title="backtesting your way to an edge the 5 most common mistakes and how to avoid them overfitting bias">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#0a1a10,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(66,190,101,.5)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Strategy</div>
+          <h3 class="post-title">Backtesting Your Way to an Edge: The 5 Most Common Mistakes and How to Avoid Them</h3>
+          <p class="post-excerpt">Survivorship bias, overfitting, and lookahead bias kill most backtests. Learn how to build tests that actually predict live performance.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Apr 14, 2026</span><span>·</span><span>11 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/optimal-entry-timing.html"
+         class="post-card" data-category="market-analysis"
+         data-title="what trade data reveals about optimal entry timing time of day session">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#1a0c0a,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,131,0,.4)" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Market Analysis</div>
+          <h3 class="post-title">What Trade Data Reveals About Optimal Entry Timing</h3>
+          <p class="post-excerpt">Trade data consistently reveals timing patterns that separate winning from losing entries. Here's what the data shows about when traders actually win.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Apr 7, 2026</span><span>·</span><span>13 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/ai-coach-3-update.html"
+         class="post-card" data-category="product-updates"
+         data-title="tradexa ai coach 3.0 what's new features emotion detection coaching paths">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#0c0a1a,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,.5)" stroke-width="1.5"><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Product Updates</div>
+          <h3 class="post-title">Tradexa AI Coach 3.0: What's New and How to Use the New Features</h3>
+          <p class="post-excerpt">AI Coach 3.0 brings real-time emotion detection, multi-timeframe analysis, and personalized coaching paths. Your complete guide.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Mar 31, 2026</span><span>·</span><span>5 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/trading-journal-framework.html"
+         class="post-card" data-category="education"
+         data-title="building a trading journal that actually makes you better real examples framework">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#0a160c,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(66,190,101,.4)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Education</div>
+          <h3 class="post-title">Building a Trading Journal That Actually Makes You Better (With Real Examples)</h3>
+          <p class="post-excerpt">Most traders keep journals. Few use them to actually improve. A structured framework for extracting actionable insights from your journal data.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Mar 24, 2026</span><span>·</span><span>8 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/beyond-sharpe-ratio.html"
+         class="post-card" data-category="strategy"
+         data-title="the sharpe ratio is overrated better metrics sortino calmar omega strategy evaluation">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#160a0a,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(239,68,68,.4)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Strategy</div>
+          <h3 class="post-title">The Sharpe Ratio Is Overrated: Better Metrics for Evaluating Your Trading Strategy</h3>
+          <p class="post-excerpt">Sharpe ratio alone misses fat tails and path dependence. We explore Sortino, Calmar, and Omega ratios — and when to use each one.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Mar 17, 2026</span><span>·</span><span>10 min</span></div>
+        </div>
+      </a>
+
+      <a href="/resources/blog/psychology-losing-streaks.html"
+         class="post-card" data-category="education"
+         data-title="why traders self-destruct during losing streaks psychology drawdown revenge trading tilt behavioral">
+        <div class="post-card-img" style="background:linear-gradient(135deg,#1a0a10,#0a0a14)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(239,68,68,.5)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="post-card-body">
+          <div class="post-category">Education</div>
+          <h3 class="post-title">Why Traders Self-Destruct During Losing Streaks (And How to Break the Pattern)</h3>
+          <p class="post-excerpt">Losing streaks don't destroy accounts — the behavioral responses they trigger do. The three psychological traps and a protocol for surviving drawdowns.</p>
+          <div class="post-meta"><span class="post-author">Tradexa Editorial</span><span>·</span><span>Apr 18, 2026</span><span>·</span><span>12 min</span></div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="empty-state" id="empty-state">No articles in this category yet — check back soon.</div>
+    <div class="no-search-results" id="no-search-results">No articles match your search. Try a different keyword.</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var tagBar     = document.getElementById('tag-bar');
+  var tags       = document.querySelectorAll('#tag-bar .tag');
+  var featured   = document.getElementById('featured-post');
+  var cards      = document.querySelectorAll('#posts-grid .post-card');
+  var emptyState = document.getElementById('empty-state');
+  var noSearch   = document.getElementById('no-search-results');
+  var searchBox  = document.getElementById('blog-search');
+
+  var activeFilter = 'all';
+  var searchQuery  = '';
+
+  function categoryMatch(el, filter) {
+    if (filter === 'all') return true;
+    var cats = (el.dataset.category || '').split(' ');
+    return cats.indexOf(filter) !== -1;
+  }
+
+  function searchMatch(el, q) {
+    if (!q) return true;
+    return (el.dataset.title || '').toLowerCase().indexOf(q) !== -1;
+  }
+
+  function applyFilters() {
+    var q = searchQuery.toLowerCase().trim();
+
+    /* Featured post */
+    var showFeatured = categoryMatch(featured, activeFilter) && searchMatch(featured, q);
+    featured.hidden = !showFeatured;
+
+    /* Grid cards */
+    var visible = 0;
+    cards.forEach(function(card) {
+      var show = categoryMatch(card, activeFilter) && searchMatch(card, q);
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    var totalVisible = (showFeatured ? 1 : 0) + visible;
+    emptyState.classList.toggle('visible', totalVisible === 0 && !q);
+    noSearch.classList.toggle('visible', totalVisible === 0 && !!q);
+  }
+
+  /* Tag click */
+  tags.forEach(function(tag){
+    tag.addEventListener('click', function(){
+      tags.forEach(function(t){ t.classList.remove('active'); });
+      this.classList.add('active');
+      activeFilter = this.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  /* Search */
+  searchBox.addEventListener('input', function(){
+    searchQuery = this.value;
+    applyFilters();
+  });
+
+})();
+</script>
+
+</body>
+</html>

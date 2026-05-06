@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tradexa AI Coach 3.0: What's New and How to Use the New Features — Tradexa Blog</title>
+  <meta name="description" content="AI Coach 3.0 brings real-time emotion detection, multi-timeframe analysis, and personalized coaching paths. Here's your complete guide to every new feature."/>
+  <meta name="keywords" content="Tradexa AI Coach, AI trading coach, trading emotion detection, multi-timeframe analysis, personalized trading coaching, Tradexa update"/>
+  <meta property="og:title" content="Tradexa AI Coach 3.0: What's New and How to Use the New Features"/>
+  <meta property="og:description" content="AI Coach 3.0 brings real-time emotion detection, multi-timeframe analysis, and personalized coaching paths. Your complete guide."/>
+  <meta property="og:type" content="article"/>
+  <link rel="canonical" href="https://tradexa.io/resources/blog/ai-coach-3-update.html"/>
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F5F5F5;font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
+    .article-hero{padding:80px 24px 56px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 0%,rgba(255,183,50,.09) 0%,transparent 70%);z-index:0}
+    .article-hero>*{position:relative;z-index:1}
+    .container{max-width:740px;margin:0 auto}
+    .container-wide{max-width:1100px;margin:0 auto}
+    .breadcrumb{font-size:12px;color:#525252;margin-bottom:24px}
+    .breadcrumb a{color:#525252;text-decoration:none}
+    .breadcrumb a:hover{color:#FFB732}
+    .article-category{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:16px}
+    .article-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:20px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:#525252;flex-wrap:wrap}
+    .article-meta .author{color:#D1D5DB;font-weight:500}
+    .article-body{padding:56px 24px 80px}
+    .article-body p{font-size:16px;color:#D1D5DB;margin-bottom:20px;line-height:1.8}
+    .article-body h2{font-size:22px;font-weight:600;color:#fff;margin:44px 0 16px;letter-spacing:-0.01em}
+    .article-body h3{font-size:17px;font-weight:600;color:#E5E5E5;margin:28px 0 12px}
+    .article-body ul,.article-body ol{padding-left:24px;margin-bottom:20px}
+    .article-body li{font-size:16px;color:#D1D5DB;margin-bottom:8px;line-height:1.7}
+    .article-body strong{color:#F5F5F5;font-weight:600}
+    .feature-card{background:#1a1d23;border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:28px;margin:28px 0}
+    .feature-tag{display:inline-block;background:rgba(255,183,50,.12);border:1px solid rgba(255,183,50,.25);color:#FFB732;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:2px;margin-bottom:14px}
+    .feature-card h3{font-size:18px;font-weight:600;color:#fff;margin:0 0 12px}
+    .feature-card p{font-size:15px;color:#D1D5DB;margin-bottom:0;line-height:1.7}
+    .feature-card ul{margin-bottom:0}
+    .new-badge{display:inline-block;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#22C55E;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:2px;margin-left:8px;vertical-align:middle}
+    .step-list{counter-reset:steps;padding-left:0;list-style:none}
+    .step-list li{counter-increment:steps;padding:16px 0 16px 52px;position:relative;border-bottom:1px solid rgba(255,255,255,.04)}
+    .step-list li:last-child{border-bottom:none}
+    .step-list li::before{content:counter(steps);position:absolute;left:0;top:16px;width:32px;height:32px;background:rgba(255,183,50,.12);border:1px solid rgba(255,183,50,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#FFB732;text-align:center;line-height:32px}
+    .article-cta{background:#1a1d23;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:40px;text-align:center;margin:56px 0 0}
+    .article-cta h3{font-size:20px;font-weight:600;color:#fff;margin-bottom:12px}
+    .article-cta p{font-size:14px;color:#A1A1AA;margin-bottom:24px}
+    .btn-gold{display:inline-block;background:#FFB732;color:#0d0f12;font-weight:600;font-size:14px;padding:12px 28px;border-radius:2px;text-decoration:none;transition:opacity .15s}
+    .btn-gold:hover{opacity:.85}
+    .author-card{display:flex;align-items:center;gap:20px;padding:32px;background:#1a1d23;border:1px solid rgba(255,255,255,.07);border-radius:3px;margin-top:56px}
+    .author-avatar{width:56px;height:56px;background:#22262e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#FFB732;flex-shrink:0}
+    .author-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+    .author-bio{font-size:13px;color:#A1A1AA;line-height:1.6}
+    .divider{height:1px;background:rgba(255,255,255,.06);margin:48px 0}
+    .related-posts{padding:56px 24px}
+    .related-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#A1A1AA;margin-bottom:24px}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .related-card{background:#0d0f12;padding:24px;text-decoration:none;display:block;transition:background .2s}
+    .related-card:hover{background:#111}
+    .related-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:8px}
+    .related-title{font-size:14px;font-weight:600;color:#E5E5E5;line-height:1.4}
+    @media(max-width:640px){.related-grid{grid-template-columns:1fr}.author-card{flex-direction:column;text-align:center}}
+  </style>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Tradexa AI Coach 3.0: New Features Guide — Tradexa"/>
+  <meta name="twitter:description" content="AI Coach 3.0 brings emotion detection, multi-timeframe analysis, and personalized coaching paths. Your complete guide."/>
+  <link rel="stylesheet" href="/assets/blog-article.css"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Tradexa AI Coach 3.0: What's New and How to Use the New Features",
+    "description": "AI Coach 3.0 brings real-time emotion detection, multi-timeframe analysis, and personalized coaching paths.",
+    "author": { "@type": "Organization", "name": "Tradexa Editorial" },
+    "publisher": { "@type": "Organization", "name": "Tradexa", "url": "https://tradexa.io" },
+    "datePublished": "2026-03-31",
+    "url": "https://tradexa.io/resources/blog/ai-coach-3-update.html",
+    "keywords": ["Tradexa AI Coach", "trading AI", "trading psychology AI", "behavioral trading analytics", "Tradexa"]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:url" content="https://tradexa.io/resources/blog/ai-coach-3-update.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="article-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/resources/blog.html">Blog</a> / Product Updates</div>
+    <div class="article-category">Product Updates</div>
+    <h1 class="article-title">Tradexa AI Coach 3.0: What's New and How to Use the New Features</h1>
+    <div class="article-meta">
+      <span class="author">Tradexa Editorial</span>
+      <span>·</span>
+      <span>March 31, 2026</span>
+      <span>·</span>
+      <span>5 min read</span>
+    </div>
+  </div>
+</div>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>AI Coach 3.0 is the most significant update to Tradexa's coaching engine since we launched. The previous version could analyze your historical trade data and surface patterns — but it worked after the fact, on data you'd already logged. Version 3.0 changes that fundamentally: it now works in real time alongside your trading session, surfacing insights when they're most actionable and flagging behavioral risks before they become costly mistakes.</p>
+
+    <p>This guide covers every new feature in 3.0 — what it does, how it works technically, and how to get maximum value from it in your daily trading practice. If you're upgrading from 2.x, the interface will look familiar but the capabilities underneath have changed substantially.</p>
+
+    <h2>What's New in AI Coach 3.0</h2>
+
+    <div class="feature-card">
+      <div class="feature-tag">New Feature</div>
+      <h3>Real-Time Emotion Detection <span class="new-badge">New</span></h3>
+      <p>The most requested feature since we launched the original AI Coach. Emotion detection analyzes patterns in your trading behavior — entry timing relative to your plan, position sizing deviations, frequency of trades in a session, time between signal and execution — and flags when your behavioral signature suggests emotional interference with your trading process.</p>
+      <p style="margin-top:14px">It doesn't read minds. It reads patterns. If you typically trade 3-4 times per session and you're on trade 11 by 11 AM, that's a measurable behavioral deviation. If your position sizes have been escalating across consecutive losing trades, that's a measurable pattern. AI Coach 3.0 identifies these signatures in real time and surfaces a coaching prompt before the next trade — not a report after the session ends.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">New Feature</div>
+      <h3>Multi-Timeframe Analysis <span class="new-badge">New</span></h3>
+      <p>AI Coach 3.0 now evaluates your setup context across multiple timeframes simultaneously. When you log a trade, the system automatically assesses whether the trade direction aligns with the higher timeframe trend, whether you're trading into or with key structural levels on the daily and weekly charts, and whether the volatility environment on your execution timeframe is consistent with your historical best conditions.</p>
+      <p style="margin-top:14px">This matters because timeframe misalignment is one of the most common sources of systematically poor trades that don't appear obviously wrong on the execution timeframe alone. A setup that looks clean on a 15-minute chart can be trading directly into a major daily resistance level — and the AI Coach now catches this and flags it in your pre-trade checklist.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-tag">New Feature</div>
+      <h3>Personalized Coaching Paths <span class="new-badge">New</span></h3>
+      <p>Rather than generic trading advice, version 3.0 builds a coaching path specific to your actual performance data — your specific weaknesses, your specific behavioral patterns, and the specific setups where your edge is strongest. After 30 days of trade data, the system generates a structured improvement plan that identifies your top three performance leaks and proposes specific, measurable behavioral changes with target metrics.</p>
+      <p style="margin-top:14px">Coaching paths update monthly as your data accumulates and your patterns evolve. The goal is not generic trading education — it's targeted behavioral coaching based on your actual trade history.</p>
+    </div>
+
+    <h2>How to Set Up Each New Feature</h2>
+
+    <h3>Setting Up Emotion Detection</h3>
+    <ol class="step-list">
+      <li><strong>Navigate to AI Coach → Emotion Detection</strong> in your dashboard sidebar. If you don't see this option, ensure you've updated to the latest app version.</li>
+      <li><strong>Complete your baseline profile.</strong> The system needs to understand your normal trading behavior before it can identify deviations. Run a 5-question baseline questionnaire about your typical session structure — trades per session, average hold time, normal position sizing range.</li>
+      <li><strong>Enable session tracking.</strong> Toggle "Active Session Mode" on at the start of each trading session. This tells the AI Coach to track real-time behavioral signals during your session rather than only analyzing historical data.</li>
+      <li><strong>Set your alert preferences.</strong> Choose whether you want emotion detection prompts as push notifications, in-app banners, or email summaries. We recommend in-app banners during your trading session for maximum immediacy.</li>
+      <li><strong>Review your first session report.</strong> After your first tracked session, review the behavioral summary — it shows a timeline of your session with flagged moments and the specific behavioral signal that triggered each flag.</li>
+    </ol>
+
+    <h3>Using Multi-Timeframe Analysis</h3>
+    <p>Multi-timeframe analysis works automatically once your broker connection is active or you're manually logging trades with instrument information included. To get the most from it:</p>
+    <ul>
+      <li>When logging a trade, include the instrument ticker and your execution timeframe — the system pulls higher timeframe context automatically</li>
+      <li>Review the "Timeframe Alignment Score" shown in your trade confirmation screen before finalizing the log — it's a 1-5 rating of how well your trade direction aligns across the daily, weekly, and monthly timeframes</li>
+      <li>Filter your trade history by Timeframe Alignment Score (under Analytics → Filters) to see how alignment correlates with your outcomes — most traders find a strong correlation</li>
+    </ul>
+
+    <h3>Activating Your Coaching Path</h3>
+    <p>Coaching paths require a minimum of 20 logged trades to generate an initial assessment. If you have existing trade history in Tradexa, your path may already be available:</p>
+    <ul>
+      <li>Go to <strong>AI Coach → My Coaching Path</strong> to see whether your path has been generated</li>
+      <li>If available, review your current three focus areas and the specific behavioral targets for each</li>
+      <li>Set weekly check-in reminders to review your progress against the targets — the coaching path includes a weekly review template specifically designed for this</li>
+      <li>Your path updates automatically at the start of each calendar month based on the previous 30 days of data</li>
+    </ul>
+
+    <h2>What Hasn't Changed</h2>
+
+    <p>Version 3.0 is additive — it builds on top of the existing AI Coach capabilities, not in replacement of them. All your existing historical analysis, pattern reports, and performance dashboards work exactly as before. Your data and trade history have not been affected by the update. The AI Coach interface has a new sidebar section for the 3.0 features, but the core experience remains identical.</p>
+
+    <p>If you run into any issues after updating, the fastest resolution path is the in-app support chat — our team is prioritizing 3.0 support queries through May.</p>
+
+    <h2>What's Coming Next</h2>
+
+    <p>A few features that didn't make the 3.0 release are already in development:</p>
+    <ul>
+      <li><strong>Voice journal integration</strong> — log trade notes by voice during the session, transcribed and tagged automatically</li>
+      <li><strong>Pre-market coaching brief</strong> — a daily AI-generated session preparation summary based on your historical performance in the current market conditions</li>
+      <li><strong>Community benchmark comparison</strong> — anonymized comparison of your key metrics against aggregate performance data across similar trading styles (opt-in only)</li>
+    </ul>
+
+    <p>These are all on the active roadmap and will be announced in the changelog as they ship. If you have feature requests or feedback on 3.0, use the feedback button in the bottom-right corner of the dashboard — our product team reviews every submission.</p>
+
+    <div class="divider"></div>
+
+    <h2>Research Behind the Features</h2>
+    <ol style="padding-left:22px;margin-bottom:0">
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Lo, A.W., Repin, D.V., &amp; Steenbarger, B.N. (2005). "Fear and Greed in Financial Markets: A Clinical Study of Day-Traders." <em>American Economic Review</em>, 95(2), 352–359. — Using physiological sensors on active day-traders, this paper demonstrates measurable correlations between emotional arousal and trading performance, providing empirical support for the behavioral pattern detection approach in AI Coach 3.0's emotion detection feature.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Steenbarger, B.N. (2015). <em>Trading Psychology 2.0: From Best Practices to Best Processes</em>. Wiley. — Steenbarger's framework for identifying and changing performance-limiting behavioral patterns in trading is the conceptual foundation for Tradexa's personalized coaching path methodology. The emphasis on specific, measurable behavioral targets (rather than generic mindset advice) directly informs how coaching paths are structured.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Kahneman, D. (2011). <em>Thinking, Fast and Slow</em>. Farrar, Straus and Giroux. — The dual-process model of cognition (System 1 fast/automatic vs. System 2 slow/deliberate) explains why emotional states degrade trading decision quality — and why catching behavioral deviations in real time (before the next trade) is more effective than post-session analysis alone.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:0;line-height:1.7">Ericsson, K.A., Krampe, R.T., &amp; Tesch-Römer, C. (1993). "The Role of Deliberate Practice in the Acquisition of Expert Performance." <em>Psychological Review</em>, 100(3), 363–406. — The deliberate practice framework — specific goals, immediate feedback, targeted repetition — is the foundation for personalized coaching path design. Identifying specific weaknesses and setting measurable targets is the operationalization of deliberate practice in a trading context.</li>
+    </ol>
+
+    <div class="divider"></div>
+
+    <div class="article-cta">
+      <h3>Try AI Coach 3.0 with your own trade data</h3>
+      <p>All 3.0 features are available on the Pro plan with a 14-day free trial. No card required to start.</p>
+      <a href="/app/dashboard.html" class="btn-gold">Start Your Free Trial →</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="author-card">
+      <div class="author-avatar">TX</div>
+      <div>
+        <div class="author-name">Tradexa Editorial</div>
+        <div class="author-bio">The Tradexa editorial team covers trading psychology, systematic strategy development, performance analytics, and platform updates. All articles reference primary sources and verified research. We are building a trading journal and analytics platform — not an execution system — and our writing reflects that focus.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="related-posts">
+  <div class="container-wide">
+    <div class="related-label">Related Articles</div>
+    <div class="related-grid">
+      <a href="/resources/blog/ai-pattern-recognition.html" class="related-card">
+        <div class="related-cat">AI &amp; Technology</div>
+        <div class="related-title">How AI Pattern Recognition Is Changing the Way Individual Traders Compete</div>
+      </a>
+      <a href="/resources/blog/trading-journal-framework.html" class="related-card">
+        <div class="related-cat">Education</div>
+        <div class="related-title">Building a Trading Journal That Actually Makes You Better (With Real Examples)</div>
+      </a>
+      <a href="/resources/blog/optimal-entry-timing.html" class="related-card">
+        <div class="related-cat">Market Analysis</div>
+        <div class="related-title">What Trade Data Reveals About Optimal Entry Timing</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/blog-article.js" defer></script>
+</body>
+</html>

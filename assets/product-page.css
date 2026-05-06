@@ -1,0 +1,88 @@
+/* ─────────────────────────────────────────────────────────────────
+   Shared stylesheet for /product/*.html sub-pages.
+   Each sub-page sets its own accent via:
+     <body data-accent="#26A69A">  (optional, defaults to gold)
+   to tint the small hero-tag pill. Everything else stays brand-gold
+   for consistency. Keeps every page <100 lines, easy to maintain,
+   single source of truth for spacing/typography/colors.
+   ───────────────────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0d0f12;color:#F9FAFB;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased
+}
+
+/* ── Hero ── */
+.page-hero{padding:80px 24px 72px;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 0% 50%,rgba(255,183,50,.12) 0%,transparent 70%);z-index:0;pointer-events:none}
+.page-hero>*{position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto}
+
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:12px;color:#D1D5DB;margin-bottom:20px}
+.hero-tag .tag-dot{width:8px;height:8px;border-radius:2px;background:#FFB732}
+.hero-tag.coming-soon{background:rgba(255,183,50,.08);border-color:rgba(255,183,50,.3);color:#FFB732}
+
+.section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:12px}
+.page-title{font-size:clamp(32px,5vw,52px);font-weight:600;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px;max-width:700px}
+.page-sub{font-size:16px;color:#A1A1AA;max-width:560px;line-height:1.7;margin-bottom:36px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ── Buttons (fixed contrast: dark text on gold, gold text on dark) ── */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#FFB732;color:#0d0f12;text-decoration:none;font-size:14px;font-weight:600;padding:12px 24px;border-radius:2px;transition:background .15s,transform .15s}
+.btn-primary:hover{background:#ffc657}
+.btn-primary:active{transform:translateY(1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#D1D5DB;text-decoration:none;font-size:14px;padding:11px 24px;border-radius:2px;border:1px solid rgba(255,255,255,.18);transition:color .15s,border-color .15s}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-ghost.disabled{opacity:.5;cursor:not-allowed;pointer-events:none}
+
+/* ── Content section ── */
+section{padding:72px 24px}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.feat-list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.feat-item{display:flex;align-items:flex-start;gap:12px}
+.feat-check{width:20px;height:20px;border-radius:50%;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;color:#22C55E;font-size:11px;font-weight:700}
+.feat-item-text{font-size:14px;color:#D1D5DB;line-height:1.5}
+.feat-h2{font-size:26px;font-weight:600;color:#fff;margin-bottom:16px;letter-spacing:-0.02em}
+.feat-lead{font-size:14px;color:#A1A1AA;line-height:1.75;margin-bottom:28px}
+.feat-cta{margin-top:32px}
+.feat-cta .btn-primary{font-size:13px;padding:10px 20px}
+
+/* ── Preview mockup (browser frame) ── */
+.preview-box{background:#1a1d23;border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.preview-bar{background:#0d0f12;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.preview-dot{width:10px;height:10px;border-radius:50%}
+.preview-url{font-size:12px;color:#9ca3af;margin-left:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.preview-content{padding:24px;min-height:300px;display:flex;flex-direction:column;gap:12px}
+.preview-row{display:flex;gap:8px}
+.preview-block{background:#0d0f12;border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:12px;flex:1}
+.preview-block-title{font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;font-weight:500}
+.preview-block-val{font-size:18px;font-weight:600;color:#fff}
+.preview-chart{display:flex;align-items:flex-end;gap:4px;height:80px}
+.preview-chart>div{flex:1;border-radius:2px 2px 0 0}
+.preview-note{background:#0d0f12;border:1px solid rgba(255,255,255,.06);border-radius:3px;padding:16px}
+.preview-note-title{font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;font-weight:500}
+.preview-note-row{font-size:13px;color:#D1D5DB;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+.preview-note-row .dot{color:#FFB732;flex-shrink:0}
+
+/* ── Coming-soon overlay (for unfinished modules) ── */
+.cs-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,18,.4) 0%,rgba(13,15,18,.92) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:6px;backdrop-filter:blur(2px)}
+.cs-overlay .cs-pill{background:rgba(255,183,50,.12);border:1px solid rgba(255,183,50,.4);color:#FFB732;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.cs-overlay h3{color:#fff;font-size:18px;margin-bottom:6px;font-weight:600}
+.cs-overlay p{color:#A1A1AA;font-size:13px;max-width:280px;line-height:1.5}
+.preview-box.has-cs{position:relative}
+
+/* ── CTA section (gold-tinted, on-brand) ── */
+.cta-section{background:linear-gradient(180deg,rgba(255,183,50,.04) 0%,rgba(255,183,50,.08) 100%);border-top:1px solid rgba(255,183,50,.18);border-bottom:1px solid rgba(255,183,50,.18);padding:64px 24px;text-align:center}
+.cta-section h2{font-size:24px;font-weight:600;color:#fff;margin-bottom:12px}
+.cta-section p{color:#A1A1AA;margin-bottom:28px;font-size:15px}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ── Mobile ── */
+@media(max-width:860px){
+  .page-hero{padding:56px 20px 48px}
+  section{padding:56px 20px}
+  .content-grid{grid-template-columns:1fr;gap:40px}
+  .preview-box{box-shadow:0 12px 30px rgba(0,0,0,.4)}
+  .cta-section{padding:48px 20px}
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing | Tradexa</title>
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F9FAFB;font-family:'Inter',sans-serif;overflow-x:hidden}
+    .page-hero{padding:80px 24px 64px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(255,183,50,.13) 0%,transparent 70%);z-index:0}
+    .page-hero>*{position:relative;z-index:1}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:12px}
+    .page-title{font-size:clamp(32px,5vw,52px);font-weight:600;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px}
+    .page-sub{font-size:16px;color:#A1A1AA;max-width:540px;margin:0 auto;line-height:1.7}
+    .toggle-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:32px}
+    .toggle-label{font-size:14px;color:#A1A1AA}
+    .toggle{width:48px;height:26px;background:#1a1d23;border-radius:100px;border:1px solid rgba(255,255,255,.1);position:relative;cursor:pointer;transition:background .2s}
+    .toggle.on{background:#FFB732;border-color:#FFB732}
+    .toggle-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s}
+    .toggle.on .toggle-knob{transform:translateX(22px)}
+    .save-badge{background:rgba(66,190,101,.12);border:1px solid rgba(66,190,101,.25);color:#22C55E;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+    .pricing-section{padding:64px 24px}
+    .container{max-width:1200px;margin:0 auto}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .price-card{background:#0d0f12;padding:40px 32px;position:relative;transition:background .2s}
+    .price-card.featured{background:#052e16;border-left:1px solid rgba(255,183,50,.3);border-right:1px solid rgba(255,183,50,.3)}
+    .price-badge{display:inline-block;background:#FFB732;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+    .price-name{font-size:22px;font-weight:600;color:#fff;margin-bottom:8px}
+    .price-desc{font-size:13px;color:#A1A1AA;line-height:1.6;margin-bottom:24px;min-height:52px}
+    .price-amount{margin-bottom:8px}
+    .price-amount .currency{font-size:18px;font-weight:400;color:#A1A1AA;vertical-align:top;line-height:2.2}
+    .price-amount .num{font-size:48px;font-weight:600;color:#fff}
+    .price-amount .per{font-size:13px;color:#A1A1AA;margin-left:2px}
+    .price-trial{font-size:12px;color:#22C55E;margin-bottom:28px}
+    .btn-cta{display:block;text-align:center;padding:13px;border-radius:2px;font-size:14px;font-weight:500;text-decoration:none;transition:all .15s;margin-bottom:28px}
+    .btn-cta-primary{background:#FFB732;color:#fff}
+    .btn-cta-primary:hover{background:#b08c1f}
+    .btn-cta-ghost{border:1px solid rgba(255,255,255,.18);color:#D1D5DB}
+    .btn-cta-ghost:hover{border-color:rgba(255,255,255,.4);color:#fff}
+    .feat-section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#525252;margin:20px 0 12px}
+    .feat-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .feat-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#D1D5DB}
+    .feat-item.no{color:#222222}
+    .feat-check{flex-shrink:0;margin-top:1px;color:#22C55E;font-size:14px}
+    .feat-item.no .feat-check{color:#222222}
+    .compare-section{padding:0 24px 80px}
+    .compare-table{width:100%;border-collapse:collapse;background:#1a1d23;border:1px solid rgba(255,255,255,.07)}
+    .compare-table th{background:#0d0f12;padding:16px 20px;text-align:left;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#A1A1AA;border-bottom:1px solid rgba(255,255,255,.07)}
+    .compare-table th:not(:first-child){text-align:center}
+    .compare-table td{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13.5px;color:#D1D5DB;vertical-align:middle}
+    .compare-table td:not(:first-child){text-align:center}
+    .compare-table tr:last-child td{border-bottom:none}
+    .compare-table .category-row td{background:#0d0f12;color:#525252;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:10px 20px}
+    .check-y{color:#22C55E;font-size:16px}
+    .check-n{color:#222222;font-size:16px}
+    .faq-section{padding:0 24px 80px}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.05)}
+    .faq-item{background:#0d0f12;padding:28px 32px}
+    .faq-q{font-size:15px;font-weight:600;color:#fff;margin-bottom:10px}
+    .faq-a{font-size:13.5px;color:#A1A1AA;line-height:1.7}
+    .faq-a a{color:#3B82F6;text-decoration:none}
+    @media(max-width:768px){.pricing-grid{grid-template-columns:1fr}.faq-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <link rel="canonical" href="https://tradexa.io/pricing/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Pricing | Tradexa"/>
+  <meta property="og:description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta property="og:url" content="https://tradexa.io/pricing/"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Pricing | Tradexa"/>
+  <meta name="twitter:description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="section-label">Pricing</div>
+  <h1 class="page-title">Simple, Transparent Pricing</h1>
+  <p class="page-sub">Start free, upgrade when you're ready. Three tiers — Free, Pro, and Elite. No credit card required to begin.</p>
+  <div class="toggle-wrap">
+    <span class="toggle-label">Monthly</span>
+    <div class="toggle" id="billing-toggle"><div class="toggle-knob"></div></div>
+    <span class="toggle-label">Annual <span class="save-badge">Save 20%</span></span>
+  </div>
+</div>
+
+<div class="pricing-section">
+  <div class="container">
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <p class="price-desc">Build the journaling habit. Manual logging, the basics, and zero pressure to upgrade.</p>
+        <div class="price-amount"><span class="currency">$</span><span class="num" id="free-price">0</span><span class="per">/forever</span></div>
+        <p class="price-trial">Free forever · No card required</p>
+        <a href="/app/dashboard.html" class="btn-cta btn-cta-ghost">Get Started Free</a>
+        <div class="feat-section-title">Included</div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check">✓</span> Manual Trade Journal</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Up to 30 Trades / Month</li>
+          <li class="feat-item"><span class="feat-check">✓</span> 1 Broker Connection</li>
+          <li class="feat-item"><span class="feat-check">✓</span> 30-Day Trade History</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Basic Dashboard &amp; Analytics</li>
+          <li class="feat-item no"><span class="feat-check">–</span> AI Coach</li>
+          <li class="feat-item no"><span class="feat-check">–</span> Backtesting</li>
+          <li class="feat-item no"><span class="feat-check">–</span> Strategy Lab</li>
+          <li class="feat-item no"><span class="feat-check">–</span> Risk Controls</li>
+          <li class="feat-item no"><span class="feat-check">–</span> Trade Replay</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Pro</div>
+        <p class="price-desc">The complete trading journal and performance analytics platform for serious independent traders.</p>
+        <div class="price-amount"><span class="currency">$</span><span class="num" id="pro-price">35</span><span class="per">/month</span></div>
+        <p class="price-trial">14-day free trial · No card required</p>
+        <a href="/app/dashboard.html" class="btn-cta btn-cta-primary">Start Free Trial</a>
+        <div class="feat-section-title">Everything in Free, plus</div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check">✓</span> Unlimited Trade Journal</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Full Dashboard Suite</li>
+          <li class="feat-item"><span class="feat-check">✓</span> 10 Broker Connections</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Unlimited Trade History</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Advanced Analytics + Reports</li>
+          <li class="feat-item"><span class="feat-check">✓</span> AI Coach Dashboard</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Backtesting (20yr historical data)</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Advanced Strategy Lab</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Risk Controls + Kill Switch</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Trade Replay Module</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Priority Email Support</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Elite</div>
+        <p class="price-desc">Maximum firepower for full-time traders, prop firms, and small trading teams.</p>
+        <div class="price-amount"><span class="currency">$</span><span class="num" id="elite-price">50</span><span class="per">/month</span></div>
+        <p class="price-trial">Cancel anytime · 14-day free trial</p>
+        <a href="/app/dashboard.html" class="btn-cta btn-cta-ghost">Go Elite</a>
+        <div class="feat-section-title">Everything in Pro, plus</div>
+        <ul class="feat-list">
+          <li class="feat-item"><span class="feat-check">✓</span> Unlimited Broker Connections</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Custom AI Model Training</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Multi-user Team Access (up to 5)</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Dedicated Account Manager</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Full API Access (read &amp; write)</li>
+          <li class="feat-item"><span class="feat-check">✓</span> White-label Reports</li>
+          <li class="feat-item"><span class="feat-check">✓</span> Custom Integrations</li>
+          <li class="feat-item"><span class="feat-check">✓</span> 24/7 Priority Support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="compare-section">
+  <div class="container">
+    <h2 style="font-size:24px;font-weight:600;color:#fff;margin-bottom:32px;text-align:center">Full Feature Comparison</h2>
+    <table class="compare-table">
+      <thead><tr>
+        <th style="width:40%">Feature</th>
+        <th>Free</th><th>Pro</th><th>Elite</th>
+      </tr></thead>
+      <tbody>
+        <tr class="category-row"><td colspan="4">Dashboard & Analytics</td></tr>
+        <tr><td>Core Dashboard</td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>Full Dashboard Suite</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>Performance Analytics</td><td>Basic</td><td>Advanced</td><td>Advanced+</td></tr>
+        <tr><td>Trade Journal</td><td>30/mo</td><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>Performance Reports</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr class="category-row"><td colspan="4">AI & Intelligence</td></tr>
+        <tr><td>AI Coach Dashboard</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>Custom AI Model Training</td><td><span class="check-n">–</span></td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr class="category-row"><td colspan="4">Tools</td></tr>
+        <tr><td>Backtesting Module</td><td><span class="check-n">–</span></td><td>20yr data</td><td>20yr data</td></tr>
+        <tr><td>Advanced Strategy Lab</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>Trade Replay Module</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>Risk Controls</td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr class="category-row"><td colspan="4">Integrations</td></tr>
+        <tr><td>Broker Connections</td><td>1</td><td>10</td><td>Unlimited</td></tr>
+        <tr><td>Trade History</td><td>30 days</td><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>API Access</td><td><span class="check-n">–</span></td><td>Read-only</td><td>Full (read & write)</td></tr>
+        <tr class="category-row"><td colspan="4">Team & Support</td></tr>
+        <tr><td>Team Seats</td><td>1</td><td>1</td><td>Up to 5</td></tr>
+        <tr><td>Support</td><td>Email</td><td>Priority Email</td><td>24/7 Priority</td></tr>
+        <tr><td>Dedicated Account Manager</td><td><span class="check-n">–</span></td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td>White-label Reports</td><td><span class="check-n">–</span></td><td><span class="check-n">–</span></td><td><span class="check-y">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="container">
+    <h2 style="font-size:24px;font-weight:600;color:#fff;text-align:center;margin-bottom:32px">Pricing FAQ</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Can I switch plans at any time?</div>
+        <div class="faq-a">Yes. You can upgrade or downgrade your plan at any time. Upgrades take effect immediately; downgrades take effect at the end of your current billing cycle.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens after my free trial ends?</div>
+        <div class="faq-a">If you started on Free, nothing happens — you stay on Free forever. If you started a 14-day Pro or Elite trial, your account converts to that plan unless you cancel. We send a reminder email 3 days before any trial ends. Cancel anytime with one click.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer refunds?</div>
+        <div class="faq-a">We offer a 30-day money-back guarantee on all paid plans. If you're not satisfied, contact us within 30 days of your first payment for a full refund.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a discount for annual billing?</div>
+        <div class="faq-a">Yes! Annual billing saves you 20% — equivalent to getting more than 2 months free. Toggle to annual billing above to see the discounted price.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What payment methods do you accept?</div>
+        <div class="faq-a">We accept all major credit and debit cards (Visa, Mastercard, Amex) and PayPal. All payments are processed securely through our PCI-compliant payment provider.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Need more than 5 team seats?</div>
+        <div class="faq-a">Elite includes up to 5 team seats out of the box. If you need a larger team configuration or custom requirements, <a href="/company/contact.html">contact our team</a> and we'll work out a tailored setup.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const toggle = document.getElementById('billing-toggle');
+const proPrice   = document.getElementById('pro-price');
+const elitePrice = document.getElementById('elite-price');
+let annual = false;
+toggle.addEventListener('click', () => {
+  annual = !annual;
+  toggle.classList.toggle('on', annual);
+  // Free stays $0 either way; only paid tiers change.
+  proPrice.textContent   = annual ? '28' : '35';
+  elitePrice.textContent = annual ? '40' : '50';
+});
+</script>
+</body>
+</html>

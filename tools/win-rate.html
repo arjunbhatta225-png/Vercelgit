@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Win Rate & Expectancy Calculator — Free Trading Tool | Tradexa</title>
+  <meta name="description" content="Free win rate and expectancy calculator for traders. Calculate trading expectancy, required win rate, and projected monthly P&L from your current stats."/>
+  <link rel="canonical" href="https://tradexa.io/tools/win-rate.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--g:#FFB732;--g2:#b08c1f;--b:#5E81AC;--red:#EF4444;--gold:#FFB732;--bg:#0d0f12;--s1:#13161b;--border:rgba(255,255,255,.08);--text:#F5F5F5;--muted:#A1A1AA;--dim:#525252}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding-top:64px;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+    .breadcrumb{padding:20px 28px;font-size:12px;color:var(--dim);max-width:1100px;margin:0 auto;display:flex;gap:6px;align-items:center}
+    .breadcrumb a{color:var(--dim);text-decoration:none}.breadcrumb a:hover{color:#fff}
+    .tool-hero{padding:40px 28px 60px;max-width:1100px;margin:0 auto}
+    .tool-tag{display:inline-block;background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.2);color:var(--gold);font-size:10px;font-weight:700;padding:3px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+    .tool-hero h1{font-size:clamp(32px,4.5vw,52px);font-weight:900;color:#fff;letter-spacing:-.05em;margin-bottom:12px;line-height:1.05}
+    .tool-hero p{font-size:16px;color:var(--muted);line-height:1.75;max-width:560px}
+    .calc-wrap{padding:0 28px 60px;max-width:1100px;margin:0 auto}
+    .calc-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:start}
+    .calc-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .calc-card-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .calc-card-header h2{font-size:15px;font-weight:700;color:#fff}
+    .calc-body{padding:24px}
+    .field{margin-bottom:18px}
+    .field-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:8px;display:flex;justify-content:space-between}
+    .field-hint{font-size:10px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+    .input-wrap{display:flex}
+    .input-prefix,.input-suffix{display:flex;align-items:center;padding:0 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--dim);font-size:13px;font-weight:500;flex-shrink:0}
+    .input-prefix{border-right:none;border-radius:8px 0 0 8px}
+    .input-suffix{border-left:none;border-radius:0 8px 8px 0}
+    .field-input{flex:1;background:var(--bg);border:1px solid var(--border);color:#fff;font-size:15px;font-family:'Inter',sans-serif;padding:12px 14px;outline:none;transition:border-color .15s;-moz-appearance:textfield}
+    .field-input::-webkit-inner-spin-button,.field-input::-webkit-outer-spin-button{-webkit-appearance:none}
+    .field-input:focus{border-color:rgba(245,185,66,.4)}
+
+    /* Donut */
+    .donut-wrap{padding:28px 24px;text-align:center;border-bottom:1px solid var(--border)}
+    .donut-numbers{display:flex;gap:20px;justify-content:center;margin-top:16px}
+    .donut-num{text-align:center;flex:1}
+    .donut-num-val{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.04em;display:block;line-height:1}
+    .donut-num-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;font-weight:600}
+
+    /* Results */
+    .results-list{padding:20px 24px}
+    .res-item{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .res-item:last-child{border-bottom:none}
+    .res-item-left{font-size:13px;color:var(--muted)}
+    .res-item-right{font-size:15px;font-weight:700;color:#fff;text-align:right}
+    .res-item-sub{font-size:10px;color:var(--dim);margin-top:2px}
+    .pos{color:var(--g)}.neg{color:var(--red)}
+
+    /* Projection chart */
+    .proj-section{margin:0 24px 20px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .proj-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px}
+    .proj-bars{display:flex;gap:8px;align-items:flex-end;height:80px}
+    .proj-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%}
+    .proj-bar{width:100%;border-radius:3px 3px 0 0;min-height:4px;transition:height .4s}
+    .proj-bar-label{font-size:9px;color:var(--dim);text-align:center}
+    .proj-bar-val{font-size:9px;font-weight:700;text-align:center}
+
+    /* Grade badge */
+    .grade-badge{
+      display:inline-flex;align-items:center;gap:6px;margin:0 24px 20px;
+      padding:10px 16px;border-radius:10px;font-size:13px;font-weight:700;
+      width:calc(100% - 48px);justify-content:center;
+    }
+
+    .guide{padding:60px 28px;border-top:1px solid var(--border);background:var(--s1)}
+    .guide-inner{max-width:800px;margin:0 auto}
+    .guide-inner h2{font-size:24px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-.03em}
+    .guide-inner h3{font-size:17px;font-weight:700;color:#fff;margin:24px 0 10px}
+    .guide-inner p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px}
+    .guide-formula{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-size:13px;color:#A1A1AA;font-family:monospace;margin:12px 0}
+
+    @media(max-width:768px){.calc-grid{grid-template-columns:1fr}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Win Rate & Expectancy Calculator — Free Trading Tool | Tradexa"/>
+  <meta property="og:description" content="Free win rate and expectancy calculator for traders. Calculate trading expectancy, required win rate, and projected monthly P&L from your current stats."/>
+  <meta property="og:url" content="https://tradexa.io/tools/win-rate.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Win Rate & Expectancy Calculator — Free Trading Tool | Tradexa"/>
+  <meta name="twitter:description" content="Free win rate and expectancy calculator for traders. Calculate trading expectancy, required win rate, and projected monthly P&L from your current stats."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<div class="breadcrumb"><a href="/">Home</a><span style="color:#374151">›</span><a href="/tools/">Tools</a><span style="color:#374151">›</span>Win Rate & Expectancy</div>
+
+<div class="tool-hero">
+  <div class="tool-tag">Free Calculator</div>
+  <h1>Win Rate &amp; Expectancy Calculator</h1>
+  <p>Calculate your true trading expectancy, project monthly P&L, and see what win rate you actually need to be profitable given your average winners and losers.</p>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-grid">
+    <!-- Inputs -->
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <h2>Your Trading Stats</h2>
+      </div>
+      <div class="calc-body">
+        <div class="field">
+          <div class="field-label">Total Winning Trades <span class="field-hint">All time or period</span></div>
+          <div class="input-wrap"><input type="number" class="field-input" id="wins" value="68" min="0" style="border-radius:8px" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Total Losing Trades</div>
+          <div class="input-wrap"><input type="number" class="field-input" id="losses" value="32" min="0" style="border-radius:8px" oninput="calculate()"/></div>
+        </div>
+        <div class="field" style="border-top:1px solid var(--border);padding-top:18px">
+          <div class="field-label">Average Winning Trade</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="avgWin" value="420" min="0" step="10" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Average Losing Trade</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="avgLoss" value="280" min="0" step="10" oninput="calculate()"/></div>
+        </div>
+        <div class="field" style="border-top:1px solid var(--border);padding-top:18px">
+          <div class="field-label">Account Balance</div>
+          <div class="input-wrap"><div class="input-prefix">$</div><input type="number" class="field-input" id="balance" value="25000" min="0" step="1000" oninput="calculate()"/></div>
+        </div>
+        <div class="field">
+          <div class="field-label">Trades Per Month</div>
+          <div class="input-wrap"><input type="number" class="field-input" id="tradesPerMonth" value="20" min="1" style="border-radius:8px" oninput="calculate()"/></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="calc-card">
+      <div class="calc-card-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <h2>Expectancy &amp; Projections</h2>
+      </div>
+      <div id="results-output">
+        <div style="padding:48px 24px;text-align:center;font-size:13px;color:var(--dim)">Enter your stats above</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;background:linear-gradient(135deg,rgba(245,185,66,.05),rgba(255,183,50,.04));border:1px solid rgba(245,185,66,.15);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+    <div>
+      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Track your expectancy automatically with every trade</div>
+      <div style="font-size:13px;color:var(--muted)">Tradexa calculates your live expectancy and alerts you when it drifts — so you catch problems early.</div>
+    </div>
+    <a href="/app/dashboard.html" style="background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;text-decoration:none;font-size:14px;font-weight:700;padding:12px 24px;border-radius:10px;white-space:nowrap">Start Free →</a>
+  </div>
+</div>
+
+<section class="guide">
+  <div class="guide-inner">
+    <h2>What is Trading Expectancy?</h2>
+    <p>Expectancy is the average dollar amount you expect to make (or lose) per trade over a large sample. It's the single best measure of whether your strategy has a real edge — and it accounts for both your win rate AND your average win/loss size.</p>
+    <div class="guide-formula">Expectancy = (Win Rate × Avg Win) − (Loss Rate × Avg Loss)</div>
+    <h3>How to interpret your expectancy</h3>
+    <p><strong style="color:var(--g)">Positive expectancy</strong> — Your strategy has a mathematical edge. Execute consistently and you'll be profitable over a large sample.</p>
+    <p><strong style="color:var(--red)">Negative expectancy</strong> — Even with great execution, you'll lose money long-term. The strategy needs work — either improve win rate, improve average winner, or reduce average loser.</p>
+    <h3>The Profit Factor</h3>
+    <div class="guide-formula">Profit Factor = Total Wins ÷ Total Losses</div>
+    <p>Profit Factor above 1.5 is considered acceptable. Above 2.0 is strong. The higher your profit factor, the more durable your edge is across different market conditions.</p>
+  </div>
+</section>
+
+<script>
+function calculate(){
+  var wins = parseInt(document.getElementById('wins').value) || 0;
+  var losses = parseInt(document.getElementById('losses').value) || 0;
+  var avgWin = parseFloat(document.getElementById('avgWin').value) || 0;
+  var avgLoss = parseFloat(document.getElementById('avgLoss').value) || 0;
+  var balance = parseFloat(document.getElementById('balance').value) || 25000;
+  var tpm = parseInt(document.getElementById('tradesPerMonth').value) || 20;
+
+  if(!wins && !losses) return;
+  var total = wins + losses;
+  var wr = total > 0 ? (wins / total) : 0;
+  var lr = 1 - wr;
+  var expectancy = (wr * avgWin) - (lr * avgLoss);
+  var totalWinAmt = wins * avgWin;
+  var totalLossAmt = losses * avgLoss;
+  var pf = totalLossAmt > 0 ? (totalWinAmt / totalLossAmt) : 999;
+  var netPL = totalWinAmt - totalLossAmt;
+  var monthlyPL = expectancy * tpm;
+  var monthly3 = monthlyPL * 3;
+  var monthly12 = monthlyPL * 12;
+  var annualPct = (monthly12 / balance * 100).toFixed(1);
+  var rrImplied = avgLoss > 0 ? (avgWin / avgLoss).toFixed(2) : 0;
+  var minWR = avgWin > 0 ? (avgLoss / (avgWin + avgLoss) * 100).toFixed(1) : 50;
+
+  /* Grade */
+  var grade, gradeClass, gradeStyle;
+  if(expectancy >= avgWin * 0.4 && pf >= 2){
+    grade = 'A — Elite edge'; gradeClass = '';
+    gradeStyle = 'background:rgba(255,183,50,.08);border:1px solid rgba(255,183,50,.25);color:var(--g)';
+  } else if(expectancy > 0 && pf >= 1.5){
+    grade = 'B — Strong system'; gradeClass = '';
+    gradeStyle = 'background:rgba(94,129,172,.08);border:1px solid rgba(94,129,172,.25);color:var(--b)';
+  } else if(expectancy > 0){
+    grade = 'C — Profitable, but fragile'; gradeClass = '';
+    gradeStyle = 'background:rgba(245,185,66,.08);border:1px solid rgba(245,185,66,.25);color:var(--gold)';
+  } else {
+    grade = 'F — Negative expectancy'; gradeClass = '';
+    gradeStyle = 'background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:var(--red)';
+  }
+
+  /* Donut SVG */
+  var wrPct = wr * 100;
+  var r = 44, cx = 52, cy = 52, circ = 2 * Math.PI * r;
+  var dash = (wrPct / 100) * circ;
+  var donutColor = wr >= 0.55 ? '#FFB732' : wr >= 0.45 ? '#5E81AC' : '#EF4444';
+
+  /* Projection bars */
+  var maxBar = Math.max(Math.abs(monthlyPL), Math.abs(monthly3/3), Math.abs(monthly12/12), 1);
+  function barH(v){ return Math.max(Math.abs(v) / maxBar * 100, 4); }
+  var barColor = monthlyPL >= 0 ? '#FFB732' : '#EF4444';
+
+  document.getElementById('results-output').innerHTML = `
+    <div class="donut-wrap">
+      <svg width="104" height="104" viewBox="0 0 104 104">
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="10"/>
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${donutColor}" stroke-width="10"
+          stroke-dasharray="${dash} ${circ - dash}" stroke-dashoffset="${circ/4}"
+          stroke-linecap="round" style="filter:drop-shadow(0 0 6px ${donutColor}50)"/>
+        <text x="${cx}" y="${cy+5}" text-anchor="middle" fill="#fff" font-size="16" font-weight="900" font-family="Inter,sans-serif">${wrPct.toFixed(1)}%</text>
+      </svg>
+      <div class="donut-numbers">
+        <div class="donut-num"><span class="donut-num-val" style="color:var(--g)">${wins}</span><div class="donut-num-label">Wins</div></div>
+        <div class="donut-num"><span class="donut-num-val" style="color:var(--red)">${losses}</span><div class="donut-num-label">Losses</div></div>
+        <div class="donut-num"><span class="donut-num-val">${total}</span><div class="donut-num-label">Total</div></div>
+      </div>
+    </div>
+    <div class="grade-badge" style="${gradeStyle}">${grade}</div>
+    <div class="results-list">
+      <div class="res-item">
+        <div class="res-item-left">Expectancy per trade</div>
+        <div class="res-item-right ${expectancy >= 0 ? 'pos' : 'neg'}">${expectancy >= 0 ? '+' : ''}$${expectancy.toFixed(2)}<div class="res-item-sub">${expectancy >= 0 ? 'Positive edge' : 'Negative edge — fix urgently'}</div></div>
+      </div>
+      <div class="res-item">
+        <div class="res-item-left">Profit factor</div>
+        <div class="res-item-right ${pf >= 1.5 ? 'pos' : pf >= 1 ? '' : 'neg'}">${pf > 100 ? '∞' : pf.toFixed(2)}x<div class="res-item-sub">${pf >= 2 ? 'Strong' : pf >= 1.5 ? 'Good' : pf >= 1 ? 'Marginal' : 'Losing'}</div></div>
+      </div>
+      <div class="res-item">
+        <div class="res-item-left">Implied R:R</div>
+        <div class="res-item-right">1:${rrImplied}<div class="res-item-sub">Based on avg winner/loser</div></div>
+      </div>
+      <div class="res-item">
+        <div class="res-item-left">Min win rate needed</div>
+        <div class="res-item-right ${wr*100 >= parseFloat(minWR) ? 'pos' : 'neg'}">${minWR}%<div class="res-item-sub">Your rate: ${wrPct.toFixed(1)}% — ${wr*100 >= parseFloat(minWR) ? 'above breakeven' : 'BELOW breakeven'}</div></div>
+      </div>
+      <div class="res-item">
+        <div class="res-item-left">Monthly P&L (est.)</div>
+        <div class="res-item-right ${monthlyPL >= 0 ? 'pos' : 'neg'}">${monthlyPL >= 0 ? '+' : ''}$${Math.round(monthlyPL).toLocaleString()}<div class="res-item-sub">${tpm} trades/mo × $${expectancy.toFixed(2)} expectancy</div></div>
+      </div>
+      <div class="res-item">
+        <div class="res-item-left">Annual return (est.)</div>
+        <div class="res-item-right ${monthly12 >= 0 ? 'pos' : 'neg'}">${monthly12 >= 0 ? '+' : ''}$${Math.round(monthly12).toLocaleString()} <span style="font-size:13px;color:var(--muted)">(${annualPct}%)</span></div>
+      </div>
+    </div>
+    <div class="proj-section">
+      <div class="proj-title">Monthly P&L Projection</div>
+      <div class="proj-bars">
+        ${[1,2,3,6,12].map(function(m){
+          var v = monthlyPL * m;
+          return `<div class="proj-bar-wrap" style="justify-content:flex-end">
+            <div class="proj-bar-val ${v>=0?'pos':'neg'}">${v>=0?'+':''}$${Math.abs(Math.round(v)).toLocaleString()}</div>
+            <div class="proj-bar" style="height:${barH(v)}%;background:${v>=0?barColor:'var(--red)'}"></div>
+            <div class="proj-bar-label">${m}mo</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+window.addEventListener('DOMContentLoaded', function(){ calculate(); });
+</script>
+</body>
+</html>

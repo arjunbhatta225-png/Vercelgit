@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What Trade Data Reveals About Optimal Entry Timing — Tradexa Blog</title>
+  <meta name="description" content="Trade data consistently reveals timing patterns that separate winning from losing entries. Here's what the data shows about when traders actually win — and when they don't."/>
+  <meta name="keywords" content="optimal trade entry timing, time of day trading, London New York session overlap, trading entry strategy, market timing, Tradexa"/>
+  <meta property="og:title" content="What Trade Data Tells Us About Optimal Entry Timing"/>
+  <meta property="og:description" content="Analysis of trading data reveals clear timing patterns. Here's what the data shows about when traders win — and when they don't."/>
+  <meta property="og:type" content="article"/>
+  <link rel="canonical" href="https://tradexa.io/resources/blog/optimal-entry-timing.html"/>
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d0f12;color:#F5F5F5;font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
+    .article-hero{padding:80px 24px 56px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .article-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 0%,rgba(255,183,50,.09) 0%,transparent 70%);z-index:0}
+    .article-hero>*{position:relative;z-index:1}
+    .container{max-width:740px;margin:0 auto}
+    .container-wide{max-width:1100px;margin:0 auto}
+    .breadcrumb{font-size:12px;color:#525252;margin-bottom:24px}
+    .breadcrumb a{color:#525252;text-decoration:none}
+    .breadcrumb a:hover{color:#FFB732}
+    .article-category{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:16px}
+    .article-title{font-size:clamp(26px,4vw,40px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.02em;margin-bottom:20px}
+    .article-meta{display:flex;align-items:center;gap:16px;font-size:13px;color:#525252;flex-wrap:wrap}
+    .article-meta .author{color:#D1D5DB;font-weight:500}
+    .article-body{padding:56px 24px 80px}
+    .article-body p{font-size:16px;color:#D1D5DB;margin-bottom:20px;line-height:1.8}
+    .article-body h2{font-size:22px;font-weight:600;color:#fff;margin:44px 0 16px;letter-spacing:-0.01em}
+    .article-body h3{font-size:17px;font-weight:600;color:#E5E5E5;margin:28px 0 12px}
+    .article-body ul,.article-body ol{padding-left:24px;margin-bottom:20px}
+    .article-body li{font-size:16px;color:#D1D5DB;margin-bottom:8px;line-height:1.7}
+    .article-body strong{color:#F5F5F5;font-weight:600}
+    .article-body blockquote{border-left:3px solid #FFB732;padding:16px 24px;background:#1a1d23;margin:28px 0;border-radius:0 3px 3px 0}
+    .article-body blockquote p{color:#E5E5E5;font-style:italic;margin-bottom:0}
+    .data-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
+    .data-table th{background:#1a1d23;color:#A1A1AA;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:12px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
+    .data-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);color:#D1D5DB}
+    .data-table tr:last-child td{border-bottom:none}
+    .data-table .positive{color:#22C55E;font-weight:600}
+    .data-table .negative{color:#EF4444;font-weight:600}
+    .data-table .neutral{color:#FFB732;font-weight:600}
+    .callout{background:#1a1d23;border:1px solid rgba(255,183,50,.25);border-radius:3px;padding:24px;margin:32px 0}
+    .callout-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:10px}
+    .callout p{font-size:15px;color:#D1D5DB;margin-bottom:0}
+    .article-cta{background:#1a1d23;border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:40px;text-align:center;margin:56px 0 0}
+    .article-cta h3{font-size:20px;font-weight:600;color:#fff;margin-bottom:12px}
+    .article-cta p{font-size:14px;color:#A1A1AA;margin-bottom:24px}
+    .btn-gold{display:inline-block;background:#FFB732;color:#0d0f12;font-weight:600;font-size:14px;padding:12px 28px;border-radius:2px;text-decoration:none;transition:opacity .15s}
+    .btn-gold:hover{opacity:.85}
+    .author-card{display:flex;align-items:center;gap:20px;padding:32px;background:#1a1d23;border:1px solid rgba(255,255,255,.07);border-radius:3px;margin-top:56px}
+    .author-avatar{width:56px;height:56px;background:#22262e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#FFB732;flex-shrink:0}
+    .author-name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+    .author-bio{font-size:13px;color:#A1A1AA;line-height:1.6}
+    .divider{height:1px;background:rgba(255,255,255,.06);margin:48px 0}
+    .related-posts{padding:56px 24px}
+    .related-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#A1A1AA;margin-bottom:24px}
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.06)}
+    .related-card{background:#0d0f12;padding:24px;text-decoration:none;display:block;transition:background .2s}
+    .related-card:hover{background:#111}
+    .related-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#FFB732;margin-bottom:8px}
+    .related-title{font-size:14px;font-weight:600;color:#E5E5E5;line-height:1.4}
+    @media(max-width:640px){.related-grid{grid-template-columns:1fr}.author-card{flex-direction:column;text-align:center}.data-table{font-size:13px}}
+  </style>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="What Trade Data Reveals About Optimal Entry Timing — Tradexa"/>
+  <meta name="twitter:description" content="Trade data consistently reveals timing patterns that separate winning from losing entries. Here's what the data shows."/>
+  <link rel="stylesheet" href="/assets/blog-article.css"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Trade Data Reveals About Optimal Entry Timing",
+    "description": "Trade data consistently reveals timing patterns that separate winning from losing entries \u2014 here's what the data shows.",
+    "author": { "@type": "Organization", "name": "Tradexa Editorial" },
+    "publisher": { "@type": "Organization", "name": "Tradexa", "url": "https://tradexa.io" },
+    "datePublished": "2026-04-07",
+    "url": "https://tradexa.io/resources/blog/optimal-entry-timing.html",
+    "keywords": ["entry timing trading", "time of day trading", "trade execution timing", "market microstructure", "Tradexa"]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <meta property="og:url" content="https://tradexa.io/resources/blog/optimal-entry-timing.html"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+
+<div class="article-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="/resources/blog.html">Blog</a> / Market Analysis</div>
+    <div class="article-category">Market Analysis</div>
+    <h1 class="article-title">What Trade Data Reveals About Optimal Entry Timing</h1>
+    <div class="article-meta">
+      <span class="author">Tradexa Editorial</span>
+      <span>·</span>
+      <span>April 7, 2026</span>
+      <span>·</span>
+      <span>13 min read</span>
+    </div>
+  </div>
+</div>
+
+<section class="article-body">
+  <div class="container">
+
+    <p>When traders analyze their performance, they typically focus on what they traded — the setup, the instrument, the direction. Rarely do they examine <em>when</em> they traded with the same rigor. This is a significant missed opportunity, because timing is one of the most consistently measurable and improvable dimensions of trading performance.</p>
+
+    <p>After analyzing trade data across different market participants and instruments, consistent patterns emerge around time-of-day performance, session overlap effects, pre- and post-news release behavior, and confirmation timing within setups. The data reveals something counterintuitive: most traders' worst performance isn't tied to their strategy or their setup quality. It's tied to when they execute — and it's an edge that can be systematically improved.</p>
+
+    <p>This article breaks down the key timing dimensions and what the data consistently shows.</p>
+
+    <h2>The Time-of-Day Effect Is Real and Measurable</h2>
+
+    <p>Markets are not uniformly efficient throughout the trading session. Liquidity, volatility, and directional momentum vary significantly by time of day, and these variations create predictable windows where different trading approaches work better or worse.</p>
+
+    <p>For U.S. equity and futures markets operating in the Eastern time zone, three distinct session phases emerge with meaningfully different characteristics:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Session Phase</th>
+          <th>Time (ET)</th>
+          <th>Characteristics</th>
+          <th>Win Rate Tendency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Open auction + early session</td>
+          <td>9:30–10:15</td>
+          <td>High volatility, news-driven, wide spreads</td>
+          <td class="negative">Lower (reactive, choppy)</td>
+        </tr>
+        <tr>
+          <td>Mid-morning trend window</td>
+          <td>10:15–11:30</td>
+          <td>Direction established, better liquidity</td>
+          <td class="positive">Higher (trend continuation)</td>
+        </tr>
+        <tr>
+          <td>Midday lull</td>
+          <td>11:30–13:30</td>
+          <td>Low volume, choppy, mean-reverting</td>
+          <td class="negative">Lower (trend strategies)</td>
+        </tr>
+        <tr>
+          <td>Afternoon session</td>
+          <td>13:30–15:00</td>
+          <td>Moderate volume, institutional repositioning</td>
+          <td class="neutral">Mixed (strategy-dependent)</td>
+        </tr>
+        <tr>
+          <td>Power hour</td>
+          <td>15:00–16:00</td>
+          <td>Volume surge, rebalancing, options expiry effects</td>
+          <td class="positive">Higher (momentum continuation)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>These patterns are not universal — they're strategy-dependent. A momentum continuation strategy will perform differently across these phases than a mean-reversion approach. But most traders apply their strategy uniformly across all session phases without ever checking whether their specific approach has a measurable timing skew in their own data.</p>
+
+    <h2>Session Overlap Windows: The Highest-Quality Hours</h2>
+
+    <p>For forex and international markets, session overlap periods consistently produce the highest trade quality — defined by tighter spreads, better directional follow-through, and more reliable setup resolution.</p>
+
+    <p>The London-New York overlap (approximately 8:00–12:00 ET) is the most liquid and directionally consistent window in global FX markets. It represents the intersection of the two largest trading centers, and the combined institutional participation during this window produces the cleanest price action of the trading day. Breakout and trend trades entered during this window have historically shown better follow-through and faster resolution than those taken outside it.</p>
+
+    <p>The Asia-London overlap (approximately 3:00–5:00 ET) is relevant primarily for JPY and Asian-session pairs. Volume is lower, but this window often sees the initial directional move that the London session later amplifies or reverses — making it valuable for position setup timing even if execution occurs later.</p>
+
+    <blockquote>
+      <p>The traders who consistently outperform on timing are not those who trade more — they're the ones who concentrate their activity in the specific windows where their strategy has a proven edge and sit on their hands when it doesn't.</p>
+    </blockquote>
+
+    <h2>The Pre-News and Post-News Timing Problem</h2>
+
+    <p>News releases — CPI, NFP, FOMC decisions, earnings announcements — create some of the most dangerous timing environments for discretionary traders, yet they're consistently among the most heavily traded periods. The data on this is consistent and important.</p>
+
+    <p>Trades entered in the 30 minutes immediately before a major scheduled release show systematically worse outcomes for discretionary traders. The reason is straightforward: price action in this window is driven largely by positioning and hedging flows from institutional players who have more information, better execution, and longer time horizons. Retail traders who enter in this window are essentially paying a premium for volatility they can't reliably predict the direction of.</p>
+
+    <p>Post-release is equally treacherous in the first two to five minutes. The initial reaction to a data release is frequently a false move — a spike in one direction that reverses sharply as the market digests the full context of the data. Traders who reflexively buy or sell the initial move are repeatedly caught in these reversals.</p>
+
+    <p><strong>What the data supports for news timing:</strong></p>
+    <ul>
+      <li>Avoid entering new positions in the 30 minutes before major scheduled releases</li>
+      <li>If already in a position, either exit before the release or widen your stop to accommodate spike volatility, not both</li>
+      <li>After a release, wait for a clear directional confirmation — typically 5-15 minutes of post-release price action — before entering a new position</li>
+      <li>The "second wave" entry — after the initial reaction and the first partial retracement — consistently outperforms the initial spike entry in terms of risk/reward</li>
+    </ul>
+
+    <h2>Confirmation Timing Within the Setup</h2>
+
+    <p>Beyond time-of-day and news calendar effects, one of the most consistent timing errors in individual trader data is entry before setup confirmation is complete. This manifests as entering on the first touch of a level rather than waiting for confirmation, or entering on an incomplete signal rather than the completed one.</p>
+
+    <p>The impatience cost is significant and consistent. Traders who enter on the first touch of a key level — before seeing any rejection or continuation confirmation — show systematically lower win rates than those who wait for at least one confirmation signal. The few ticks of better entry price are consistently not worth the degraded win rate they come with.</p>
+
+    <h3>The confirmation hierarchy</h3>
+    <p>Effective setup confirmation generally involves at least two of the following elements resolving in the same direction before entry:</p>
+    <ul>
+      <li><strong>Price structure confirmation:</strong> A rejection bar, engulfing candle, or pin bar at the key level</li>
+      <li><strong>Volume confirmation:</strong> An uptick in volume accompanying the rejection or breakout</li>
+      <li><strong>Market structure alignment:</strong> Higher timeframe trend direction matching the trade direction</li>
+      <li><strong>Momentum confluence:</strong> An oscillator or momentum indicator in a condition consistent with the setup thesis</li>
+    </ul>
+
+    <p>Waiting for two-element confirmation before entering increases per-trade risk (by reducing the distance to the level) but decreases frequency of false starts — and the net effect on expectancy is consistently positive across different trading styles and instruments.</p>
+
+    <h2>How to Analyze Your Own Timing Data</h2>
+
+    <p>General patterns are useful, but what matters most is your personal timing data — because every trader's performance has a unique timing profile shaped by their strategy, their market, and their behavioral tendencies.</p>
+
+    <p>The analysis is straightforward if you have a properly structured trade log:</p>
+
+    <ol>
+      <li><strong>Tag every trade with entry time</strong> (at minimum, the session phase — pre-market, open, mid-morning, midday, afternoon, close)</li>
+      <li><strong>Calculate win rate and average R by time bucket</strong> — look for statistically significant differences between buckets</li>
+      <li><strong>Flag news calendar proximity</strong> — did you enter within 30 minutes of a scheduled release?</li>
+      <li><strong>Rate confirmation level</strong> — did you enter on a first touch, partial confirmation, or full confirmation?</li>
+      <li><strong>Segment the analysis by market regime</strong> — timing effects differ in trending versus range-bound conditions</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-label">What to Look For</div>
+      <p>A clear timing edge exists when one or more time buckets shows both higher win rate AND better average R/R than the others, with a sufficient sample size to be statistically meaningful. A sample of 20+ trades per bucket is the minimum to draw preliminary conclusions; 50+ is preferable.</p>
+    </div>
+
+    <p>Most traders who do this analysis for the first time are surprised by how concentrated their best performance is in a relatively narrow timing window — and how much of their underperformance comes from trades taken outside that window out of boredom, FOMO, or habit rather than genuine opportunity.</p>
+
+    <h2>Building a Timing Discipline Practice</h2>
+
+    <p>Knowing your timing edge and executing on it consistently are different challenges. The practical implementation involves a few specific commitments:</p>
+
+    <p><strong>Define your prime trading window explicitly</strong> based on your data, and treat it as a hard rule rather than a loose preference. If your data shows that 75% of your profitable trades occur between 10:15 and 11:30 ET, make that your primary session and treat other times as secondary.</p>
+
+    <p><strong>Use the economic calendar as a pre-trade checklist.</strong> Before every session, identify the day's scheduled releases and mark the 30-minute buffer zones. Decide in advance whether you'll trade through those windows or sit out — and write the decision down before the market opens, not in the moment.</p>
+
+    <p><strong>Grade confirmation before every entry.</strong> Before pulling the trigger on any trade, explicitly assess: "Is this a first touch, partial confirmation, or full confirmation entry?" If it's a first touch, either reduce size to account for the lower win rate expectation or wait for confirmation to develop.</p>
+
+    <p>Timing won't save a poor setup, and a great setup can overcome bad timing in many cases. But for traders who already have a valid edge in their approach, timing optimization is frequently the highest-leverage improvement available — because it improves both the quality of trades taken and the consistency of execution by creating clear, pre-defined rules around when to trade and when to wait.</p>
+
+    <div class="divider"></div>
+
+    <h2>References &amp; Further Reading</h2>
+    <ol style="padding-left:22px;margin-bottom:0">
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Harris, L. (2003). <em>Trading and Exchanges: Market Microstructure for Practitioners</em>. Oxford University Press. — The standard practitioner reference on how markets actually work at the microstructure level, including liquidity provision, informed vs. uninformed trading, and the intraday patterns in volume, spread, and price discovery that underpin the timing effects described in this article.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Admati, A.R., &amp; Pfleiderer, P. (1988). "A Theory of Intraday Patterns: Volume and Price Variability." <em>Review of Financial Studies</em>, 1(1), 3–40. — The foundational theoretical paper explaining why trading volume and price variability cluster at certain times of day — specifically the open and close — due to the strategic behavior of informed traders. Directly explains the time-of-day effects observed in practical trading data.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:14px;line-height:1.7">Wood, R.A., McInish, T.H., &amp; Ord, J.K. (1985). "An Investigation of Transactions Data for NYSE Stocks." <em>Journal of Finance</em>, 40(3), 723–741. — Early empirical documentation of the U-shaped intraday volume pattern — high at open and close, lower in the middle of the day — in NYSE equity data. Establishes the empirical basis for time-of-day trading effects that practitioners observe today.</li>
+      <li style="font-size:15px;color:#A1A1AA;margin-bottom:0;line-height:1.7">Steenbarger, B.N. (2002). <em>The Psychology of Trading: Tools and Techniques for Minding the Markets</em>. Wiley. — Covers the behavioral dimensions of timing decisions, including why traders consistently deviate from their optimal timing windows and what the data says about the costs of those deviations. Complements the quantitative timing analysis with the psychological context.</li>
+    </ol>
+
+    <div class="divider"></div>
+
+    <div class="article-cta">
+      <h3>See your personal timing patterns in your trade data</h3>
+      <p>Tradexa's analytics break down your win rate, P&amp;L, and R-multiple by time of day, session, and news proximity — so you can see exactly where your timing edge is strongest.</p>
+      <a href="/app/dashboard.html" class="btn-gold">Start Free — No Card Required →</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="author-card">
+      <div class="author-avatar">TX</div>
+      <div>
+        <div class="author-name">Tradexa Editorial</div>
+        <div class="author-bio">The Tradexa editorial team covers trading psychology, systematic strategy development, performance analytics, and platform updates. All articles reference primary sources and verified research. We are building a trading journal and analytics platform — not an execution system — and our writing reflects that focus.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="related-posts">
+  <div class="container-wide">
+    <div class="related-label">Related Articles</div>
+    <div class="related-grid">
+      <a href="/resources/blog/trading-journal-framework.html" class="related-card">
+        <div class="related-cat">Education</div>
+        <div class="related-title">Building a Trading Journal That Actually Makes You Better (With Real Examples)</div>
+      </a>
+      <a href="/resources/blog/backtesting-mistakes.html" class="related-card">
+        <div class="related-cat">Strategy</div>
+        <div class="related-title">Backtesting Your Way to an Edge: The 5 Most Common Mistakes and How to Avoid Them</div>
+      </a>
+      <a href="/resources/blog/dynamic-position-sizing.html" class="related-card">
+        <div class="related-cat">Risk Management</div>
+        <div class="related-title">The 2% Rule Isn't Enough: How to Build a Dynamic Position Sizing Framework</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/blog-article.js" defer></script>
+</body>
+</html>

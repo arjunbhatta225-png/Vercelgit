@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Get Started | Tradexa</title>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .ob-progress-bar{height:6px;background:var(--bg);border-radius:100px;overflow:hidden;margin-bottom:32px}
+    .ob-progress-fill{height:100%;background:linear-gradient(90deg,#FFB732,#ffc55c);border-radius:100px;transition:width .4s ease}
+    .ob-step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:12px;display:flex;gap:20px;align-items:flex-start;cursor:pointer;transition:all .2s;position:relative}
+    .ob-step:hover{border-color:var(--border2)}
+    .ob-step.done{background:#1a1d23;border-color:var(--gold-border)}
+    .ob-step.active{border-color:var(--green);box-shadow:0 0 0 3px rgba(255,183,50,.08)}
+    .ob-step.locked{opacity:.5;cursor:not-allowed}
+    .ob-check{width:40px;height:40px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;background:var(--bg)}
+    .ob-step.done .ob-check{background:var(--green);border-color:var(--green)}
+    .ob-step.active .ob-check{border-color:var(--green)}
+    .ob-step-num{font-size:13px;font-weight:700;color:var(--dim)}
+    .ob-step.done .ob-step-num{display:none}
+    .ob-check-icon{display:none}
+    .ob-step.done .ob-check-icon{display:block}
+    .ob-step-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.01em}
+    .ob-step-desc{font-size:13px;color:var(--muted);line-height:1.6}
+    .ob-step-meta{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+    .ob-step-time{font-size:11px;color:var(--dim)}
+    .ob-cta{margin-top:8px}
+    .ob-reward{position:absolute;top:16px;right:16px}
+    .ob-video-thumb{width:100%;border-radius:8px;overflow:hidden;aspect-ratio:16/9;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:12px;transition:border-color .15s}
+    .ob-video-thumb:hover{border-color:var(--green)}
+    .milestone{background:#1a1d23;border:1px solid var(--gold-border);border-radius:10px;padding:20px;text-align:center;margin-bottom:20px}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Get Started'});</script>
+<main class="tx-main">
+  <div class="tx-page-header">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Welcome to Tradexa</div>
+      <h1 class="tx-page-title">Get Started Checklist</h1>
+      <p class="tx-page-sub">Complete these steps to unlock your full trading intelligence system.</p>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:28px;font-weight:800;color:var(--text)">4 / 8</div>
+      <div style="font-size:12px;color:var(--muted)">steps complete</div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="ob-progress-bar">
+    <div class="ob-progress-fill" id="obProgress" style="width:50%"></div>
+  </div>
+
+  <!-- Milestone Banner -->
+  <div class="milestone" id="milestone1" style="display:none">
+    <div style="font-size:24px;margin-bottom:8px">🎉</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text)">You've unlocked the AI Coach!</div>
+    <div style="font-size:13px;color:#A1A1AA;margin-top:4px">Complete 4 more steps to unlock the full backtesting engine.</div>
+  </div>
+
+  <div class="tx-grid-aside" style="gap:24px">
+    <div>
+      <!-- Step 1 — Done -->
+      <div class="ob-step done" onclick="toggleStep(this)">
+        <div class="ob-check">
+          <svg class="ob-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span class="ob-step-num">1</span>
+        </div>
+        <div style="flex:1">
+          <div class="ob-step-title">Create your account</div>
+          <div class="ob-step-desc">You signed up and verified your email. Your secure account is ready.</div>
+          <div class="ob-step-meta">
+            <span class="tx-badge tx-badge-green">Done</span>
+            <span class="ob-step-time">⏱ 2 min · Completed May 2</span>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+10 pts</span></div>
+      </div>
+
+      <!-- Step 2 — Done -->
+      <div class="ob-step done" onclick="toggleStep(this)">
+        <div class="ob-check">
+          <svg class="ob-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span class="ob-step-num">2</span>
+        </div>
+        <div style="flex:1">
+          <div class="ob-step-title">Complete your trading profile</div>
+          <div class="ob-step-desc">Tell us about your trading style, experience level, markets, and risk tolerance so the AI can personalize insights.</div>
+          <div class="ob-step-meta">
+            <span class="tx-badge tx-badge-green">Done</span>
+            <span class="ob-step-time">⏱ 5 min · Completed May 2</span>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+20 pts</span></div>
+      </div>
+
+      <!-- Step 3 — Done -->
+      <div class="ob-step done" onclick="toggleStep(this)">
+        <div class="ob-check">
+          <svg class="ob-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span class="ob-step-num">3</span>
+        </div>
+        <div style="flex:1">
+          <div class="ob-step-title">Log your first trade</div>
+          <div class="ob-step-desc">You've started building your journal. This is where your edge gets built — every trade logged is data for the AI to analyze.</div>
+          <div class="ob-step-meta">
+            <span class="tx-badge tx-badge-green">Done</span>
+            <span class="ob-step-time">⏱ 2 min · Completed May 2</span>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+30 pts</span></div>
+      </div>
+
+      <!-- Step 4 — Done -->
+      <div class="ob-step done" onclick="toggleStep(this)">
+        <div class="ob-check">
+          <svg class="ob-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span class="ob-step-num">4</span>
+        </div>
+        <div style="flex:1">
+          <div class="ob-step-title">Set your daily risk rules</div>
+          <div class="ob-step-desc">Daily loss limit, max trade count, and position sizing rules are configured. The risk engine is actively protecting your account.</div>
+          <div class="ob-step-meta">
+            <span class="tx-badge tx-badge-green">Done</span>
+            <span class="ob-step-time">⏱ 3 min · Completed May 2</span>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+25 pts</span></div>
+      </div>
+
+      <!-- Step 5 — Active -->
+      <div class="ob-step active" id="step5">
+        <div class="ob-check">
+          <svg class="ob-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span class="ob-step-num" style="color:var(--green)">5</span>
+        </div>
+        <div style="flex:1">
+          <div class="ob-step-title">Connect your broker</div>
+          <div class="ob-step-desc">Auto-import trades directly from your broker. Supports Interactive Brokers, Tradovate, Coinbase, TD Ameritrade, and 47 more. Once connected, your journal fills automatically.</div>
+          <div class="ob-step-meta">
+            <span class="ob-step-time">⏱ 5 min</span>
+            <span class="tx-badge tx-badge-blue">Next Step</span>
+          </div>
+          <div class="ob-cta">
+            <a href="/app/settings.html" class="tx-btn tx-btn-primary" style="margin-top:12px;display:inline-flex" data-track="onboarding_connect_broker">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+              Connect Broker
+            </a>
+            <button class="tx-btn tx-btn-ghost" style="margin-top:12px;margin-left:8px" onclick="markDone(this)">I'll do this later</button>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+40 pts</span></div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="ob-step" id="step6">
+        <div class="ob-check"><span class="ob-step-num">6</span></div>
+        <div style="flex:1">
+          <div class="ob-step-title">Have your first AI Coach session</div>
+          <div class="ob-step-desc">Ask the AI Coach about your trading patterns. It needs at least 10 trades to give you meaningful insights — but it gets smarter every week.</div>
+          <div class="ob-step-meta"><span class="ob-step-time">⏱ 10 min</span></div>
+          <div class="ob-cta">
+            <a href="/app/ai-coach.html" class="tx-btn tx-btn-ghost" style="margin-top:12px;display:inline-flex" data-track="onboarding_ai_coach">Open AI Coach →</a>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+35 pts</span></div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="ob-step" id="step7">
+        <div class="ob-check"><span class="ob-step-num">7</span></div>
+        <div style="flex:1">
+          <div class="ob-step-title">Set weekly performance targets</div>
+          <div class="ob-step-desc">Define your weekly P&L target, minimum win rate goal, and max drawdown tolerance. The platform tracks your progress and alerts you when you're off course.</div>
+          <div class="ob-step-meta"><span class="ob-step-time">⏱ 3 min</span></div>
+          <div class="ob-cta">
+            <a href="/app/settings.html" class="tx-btn tx-btn-ghost" style="margin-top:12px;display:inline-flex" data-track="onboarding_targets">Set Targets →</a>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+20 pts</span></div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="ob-step" id="step8">
+        <div class="ob-check"><span class="ob-step-num">8</span></div>
+        <div style="flex:1">
+          <div class="ob-step-title">Complete your first Weekly Review</div>
+          <div class="ob-step-desc">After 5 days of trading, the AI generates your first personalized weekly review. Read it, reflect on it, and use it to build your trading improvement plan.</div>
+          <div class="ob-step-meta"><span class="ob-step-time">⏱ 15 min</span></div>
+          <div class="ob-cta">
+            <a href="/app/weekly-reviews.html" class="tx-btn tx-btn-ghost" style="margin-top:12px;display:inline-flex" data-track="onboarding_weekly_review">View Reviews →</a>
+          </div>
+        </div>
+        <div class="ob-reward"><span class="tx-badge tx-badge-green-border">+50 pts</span></div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div>
+      <!-- XP Score Card -->
+      <div style="background:#1a1d23;border:1px solid var(--gold-border);border-radius:10px;padding:22px;margin-bottom:16px;text-align:center">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:10px">Your Progress Score</div>
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#222222" stroke-width="8"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#FFB732" stroke-width="8" stroke-dasharray="157 94" stroke-dashoffset="39" stroke-linecap="round"/>
+          <text x="50" y="55" text-anchor="middle" font-size="18" font-weight="800" fill="#fff" font-family="Inter,sans-serif">85</text>
+        </svg>
+        <div style="font-size:26px;font-weight:800;color:var(--text);margin-top:4px">85 XP</div>
+        <div style="font-size:12px;color:#A1A1AA;margin-top:2px">Level 2 — Active Trader</div>
+        <div style="margin-top:12px;padding:10px;background:rgba(0,0,0,.2);border-radius:6px">
+          <div style="font-size:11px;color:var(--dim);margin-bottom:6px">Next level: 150 XP</div>
+          <div class="tx-progress-bg"><div class="tx-progress-fill" style="width:57%;background:var(--green)"></div></div>
+        </div>
+      </div>
+
+      <!-- Rewards -->
+      <div class="tx-card" style="margin-bottom:16px">
+        <div class="tx-card-title">Unlocked Rewards</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;background:var(--bg)">
+            <div style="font-size:18px">🏆</div>
+            <div><div style="font-size:12px;font-weight:600;color:var(--text)">First Trade Logged</div><div style="font-size:10px;color:var(--dim)">+30 XP · May 2</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;background:var(--bg)">
+            <div style="font-size:18px">🔒</div>
+            <div><div style="font-size:12px;font-weight:600;color:var(--text)">Risk System Active</div><div style="font-size:10px;color:var(--dim)">+25 XP · May 2</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;background:var(--bg)">
+            <div style="font-size:18px">🎯</div>
+            <div><div style="font-size:12px;font-weight:600;color:var(--text)">Profile Completed</div><div style="font-size:10px;color:var(--dim)">+20 XP · May 2</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tip Box -->
+      <div class="tx-card" style="background:#1a1d23;border-color:var(--green-border);margin-bottom:16px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:8px">💡 Pro Tip</div>
+        <div style="font-size:13px;color:#A1A1AA;line-height:1.6">Traders who connect a broker in their first week retain their account for 3x longer and see 68% higher AI Coach accuracy within 30 days.</div>
+      </div>
+
+      <!-- Video Quickstart -->
+      <div class="tx-card">
+        <div class="tx-card-title">Video Quickstart (4 min)</div>
+        <div class="ob-video-thumb" onclick="alert('Video player would open here')">
+          <div style="text-align:center">
+            <div style="width:48px;height:48px;border-radius:50%;background:rgba(255,183,50,.2);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div style="font-size:12px;color:var(--muted)">Watch the platform tour</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+function markDone(btn){
+  var step=btn.closest('.ob-step');
+  step.classList.remove('active');
+  step.classList.add('done');
+  updateProgress();
+}
+function toggleStep(step){
+  if(!step.classList.contains('done'))return;
+}
+function updateProgress(){
+  var done=document.querySelectorAll('.ob-step.done').length;
+  var total=document.querySelectorAll('.ob-step').length;
+  var pct=Math.round(done/total*100);
+  document.getElementById('obProgress').style.width=pct+'%';
+}
+</script>
+<script src="/assets/tradebot.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- tx-auth-guard-v3 -->
+  <style>html.tx-auth-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('tx-auth-pending')</script>
+  <script src="/assets/supabase-auth.js"></script>
+  <script src="/assets/profiles.js"></script>
+  <!-- /tx-auth-guard-v3 -->
+<meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <title>Capital Tracker | Tradexa</title>
+  <script src="/assets/capital-tracker.js"></script>
+  <script src="/assets/trades-data.js"></script>
+  <script src="/assets/tx-router.js" defer></script>
+  <script src="/assets/app-sidebar.js" defer></script>
+  <style>
+    .cap-hero{background:linear-gradient(135deg,#13161b,#111);border:1px solid #252525;border-radius:12px;padding:28px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+    .cap-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#FFB732,rgba(255,183,50,.2),transparent)}
+    .cap-hero::after{content:'';position:absolute;top:0;right:0;width:300px;height:100%;background:radial-gradient(ellipse at right center,rgba(255,183,50,.07) 0%,transparent 70%);pointer-events:none}
+    .cap-balance-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .cap-balance-num{font-size:48px;font-weight:800;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums;color:var(--text)}
+    .cap-growth-badge{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;padding:4px 10px;border-radius:100px;margin-top:8px}
+    .cap-growth-badge.pos{background:rgba(34,197,94,.12);color:var(--profit)}
+    .cap-growth-badge.neg{background:rgba(239,68,68,.12);color:var(--loss)}
+    .cap-growth-badge.neu{background:rgba(255,255,255,.06);color:var(--muted)}
+
+    .cap-period-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin-top:20px}
+    .cap-period-cell{background:var(--bg);padding:14px 16px}
+    .cap-period-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:6px}
+    .cap-period-val{font-size:17px;font-weight:700;letter-spacing:-.02em}
+    .cap-period-pct{font-size:11px;font-weight:600;margin-top:3px}
+    .cap-period-val.pos,.cap-period-pct.pos{color:var(--profit)}
+    .cap-period-val.neg,.cap-period-pct.neg{color:var(--loss)}
+    .cap-period-val.neu{color:var(--text)}
+
+    .cap-acct-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;border:1px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;background:transparent;color:var(--muted);font-family:inherit}
+    .cap-acct-pill.active{background:var(--gold-dim);border-color:var(--gold-border);color:var(--gold)}
+    .cap-acct-pill:hover:not(.active){background:rgba(255,255,255,.04);color:var(--text)}
+    .cap-acct-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+    .cap-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);margin-bottom:14px}
+
+    /* Equity chart */
+    .cap-eq-svg{width:100%;height:160px}
+
+    /* History table */
+    .cap-hist-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+    .cap-hist-row:last-child{border-bottom:none}
+    .cap-hist-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+    .cap-hist-type.deposit{background:rgba(34,197,94,.12);color:var(--profit)}
+    .cap-hist-type.withdrawal{background:rgba(239,68,68,.12);color:var(--loss)}
+    .cap-hist-type.trade{background:rgba(255,183,50,.1);color:var(--gold)}
+    .cap-hist-date{color:var(--dim);font-size:11px;flex-shrink:0}
+    .cap-hist-note{flex:1;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cap-hist-amt{font-weight:700;flex-shrink:0}
+    .cap-hist-amt.pos{color:var(--profit)}
+    .cap-hist-amt.neg{color:var(--loss)}
+
+    /* Goal bar */
+    .goal-bar-bg{height:8px;background:var(--bg);border-radius:100px;overflow:hidden;margin-bottom:6px;border:1px solid var(--border)}
+    .goal-bar-fill{height:100%;background:linear-gradient(90deg,#FFB732,#e8b830);border-radius:100px;transition:width .6s ease}
+
+    /* Risk grid */
+    .risk-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .risk-cell{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px}
+    .risk-cell-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:6px}
+    .risk-cell-val{font-size:20px;font-weight:700;letter-spacing:-.03em}
+
+    /* Setup banner */
+    .cap-setup-banner{background:rgba(255,183,50,.05);border:1px dashed rgba(255,183,50,.3);border-radius:10px;padding:32px;text-align:center}
+
+    /* DD alert */
+    .dd-alert{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--loss);margin-bottom:16px}
+    .dd-alert.hide{display:none}
+
+    @media(max-width:768px){
+      .cap-period-grid{grid-template-columns:1fr 1fr}
+      .risk-grid{grid-template-columns:1fr 1fr}
+      .cap-balance-num{font-size:36px}
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="description" content="Tradexa is a premium trading journal and performance analytics platform for forex, crypto, stock, and futures traders who trade with discipline."/>
+</head>
+<body>
+<script>document.addEventListener('DOMContentLoaded',function(){var t=document.getElementById('txPageTitle');if(t)t.textContent='Capital Tracker'});</script>
+<main class="tx-main">
+
+  <div class="tx-page-header">
+    <div>
+      <h1 class="tx-page-title">Capital Tracker</h1>
+      <p class="tx-page-sub" id="cap-page-sub">Real-time account balance, growth, and risk management.</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center" id="cap-action-btns">
+      <button class="tx-btn tx-btn-ghost tx-btn-sm" onclick="TxCapital.openTxnModal('withdrawal')">− Withdraw</button>
+      <button class="tx-btn tx-btn-ghost tx-btn-sm" style="color:var(--profit);border-color:rgba(34,197,94,.3)" onclick="TxCapital.openTxnModal('deposit')">+ Deposit</button>
+      <button class="tx-btn tx-btn-primary tx-btn-sm" onclick="TxCapital.openSetupModal(true)">⚙ Edit Account</button>
+    </div>
+  </div>
+
+  <!-- Account selector -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px" id="cap-acct-pills"></div>
+
+  <!-- DD Alert (hidden unless triggered) -->
+  <div class="dd-alert hide" id="cap-dd-alert">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span id="cap-dd-alert-text">Drawdown approaching limit</span>
+  </div>
+
+  <!-- Hero Balance Card -->
+  <div class="cap-hero" id="cap-hero-configured">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="cap-balance-lbl">
+          <span id="cap-acct-name-lbl">Main Account</span>
+          <span id="cap-acct-type-badge" style="font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2);color:#FFB732;font-weight:700"></span>
+        </div>
+        <div class="cap-balance-num" id="cap-hero-balance">—</div>
+        <div class="cap-growth-badge neu" id="cap-growth-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          <span id="cap-growth-lbl">—</span>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:10px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Starting Capital</div>
+        <div style="font-size:18px;font-weight:700;color:var(--muted)" id="cap-start-lbl">—</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:2px" id="cap-since-lbl">since —</div>
+      </div>
+    </div>
+
+    <!-- Goal progress -->
+    <div id="cap-goal-section" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid #1E1E1E">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span style="font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.07em">Goal Progress</span>
+        <span style="font-size:12px;font-weight:700;color:var(--gold)" id="cap-goal-pct-lbl">—</span>
+      </div>
+      <div class="goal-bar-bg"><div class="goal-bar-fill" id="cap-goal-fill" style="width:0%"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:4px">
+        <span id="cap-goal-cur-lbl">—</span>
+        <span id="cap-goal-target-lbl">Target: —</span>
+      </div>
+    </div>
+
+    <!-- Period stats -->
+    <div class="cap-period-grid" id="cap-period-grid">
+      <div class="cap-period-cell"><div class="cap-period-lbl">Today</div><div class="cap-period-val neu" id="cp-today">—</div><div class="cap-period-pct" id="cp-today-pct">—</div></div>
+      <div class="cap-period-cell"><div class="cap-period-lbl">This Week</div><div class="cap-period-val neu" id="cp-week">—</div><div class="cap-period-pct" id="cp-week-pct">—</div></div>
+      <div class="cap-period-cell"><div class="cap-period-lbl">This Month</div><div class="cap-period-val neu" id="cp-month">—</div><div class="cap-period-pct" id="cp-month-pct">—</div></div>
+      <div class="cap-period-cell"><div class="cap-period-lbl">All Time</div><div class="cap-period-val neu" id="cp-alltime">—</div><div class="cap-period-pct" id="cp-alltime-pct">—</div></div>
+    </div>
+  </div>
+
+  <!-- Setup banner (shown when not configured) -->
+  <div class="cap-setup-banner" id="cap-setup-banner" style="display:none;margin-bottom:20px">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FFB732" stroke-width="1.5" style="margin:0 auto 12px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px">Set Up Capital Tracking</div>
+    <div style="font-size:13px;color:var(--muted);max-width:440px;margin:0 auto 20px;line-height:1.6">Enter your starting account balance to unlock live balance tracking, growth percentage, risk calculator, drawdown alerts, and goal progress.</div>
+    <button class="tx-btn tx-btn-primary" onclick="TxCapital.openSetupModal()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Configure Capital Tracking
+    </button>
+  </div>
+
+  <!-- Main content grid -->
+  <div class="tx-grid-aside" style="margin-bottom:20px" id="cap-main-grid">
+
+    <!-- Left: Equity Curve + History -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Equity Curve -->
+      <div class="tx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div class="cap-section-title" style="margin:0">Equity Curve</div>
+          <div style="display:flex;gap:10px;font-size:11px">
+            <span style="color:var(--dim)">Peak: <strong style="color:var(--text)" id="eq-peak">—</strong></span>
+            <span style="color:var(--dim)">Max DD: <strong style="color:var(--loss)" id="eq-maxdd">—</strong></span>
+          </div>
+        </div>
+        <svg class="cap-eq-svg" viewBox="0 0 600 160" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="capEqG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FFB732" stop-opacity=".25"/>
+              <stop offset="100%" stop-color="#FFB732" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path id="cap-eq-fill" d="M0,160 L600,160 Z" fill="url(#capEqG)"/>
+          <path id="cap-eq-line" d="M0,140 L600,140" fill="none" stroke="#FFB732" stroke-width="2"/>
+          <circle id="cap-eq-dot" cx="600" cy="140" r="4" fill="#FFB732"/>
+        </svg>
+      </div>
+
+      <!-- Transaction History -->
+      <div class="tx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="cap-section-title" style="margin:0">Transaction History</div>
+          <div style="display:flex;gap:6px">
+            <button class="tx-btn tx-btn-ghost tx-btn-sm" onclick="TxCapital.openTxnModal('deposit')">+ Deposit</button>
+            <button class="tx-btn tx-btn-ghost tx-btn-sm" onclick="TxCapital.openTxnModal('withdrawal')">− Withdraw</button>
+          </div>
+        </div>
+        <div id="cap-history-list">
+          <div style="color:var(--dim);font-size:13px;text-align:center;padding:24px 0">No transactions yet.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Risk + Stats -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- Risk Calculator -->
+      <div class="tx-card">
+        <div class="cap-section-title">Risk Calculator</div>
+        <div class="risk-grid" id="risk-grid">
+          <div class="risk-cell">
+            <div class="risk-cell-lbl">1% Risk</div>
+            <div class="risk-cell-val" style="color:var(--profit)" id="rc-1">—</div>
+          </div>
+          <div class="risk-cell">
+            <div class="risk-cell-lbl">2% Risk</div>
+            <div class="risk-cell-val" style="color:var(--warn)" id="rc-2">—</div>
+          </div>
+          <div class="risk-cell">
+            <div class="risk-cell-lbl">5% Risk</div>
+            <div class="risk-cell-val" style="color:var(--loss)" id="rc-5">—</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.07em">Max Daily Loss</span>
+            <span style="font-size:14px;font-weight:700;color:var(--loss)" id="rc-daily">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:11px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.07em">Max Drawdown Limit</span>
+            <span style="font-size:14px;font-weight:700;color:var(--loss)" id="rc-ddlimit">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Account Stats -->
+      <div class="tx-card">
+        <div class="cap-section-title">Account Stats</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">Peak Capital</span>
+            <span style="font-size:13px;font-weight:700;color:var(--text)" id="stat-peak">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">Max Drawdown</span>
+            <span style="font-size:13px;font-weight:700;color:var(--loss)" id="stat-dd">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">Max DD %</span>
+            <span style="font-size:13px;font-weight:700;color:var(--loss)" id="stat-ddpct">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">DD Limit</span>
+            <span style="font-size:13px;font-weight:700;color:var(--muted)" id="stat-ddlimit">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">Account Type</span>
+            <span style="font-size:13px;font-weight:700;color:var(--text)" id="stat-type">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:12px;color:var(--muted)">Currency</span>
+            <span style="font-size:13px;font-weight:700;color:var(--text)" id="stat-currency">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0">
+            <span style="font-size:12px;color:var(--muted)">Tracking Since</span>
+            <span style="font-size:13px;font-weight:700;color:var(--text)" id="stat-since">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Account -->
+      <div class="tx-card" style="text-align:center">
+        <div class="cap-section-title" style="text-align:left">Multiple Accounts</div>
+        <div style="font-size:12px;color:var(--dim);margin-bottom:14px;text-align:left">Track futures, prop, and demo accounts separately.</div>
+        <button class="tx-btn tx-btn-ghost" style="width:100%" onclick="addNewAccount()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add Another Account
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script src="/assets/tradebot.js" defer></script>
+<script>
+window.txRefreshCapitalDashboard = function(){ initPage(); };
+
+function fmt(n, sym){
+  sym = sym || '$';
+  return (n >= 0 ? '+' : '-') + sym + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function fmtAbs(n, sym){
+  sym = sym || '$';
+  return sym + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function clx(n){ return n > 0 ? 'pos' : n < 0 ? 'neg' : 'neu'; }
+
+function buildAccountPills(settings){
+  var container = document.getElementById('cap-acct-pills');
+  if(!settings.accounts || settings.accounts.length <= 1){ container.style.display = 'none'; return; }
+  container.style.display = 'flex';
+  container.innerHTML = settings.accounts.map(function(a){
+    var isActive = a.id === settings.activeAccountId;
+    return '<button class="cap-acct-pill' + (isActive ? ' active' : '') + '" onclick="switchAccount(\'' + a.id + '\')">' +
+      (isActive ? '<span class="cap-acct-dot"></span>' : '') +
+      a.name + ' <span style="font-size:10px;opacity:.6">(' + a.type + ')</span>' +
+    '</button>';
+  }).join('');
+}
+
+function switchAccount(id){
+  TxCapital.setActiveAccount(id);
+  initPage();
+}
+
+function addNewAccount(){
+  TxCapital.openSetupModal();
+}
+
+function buildEquityCurve(points){
+  if(!points || points.length < 2){
+    document.getElementById('cap-eq-line').setAttribute('d','M0,140 L600,140');
+    document.getElementById('cap-eq-fill').setAttribute('d','M0,140 L600,140 Z');
+    document.getElementById('cap-eq-dot').setAttribute('cx','600');
+    document.getElementById('cap-eq-dot').setAttribute('cy','140');
+    return;
+  }
+  var vals = points.map(function(p){ return p.capital; });
+  var minV = Math.min.apply(null, vals);
+  var maxV = Math.max.apply(null, vals);
+  var range = maxV - minV || 1;
+  var H = 160, pad = 14;
+  var pts = points.map(function(p, i){
+    var x = (i / (points.length - 1)) * 600;
+    var y = H - pad - ((p.capital - minV) / range) * (H - pad * 2);
+    return { x: x, y: y };
+  });
+  var line = pts.map(function(p, i){ return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+  var fill = line + ' L600,' + H + ' L0,' + H + ' Z';
+  document.getElementById('cap-eq-line').setAttribute('d', line);
+  document.getElementById('cap-eq-fill').setAttribute('d', fill);
+  var last = pts[pts.length - 1];
+  document.getElementById('cap-eq-dot').setAttribute('cx', last.x.toFixed(1));
+  document.getElementById('cap-eq-dot').setAttribute('cy', last.y.toFixed(1));
+}
+
+function buildHistory(settings, cs){
+  var acctId = settings.activeAccountId;
+  var sym = TxCapital.CURRENCIES[cs.currency] ? TxCapital.CURRENCIES[cs.currency].symbol : '$';
+  var hist = [];
+
+  try {
+    var raw = JSON.parse(localStorage.getItem('txCapitalHistory_v1') || '[]');
+    hist = raw.filter(function(h){ return h.accountId === acctId; }).slice().reverse().slice(0, 30);
+  } catch(e){}
+
+  var trades = window.TxTradeData ? window.TxTradeData.getTrades().slice().reverse().slice(0, 10) : [];
+  var el = document.getElementById('cap-history-list');
+
+  if(!hist.length && !trades.length){
+    el.innerHTML = '<div style="color:var(--dim);font-size:13px;text-align:center;padding:24px 0">No transactions yet.<br><span style="font-size:12px">Log trades or record deposits/withdrawals.</span></div>';
+    return;
+  }
+
+  var rows = '';
+  hist.forEach(function(h){
+    var type = h.source || 'deposit';
+    var amt = h.change || 0;
+    var d = h.date ? new Date(h.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+    rows += '<div class="cap-hist-row">' +
+      '<span class="cap-hist-type ' + type + '">' + type + '</span>' +
+      '<span class="cap-hist-date">' + d + '</span>' +
+      '<span class="cap-hist-note">' + (h.notes || '—') + '</span>' +
+      '<span class="cap-hist-amt ' + clx(amt) + '">' + fmt(amt, sym) + '</span>' +
+    '</div>';
+  });
+
+  trades.slice(0, 5).forEach(function(t){
+    var pnl = parseFloat(t.pnl) || 0;
+    var d = t.date ? new Date(t.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+    rows += '<div class="cap-hist-row">' +
+      '<span class="cap-hist-type trade">trade</span>' +
+      '<span class="cap-hist-date">' + d + '</span>' +
+      '<span class="cap-hist-note">' + (t.symbol || '—') + (t.notes ? ' · ' + t.notes : '') + '</span>' +
+      '<span class="cap-hist-amt ' + clx(pnl) + '">' + fmt(pnl, sym) + '</span>' +
+    '</div>';
+  });
+
+  el.innerHTML = rows || '<div style="color:var(--dim);font-size:13px;text-align:center;padding:24px 0">No transactions yet.</div>';
+}
+
+function initPage(){
+  var settings = TxCapital.getSettings();
+  var cs = TxCapital.getCapitalStats();
+  var sym = TxCapital.CURRENCIES[cs.currency] ? TxCapital.CURRENCIES[cs.currency].symbol : '$';
+  var acct = TxCapital.getActiveAccount();
+
+  buildAccountPills(settings);
+
+  if(!settings.isConfigured){
+    document.getElementById('cap-hero-configured').style.display = 'none';
+    document.getElementById('cap-setup-banner').style.display = 'block';
+    document.getElementById('cap-main-grid').style.opacity = '.4';
+    document.getElementById('cap-action-btns').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('cap-hero-configured').style.display = 'block';
+  document.getElementById('cap-setup-banner').style.display = 'none';
+  document.getElementById('cap-main-grid').style.opacity = '1';
+
+  var cur       = cs.currentCap    != null ? cs.currentCap    : (acct.startingCapital || 0);
+  var growth    = cs.totalGrowth   != null ? cs.totalGrowth   : 0;
+  var growthPct = cs.growthPct     != null ? cs.growthPct     : 0;
+
+  document.getElementById('cap-hero-balance').textContent = sym + cur.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('cap-acct-name-lbl').textContent = acct.name;
+  document.getElementById('cap-acct-type-badge').textContent = acct.type;
+  document.getElementById('cap-start-lbl').textContent = sym + acct.startingCapital.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('cap-since-lbl').textContent = 'since ' + new Date(acct.startDate).toLocaleDateString('en-US',{month:'short',year:'numeric'});
+
+  var badge = document.getElementById('cap-growth-badge');
+  badge.className = 'cap-growth-badge ' + clx(growth);
+  badge.querySelector('svg').style.transform = growth >= 0 ? '' : 'rotate(180deg)';
+  document.getElementById('cap-growth-lbl').textContent = (growthPct >= 0 ? '+' : '') + growthPct.toFixed(2) + '% all time';
+
+  function setPeriod(id, pId, val, pct){
+    var el = document.getElementById(id);
+    el.textContent = (val >= 0 ? '+' : '') + sym + Math.abs(val).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    el.className = 'cap-period-val ' + clx(val);
+    var pe = document.getElementById(pId);
+    pe.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+    pe.className = 'cap-period-pct ' + clx(pct);
+  }
+  setPeriod('cp-today', 'cp-today-pct', cs.todayPnL, cs.todayPct);
+  setPeriod('cp-week', 'cp-week-pct', cs.weekPnL, cs.weekPct);
+  setPeriod('cp-month', 'cp-month-pct', cs.monthPnL, cs.monthPct);
+  setPeriod('cp-alltime', 'cp-alltime-pct', cs.totalGrowth, cs.growthPct);
+
+  if(cs.targetProgress !== null){
+    document.getElementById('cap-goal-section').style.display = 'block';
+    document.getElementById('cap-goal-pct-lbl').textContent = cs.targetProgress.toFixed(1) + '%';
+    document.getElementById('cap-goal-fill').style.width = cs.targetProgress + '%';
+    document.getElementById('cap-goal-cur-lbl').textContent = sym + cur.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+    document.getElementById('cap-goal-target-lbl').textContent = 'Target: ' + sym + (cs.targetCap||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+  }
+
+  var peakCap  = cs.peakCapital != null ? cs.peakCapital : cur;
+  var maxDDAmt = cs.maxDDAmt   != null ? cs.maxDDAmt   : 0;
+  var risk1    = cs.risk1      != null ? cs.risk1      : Math.round(cur * 0.01 * 100)/100;
+  var risk2    = cs.risk2      != null ? cs.risk2      : Math.round(cur * 0.02 * 100)/100;
+  var dailyMax = cs.dailyMax   != null ? cs.dailyMax   : Math.round(cur * (acct.maxDrawdownPct/100) * 100)/100;
+
+  function locFmt(n){ return (n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  document.getElementById('eq-peak').textContent = sym + locFmt(peakCap);
+  document.getElementById('eq-maxdd').textContent = '-' + sym + locFmt(maxDDAmt) + ' (' + (cs.maxDDPct||0) + '%)';
+
+  document.getElementById('rc-1').textContent = sym + locFmt(risk1);
+  document.getElementById('rc-2').textContent = sym + locFmt(risk2);
+  document.getElementById('rc-5').textContent = sym + locFmt(Math.round(cur * 0.05 * 100)/100);
+  document.getElementById('rc-daily').textContent = '-' + sym + locFmt(dailyMax);
+  document.getElementById('rc-ddlimit').textContent = '-' + sym + locFmt(Math.round(cur * (acct.maxDrawdownPct/100) * 100)/100);
+
+  document.getElementById('stat-peak').textContent = sym + locFmt(peakCap);
+  document.getElementById('stat-dd').textContent = '-' + sym + locFmt(maxDDAmt);
+  document.getElementById('stat-ddpct').textContent = '-' + (cs.maxDDPct||0) + '%';
+  document.getElementById('stat-ddlimit').textContent = acct.maxDrawdownPct + '%';
+  document.getElementById('stat-type').textContent = acct.type;
+  document.getElementById('stat-currency').textContent = acct.currency;
+  document.getElementById('stat-since').textContent = new Date(acct.startDate).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+  if(cs.maxDDPct >= acct.maxDrawdownPct * 0.8){
+    var ddEl = document.getElementById('cap-dd-alert');
+    ddEl.classList.remove('hide');
+    document.getElementById('cap-dd-alert-text').textContent =
+      'Drawdown at ' + cs.maxDDPct + '% — approaching your ' + acct.maxDrawdownPct + '% limit. Consider reducing position size.';
+  }
+
+  buildEquityCurve(cs.equityPoints);
+  buildHistory(settings, cs);
+}
+
+document.addEventListener('DOMContentLoaded', initPage);
+</script>
+</body>
+</html>

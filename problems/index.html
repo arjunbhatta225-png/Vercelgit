@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="view-transition" content="same-origin">
+  <style id="tx-critical-bg" data-v="2">html{background:#0d0f12;color-scheme:dark}body{background:#0d0f12;margin:0}html.tx-nav-leaving body{opacity:0;transition:opacity .14s ease-out}@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:160ms;animation-timing-function:cubic-bezier(.2,.6,.2,1)}@media(prefers-reduced-motion:reduce){html.tx-nav-leaving body{transition:none;opacity:1}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+  <script id="tx-noflash-js">(function(){if(window.__txFadeNav)return;window.__txFadeNav=true;var rm=matchMedia('(prefers-reduced-motion:reduce)');var vt=false;try{vt=typeof document.startViewTransition==='function'&&CSS.supports('selector(::view-transition)')}catch(e){}function ok(a,e){if(!a||!a.href)return false;if(e&&(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0))return false;if(a.target&&a.target!==''&&a.target!=='_self')return false;if(a.hasAttribute('download'))return false;var u;try{u=new URL(a.href,location.href)}catch(_){return false}if(u.origin!==location.origin)return false;if(u.pathname===location.pathname&&u.search===location.search&&u.hash)return false;return !/\.(pdf|zip|png|jpe?g|gif|svg|webp|mp4|mov|webm|csv|xlsx?|docx?)$/i.test(u.pathname)}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,e)||vt||rm.matches)return;document.documentElement.classList.add('tx-nav-leaving')},true);document.addEventListener('submit',function(e){var f=e.target;if(!f||f.tagName!=='FORM'||vt||rm.matches)return;var act=f.action||location.href;try{if(new URL(act,location.href).origin!==location.origin)return}catch(_){return}if(f.target&&f.target!=='_self')return;document.documentElement.classList.add('tx-nav-leaving')},true);function r(){document.documentElement.classList.remove('tx-nav-leaving')}addEventListener('pageshow',r);addEventListener('pagehide',function(){setTimeout(r,0)});var pf=new Set(),budget=12,c=navigator.connection;function bad(){return c&&(c.saveData||/2g/.test(c.effectiveType||''))}function pre(h){if(pf.size>=budget||pf.has(h)||bad())return;pf.add(h);var l=document.createElement('link');l.rel='prefetch';l.href=h;l.as='document';document.head.appendChild(l)}var pt;function hp(e){if(bad()||rm.matches)return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a||!ok(a,null))return;clearTimeout(pt);pt=setTimeout(function(){pre(a.href)},80)}addEventListener('pointerenter',hp,{passive:true,capture:true});addEventListener('touchstart',hp,{passive:true})})();</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Problems We Solve | Tradexa</title>
+  <meta name="description" content="Tradexa addresses the most common trader pain points: overtrading, breaking rules, emotional decisions, poor risk management, and lack of consistency.">
+  <script src="/assets/nav.js" defer></script>
+  <style>
+    *{box-sizing:border-box}
+    .prob-hero{text-align:center;padding:80px 28px 64px;max-width:800px;margin:0 auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#EF4444;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:100px;padding:5px 14px;margin-bottom:24px}
+    .prob-hero h1{font-size:clamp(36px,5vw,56px);font-weight:800;color:#F5F5F5;letter-spacing:-.04em;line-height:1.1;margin:0 0 20px}
+    .prob-hero h1 span{color:#FFB732}
+    .prob-hero p{font-size:17px;color:#A1A1AA;line-height:1.7;margin:0 auto;max-width:600px}
+    .prob-list{max-width:900px;margin:0 auto;padding:0 28px 100px;display:flex;flex-direction:column;gap:2px}
+    .prob-card{background:#13161b;border:1px solid rgba(255,255,255,.08);border-radius:0;padding:40px 48px;display:flex;align-items:flex-start;gap:28px;text-decoration:none;color:inherit;transition:background .2s}
+    .prob-card:first-child{border-radius:16px 16px 0 0}
+    .prob-card:last-child{border-radius:0 0 16px 16px}
+    .prob-card:hover{background:#1a1d23}
+    .prob-icon{width:52px;height:52px;border-radius:12px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+    .prob-content{flex:1}
+    .prob-title{font-size:20px;font-weight:700;color:#F5F5F5;margin-bottom:8px;letter-spacing:-.02em}
+    .prob-desc{font-size:14px;color:#A1A1AA;line-height:1.7;margin-bottom:14px}
+    .prob-solution{display:flex;align-items:center;gap:8px;font-size:13px;color:#FFB732;font-weight:600}
+    .prob-solution::before{content:'✓';width:18px;height:18px;background:rgba(255,183,50,.1);border:1px solid rgba(255,183,50,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+    .prob-cta{margin-left:auto;font-size:13px;font-weight:600;color:#A1A1AA;flex-shrink:0;display:flex;align-items:center;gap:6px;align-self:center}
+    .prob-cta-strip{text-align:center;padding:80px 28px;background:#13161b;border-top:1px solid rgba(255,255,255,.06)}
+    .prob-cta-strip h2{font-size:32px;font-weight:800;color:#F5F5F5;letter-spacing:-.03em;margin:0 0 12px}
+    .prob-cta-strip p{font-size:15px;color:#A1A1AA;margin:0 0 32px}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#FFB732,#b08c1f);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:10px;text-decoration:none;box-shadow:0 0 28px rgba(255,183,50,.25)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;color:#A1A1AA;font-weight:500;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:all .15s}
+    .btn-ghost:hover{color:#F5F5F5;border-color:rgba(255,255,255,.2)}
+    @media(max-width:700px){.prob-card{flex-direction:column;padding:28px}.prob-cta{display:none}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/favicon.svg"/>
+  <meta name="theme-color" content="#0d0f12"/>
+  <link rel="canonical" href="https://tradexa.io/problems/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Problems We Solve | Tradexa"/>
+  <meta property="og:description" content="Tradexa addresses the most common trader pain points: overtrading, breaking rules, emotional decisions, poor risk management, and lack of consistency."/>
+  <meta property="og:url" content="https://tradexa.io/problems/"/>
+  <meta property="og:site_name" content="Tradexa"/>
+  <meta property="og:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Problems We Solve | Tradexa"/>
+  <meta name="twitter:description" content="Tradexa addresses the most common trader pain points: overtrading, breaking rules, emotional decisions, poor risk management, and lack of consistency."/>
+  <meta name="twitter:image" content="https://tradexa.io/assets/og-cover.jpg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+</head>
+<body>
+<div class="prob-hero">
+  <div class="eyebrow">⚡ Problems We Solve</div>
+  <h1>We know what's <span>holding you back</span></h1>
+  <p>Most traders don't fail because of bad strategies. They fail because of execution, habits, and self-awareness. Tradexa is built to fix exactly that.</p>
+</div>
+
+<div class="prob-list">
+  <a href="/problems/overtrading.html" class="prob-card">
+    <div class="prob-icon">📉</div>
+    <div class="prob-content">
+      <div class="prob-title">Overtrading</div>
+      <div class="prob-desc">You take too many trades, especially when the market isn't giving you clean setups. Every low-quality trade chips away at your account and your confidence.</div>
+      <div class="prob-solution">Tradexa tracks your trade frequency and alerts you when patterns suggest overtrading behaviour.</div>
+    </div>
+    <div class="prob-cta">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/problems/breaking-rules.html" class="prob-card">
+    <div class="prob-icon">🚫</div>
+    <div class="prob-content">
+      <div class="prob-title">Breaking Your Own Rules</div>
+      <div class="prob-desc">You have a trading plan, but when the moment comes, emotions take over. You move stop losses, take trades outside your criteria, and justify it every time.</div>
+      <div class="prob-solution">Tradexa compares your live trades to your stated rules and flags every deviation automatically.</div>
+    </div>
+    <div class="prob-cta">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/problems/no-consistency.html" class="prob-card">
+    <div class="prob-icon">📊</div>
+    <div class="prob-content">
+      <div class="prob-title">No Consistency</div>
+      <div class="prob-desc">One great week, three terrible ones. You can't reproduce your winning streaks because you don't know what caused them. Random results keep you stuck in a cycle.</div>
+      <div class="prob-solution">Tradexa identifies your highest-expectancy setups and tells you exactly when and how to trade them more.</div>
+    </div>
+    <div class="prob-cta">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/problems/risk-management.html" class="prob-card">
+    <div class="prob-icon">🛡️</div>
+    <div class="prob-content">
+      <div class="prob-title">Poor Risk Management</div>
+      <div class="prob-desc">A few big losses wipe out weeks of gains. You know 1% risk per trade is the rule, but when conviction is high, position sizes balloon and accounts blow.</div>
+      <div class="prob-solution">Tradexa calculates real-time risk per trade and shows you exactly how each trade fits your portfolio exposure.</div>
+    </div>
+    <div class="prob-cta">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+
+  <a href="/problems/emotional-trading.html" class="prob-card">
+    <div class="prob-icon">🧠</div>
+    <div class="prob-content">
+      <div class="prob-title">Emotional Trading</div>
+      <div class="prob-desc">Fear, greed, revenge trades after losses. Your psychology sabotages your strategy. You know it, but you can't stop it without objective data to hold you accountable.</div>
+      <div class="prob-solution">Tradexa's AI Coach tracks emotional patterns and gives you structured feedback to separate feelings from execution.</div>
+    </div>
+    <div class="prob-cta">Learn more <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+  </a>
+</div>
+
+<div class="prob-cta-strip">
+  <h2>Stop repeating the same mistakes</h2>
+  <p>Tradexa gives you the data and structure to become a consistently profitable trader.</p>
+  <div class="cta-btns">
+    <a href="/app/dashboard.html" class="btn-primary">Start Free — No Card Required →</a>
+    <a href="/solutions/" class="btn-ghost">View Solutions</a>
+  </div>
+</div>
+</body>
+</html>
