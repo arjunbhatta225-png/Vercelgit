@@ -1,4 +1,4 @@
-"""Vercel handler for POST /api/chat — Trade Bot. Supports ?stream=1 SSE."""
+"""Vercel handler for POST /api/chat â€” Trade Bot. Supports ?stream=1 SSE."""
 from http.server import BaseHTTPRequestHandler
 import json
 import urllib.request
@@ -40,20 +40,7 @@ class handler(BaseHTTPRequestHandler):
         want_stream = '?stream=1' in self.path or '&stream=1' in self.path
 
         if not S.GEMINI_API_KEY:
-            fallback = 'Trade Bot is almost ready — a Gemini API key needs to be configured.'
-            if want_stream:
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/event-stream')
-                self.send_header('Cache-Control', 'no-cache')
-                self.send_header('X-Accel-Buffering', 'no')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                self.wfile.write(b'data: ' + json.dumps({'chunk': fallback}).encode() + b'\n\n')
-                self.wfile.write(b'data: ' + json.dumps({'done': True}).encode() + b'\n\n')
-                self.wfile.flush()
-                return
-            self._respond(200, {'reply': fallback})
-            return
+            self._respond(503, {'error': 'AI is not configured on this server.'}); return
 
         system_prompt = S.TRADEBOT_SYSTEM
         if trade_context and trade_context.strip() and 'NO_TRADES' not in trade_context:
@@ -85,12 +72,12 @@ class handler(BaseHTTPRequestHandler):
         except urllib.error.HTTPError as e:
             print(f'Gemini HTTP error {e.code}: {e.read().decode("utf-8") if e.fp else ""}')
             if e.code == 429:
-                self._respond(429, {'error': 'Trade Bot is busy — rate limit reached. Try again in a moment.'})
+                self._respond(429, {'error': 'Trade Bot is busy â€” rate limit reached. Try again in a moment.'})
             else:
-                self._respond(502, {'error': 'AI service temporarily unavailable — please try again shortly'})
+                self._respond(502, {'error': 'AI service temporarily unavailable â€” please try again shortly'})
         except Exception as e:
             print(f'Chat error: {e}')
-            self._respond(500, {'error': 'Something went wrong — please try again'})
+            self._respond(500, {'error': 'Something went wrong â€” please try again'})
 
     def _stream(self, payload):
         try:

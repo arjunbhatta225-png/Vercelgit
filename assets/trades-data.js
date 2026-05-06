@@ -4,7 +4,7 @@
  * Used by the Trade Bot, Journal, Dashboard, and Analytics pages.
  */
 (function(global){
-  /* Per-user storage keys — prevents leaking data between accounts on
+  /* Per-user storage keys â€” prevents leaking data between accounts on
      a shared browser. Falls back to "anon" before TxAuth resolves; the
      anon row is never persisted across sign-out (signOut() wipes it). */
   function _uid(){
@@ -18,21 +18,21 @@
   function _tradesKey(){ return 'txTrades_v1::' + _uid(); }
   function _userKey(){   return 'txUserProfile_v1::' + _uid(); }
 
-  /* Back-compat shim — old code reads TX_TRADES_KEY directly. */
+  /* Back-compat shim â€” old code reads TX_TRADES_KEY directly. */
   var TX_TRADES_KEY = 'txTrades_v1';
   var TX_USER_KEY   = 'txUserProfile_v1';
 
-  /* Real user data only — no demo seed. Empty accounts show empty states. */
+  /* Real user data only â€” no demo seed. Empty accounts show empty states. */
   var SEED_TRADES = [];
   var _LEGACY_SEED_REMOVED = [
     {id:'t001',date:'2026-05-02T09:42',asset:'NQ Futures',direction:'long',entry:18420,exit:18650,size:2,riskPct:1.2,stopLoss:18350,takeProfit:18700,setup:['Breakout'],emotion:['Calm'],rating:4,notes:'Clean breakout above overnight high. Followed plan exactly. Took partial at 1R, let rest run.',pnl:840,rr:2.8},
-    {id:'t002',date:'2026-05-02T11:15',asset:'AAPL',direction:'short',entry:182.40,exit:181.62,size:100,riskPct:0.8,stopLoss:183.10,takeProfit:181.00,setup:['Reversal'],emotion:['FOMO'],rating:2,notes:'Entered too early before confirmation. FOMO after seeing it drop — should have waited for the 5min close.',pnl:-220,rr:0.7},
+    {id:'t002',date:'2026-05-02T11:15',asset:'AAPL',direction:'short',entry:182.40,exit:181.62,size:100,riskPct:0.8,stopLoss:183.10,takeProfit:181.00,setup:['Reversal'],emotion:['FOMO'],rating:2,notes:'Entered too early before confirmation. FOMO after seeing it drop â€” should have waited for the 5min close.',pnl:-220,rr:0.7},
     {id:'t003',date:'2026-05-01T10:30',asset:'ES Futures',direction:'long',entry:5210,exit:5258,size:3,riskPct:1.5,stopLoss:5190,takeProfit:5270,setup:['Breakout'],emotion:['Calm'],rating:5,notes:'Perfect execution. Waited for the retest of breakout level, sized correctly, held to full target.',pnl:1190,rr:3.2},
     {id:'t004',date:'2026-05-01T14:22',asset:'BTC/USD',direction:'long',entry:62100,exit:62850,size:0.05,riskPct:1.0,stopLoss:61600,takeProfit:63100,setup:['Pullback'],emotion:['Confident'],rating:4,notes:'Strong pullback to support. Held through volatility.',pnl:340,rr:2.1},
-    {id:'t005',date:'2026-04-30T08:15',asset:'EUR/USD',direction:'short',entry:1.0820,exit:1.0833,size:2,riskPct:0.9,stopLoss:1.0835,takeProfit:1.0790,setup:['Trend Follow'],emotion:['Uncertain'],rating:3,notes:'Not my best entry — moved against me immediately. Should have waited for London close.',pnl:-103,rr:0.8},
+    {id:'t005',date:'2026-04-30T08:15',asset:'EUR/USD',direction:'short',entry:1.0820,exit:1.0833,size:2,riskPct:0.9,stopLoss:1.0835,takeProfit:1.0790,setup:['Trend Follow'],emotion:['Uncertain'],rating:3,notes:'Not my best entry â€” moved against me immediately. Should have waited for London close.',pnl:-103,rr:0.8},
     {id:'t006',date:'2026-04-29T09:55',asset:'GLD',direction:'long',entry:218.40,exit:221.80,size:50,riskPct:1.1,stopLoss:216.80,takeProfit:222.00,setup:['Breakout'],emotion:['Calm'],rating:4,notes:'Gold breaking out on inflation data. Clean setup, good R:R.',pnl:170,rr:1.9},
     {id:'t007',date:'2026-04-28T14:30',asset:'TSLA',direction:'short',entry:168.20,exit:164.80,size:75,riskPct:1.4,stopLoss:170.50,takeProfit:164.00,setup:['Gap Fill'],emotion:['Confident'],rating:5,notes:'Gap fill trade after earnings gap up. Classic setup, held through first pullback.',pnl:255,rr:2.4},
-    {id:'t008',date:'2026-04-28T10:05',asset:'NQ Futures',direction:'short',entry:18380,exit:18420,size:1,riskPct:0.8,stopLoss:18430,takeProfit:18300,setup:['Reversal'],emotion:['Revenge'],rating:1,notes:'Revenge trade after morning loss. Took this without a setup — pure emotion. Stopped out.',pnl:-180,rr:0.5},
+    {id:'t008',date:'2026-04-28T10:05',asset:'NQ Futures',direction:'short',entry:18380,exit:18420,size:1,riskPct:0.8,stopLoss:18430,takeProfit:18300,setup:['Reversal'],emotion:['Revenge'],rating:1,notes:'Revenge trade after morning loss. Took this without a setup â€” pure emotion. Stopped out.',pnl:-180,rr:0.5},
     {id:'t009',date:'2026-04-25T09:30',asset:'SPY',direction:'long',entry:518.50,exit:521.80,size:100,riskPct:1.2,stopLoss:516.00,takeProfit:522.00,setup:['Trend Follow'],emotion:['Calm'],rating:4,notes:'Monday open trend follow. Clean momentum move after gap and go.',pnl:330,rr:1.8},
     {id:'t010',date:'2026-04-24T13:45',asset:'BTC/USD',direction:'long',entry:60400,exit:61200,size:0.08,riskPct:1.0,stopLoss:59800,takeProfit:61600,setup:['Pullback'],emotion:['Confident'],rating:4,notes:'Support bounce. Entered on 4H bullish engulfing.',pnl:506,rr:2.0},
     {id:'t011',date:'2026-04-23T11:30',asset:'MSFT',direction:'long',entry:412.00,exit:418.50,size:50,riskPct:1.3,stopLoss:408.00,takeProfit:420.00,setup:['Breakout'],emotion:['Calm'],rating:5,notes:'All-time high breakout. Let it breathe, no premature exit.',pnl:325,rr:2.9},
@@ -51,7 +51,7 @@
     {id:'t024',date:'2026-04-04T10:30',asset:'ES Futures',direction:'long',entry:5160,exit:5192,size:3,riskPct:1.4,stopLoss:5145,takeProfit:5200,setup:['Breakout'],emotion:['Confident'],rating:4,notes:'NFP day breakout. Good setup, held through pullback.',pnl:840,rr:2.8},
     {id:'t025',date:'2026-04-03T11:00',asset:'AAPL',direction:'long',entry:176.80,exit:179.60,size:100,riskPct:1.1,stopLoss:175.00,takeProfit:180.00,setup:['Pullback'],emotion:['Calm'],rating:4,notes:'EMA retest on rising market. Clean entry, good follow-through.',pnl:280,rr:2.1},
     {id:'t026',date:'2026-04-02T09:35',asset:'BTC/USD',direction:'long',entry:61800,exit:62400,size:0.07,riskPct:1.0,stopLoss:61200,takeProfit:62800,setup:['Trend Follow'],emotion:['Calm'],rating:4,notes:'Momentum continuation trade. Held through minor pullback.',pnl:420,rr:1.8},
-    {id:'t027',date:'2026-04-01T14:00',asset:'GLD',direction:'long',entry:214.00,exit:212.80,size:50,riskPct:0.8,stopLoss:213.20,takeProfit:216.00,setup:['Breakout'],emotion:['Greedy'],rating:2,notes:'Tried to buy too early at false breakout. Greed — should have waited for confirmation.',pnl:-60,rr:0.5},
+    {id:'t027',date:'2026-04-01T14:00',asset:'GLD',direction:'long',entry:214.00,exit:212.80,size:50,riskPct:0.8,stopLoss:213.20,takeProfit:216.00,setup:['Breakout'],emotion:['Greedy'],rating:2,notes:'Tried to buy too early at false breakout. Greed â€” should have waited for confirmation.',pnl:-60,rr:0.5},
     {id:'t028',date:'2026-03-31T10:15',asset:'TSLA',direction:'short',entry:172.50,exit:169.80,size:80,riskPct:1.3,stopLoss:174.50,takeProfit:169.00,setup:['Gap Fill'],emotion:['Confident'],rating:4,notes:'End of quarter position. Gap fill to support zone.',pnl:216,rr:2.1},
     {id:'t029',date:'2026-03-28T09:30',asset:'NQ Futures',direction:'long',entry:17950,exit:18120,size:2,riskPct:1.2,stopLoss:17880,takeProfit:18150,setup:['Trend Follow'],emotion:['Calm'],rating:5,notes:'Weekly open momentum. Perfect entry at breakout retest.',pnl:595,rr:3.5},
     {id:'t030',date:'2026-03-27T13:45',asset:'EUR/USD',direction:'long',entry:1.0840,exit:1.0870,size:2,riskPct:0.9,stopLoss:1.0815,takeProfit:1.0880,setup:['Pullback'],emotion:['Calm'],rating:4,notes:'Clean setup into NY session. Followed rules perfectly.',pnl:188,rr:2.0}
@@ -70,12 +70,12 @@
       var n = parseFloat(t[k]);
       t[k] = isFinite(n) ? n : 0;
     }
-    /* String fields — type-guard for safe downstream use. */
+    /* String fields â€” type-guard for safe downstream use. */
     if(t.asset != null && typeof t.asset !== 'string') t.asset = String(t.asset);
     if(t.direction != null && typeof t.direction !== 'string') t.direction = String(t.direction);
     if(t.notes != null && typeof t.notes !== 'string') t.notes = String(t.notes);
     if(t.date != null && typeof t.date !== 'string') t.date = String(t.date);
-    /* Array fields — coerce to array if scalar. */
+    /* Array fields â€” coerce to array if scalar. */
     if(t.setup != null && !Array.isArray(t.setup)) t.setup = [String(t.setup)];
     if(t.emotion != null && !Array.isArray(t.emotion)) t.emotion = [String(t.emotion)];
     return t;
@@ -92,11 +92,12 @@
         }
       }
     }catch(e){}
-    seedTrades();
+    if(SEED_TRADES.length) seedTrades();
     return SEED_TRADES.slice();
   }
 
   function seedTrades(){
+    if(!SEED_TRADES.length) return;
     try{ localStorage.setItem(_tradesKey(), JSON.stringify(SEED_TRADES)); }catch(e){}
   }
 
@@ -126,7 +127,7 @@
 
   function _calcRR(t){
     if(!t.entry || !t.stopLoss || !t.pnl) return 0;
-    /* abs(size) — some brokers represent shorts as a negative size. */
+    /* abs(size) â€” some brokers represent shorts as a negative size. */
     var risk = Math.abs(t.entry - t.stopLoss) * Math.abs(t.size);
     return risk > 0 ? Math.round((Math.abs(t.pnl) / risk) * 10) / 10 : 0;
   }
@@ -143,8 +144,8 @@
     var avgRR   = trades.filter(function(t){ return t.rr>0; })
                         .reduce(function(s,t,_,a){ return s + t.rr/a.length; }, 0);
     /* Profit factor: |gross win| / |gross loss|.
-       - If no losses but wins exist → Infinity (unbounded edge); UI clamps display.
-       - If no trades / no wins / no losses → 0.
+       - If no losses but wins exist â†’ Infinity (unbounded edge); UI clamps display.
+       - If no trades / no wins / no losses â†’ 0.
        Avoids the previous magic 999 which leaked into UI as a real number. */
     var profitFactor;
     if(totalLossPnl !== 0)      profitFactor = Math.abs(totalWinPnl / totalLossPnl);
@@ -184,7 +185,7 @@
       if(t.pnl > 0) assetStats[t.asset].wins++;
     });
 
-    /* "Recent 10" is date-derived, not insertion-derived — the array order
+    /* "Recent 10" is date-derived, not insertion-derived â€” the array order
        can drift if records were imported in batch or hand-edited in storage. */
     var recent10 = trades.slice().sort(function(a,b){
       var da = new Date(a.date).getTime();
@@ -196,11 +197,11 @@
     var recent10Wins = recent10.filter(function(t){ return t.pnl > 0; }).length;
     var recent10Pnl  = recent10.reduce(function(s,t){ return s + (t.pnl||0); }, 0);
 
-    /* Streak — count consecutive wins or losses from the most recent trade
+    /* Streak â€” count consecutive wins or losses from the most recent trade
        backward. Don't rely on insertion order: sort by date desc so the
        streak is correct even if records were imported out of order or
        a user-edited localStorage broke the unshift invariant. Breakeven
-       trades (pnl===0) are skipped — they neither extend nor break a streak. */
+       trades (pnl===0) are skipped â€” they neither extend nor break a streak. */
     var streak = 0, streakType = '';
     var byDateDesc = trades.slice().sort(function(a,b){
       var da = new Date(a.date).getTime();
@@ -227,7 +228,7 @@
       avgWin:   Math.round(avgWin  * 100) / 100,
       avgLoss:  Math.round(avgLoss * 100) / 100,
       avgRR:    Math.round(avgRR   * 10)  / 10,
-      /* Preserve Infinity through to UI — Math.round(Infinity)=Infinity, /100=Infinity. */
+      /* Preserve Infinity through to UI â€” Math.round(Infinity)=Infinity, /100=Infinity. */
       profitFactor: isFinite(profitFactor) ? Math.round(profitFactor * 100) / 100 : Infinity,
       fomoCount, revengeCount, greedyCount, calmCount,
       emotionPnl, setupWinRates, assetStats,
@@ -330,13 +331,13 @@
   }
 
   /* Format profit factor for display.
-     - Infinity (wins, no losses) → '∞'
-     - 0 / NaN / no data           → '—'
-     - Otherwise                   → number rounded as-is */
+     - Infinity (wins, no losses) â†’ 'âˆž'
+     - 0 / NaN / no data           â†’ 'â€”'
+     - Otherwise                   â†’ number rounded as-is */
   function formatPF(pf){
-    if(pf === Infinity) return '∞';
+    if(pf === Infinity) return 'âˆž';
     var n = parseFloat(pf);
-    if(!isFinite(n) || n === 0) return '—';
+    if(!isFinite(n) || n === 0) return 'â€”';
     return n;
   }
 

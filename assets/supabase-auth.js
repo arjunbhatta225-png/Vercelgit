@@ -1,28 +1,28 @@
-/* ─────────────────────────────────────────────────────────────────────
-   Tradexa — Supabase auth bridge
-   ─────────────────────────────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   Tradexa â€” Supabase auth bridge
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Exposes window.TxAuth with a stable API used across the app:
 
-     TxAuth.ready()              → Promise<client>            resolves once SDK + session loaded
-     TxAuth.getClient()          → SupabaseClient | null
-     TxAuth.getSession()         → session | null             (synchronous, latest known)
-     TxAuth.getUser()            → user | null                (synchronous)
-     TxAuth.getToken()           → Promise<string | null>     (always fresh, auto-refreshed)
-     TxAuth.userKey()            → string                     (for per-user localStorage scoping)
-     TxAuth.signInWithPassword(email, password)               → Promise<{data,error}>
-     TxAuth.signUp(email, password, {fullName})               → Promise<{data,error}>
-     TxAuth.signInWithGoogle()                                → Promise<{data,error}>
-     TxAuth.signOut()                                         → Promise<void> (redirects to /auth/login.html)
+     TxAuth.ready()              â†’ Promise<client>            resolves once SDK + session loaded
+     TxAuth.getClient()          â†’ SupabaseClient | null
+     TxAuth.getSession()         â†’ session | null             (synchronous, latest known)
+     TxAuth.getUser()            â†’ user | null                (synchronous)
+     TxAuth.getToken()           â†’ Promise<string | null>     (always fresh, auto-refreshed)
+     TxAuth.userKey()            â†’ string                     (for per-user localStorage scoping)
+     TxAuth.signInWithPassword(email, password)               â†’ Promise<{data,error}>
+     TxAuth.signUp(email, password, {fullName})               â†’ Promise<{data,error}>
+     TxAuth.signInWithGoogle()                                â†’ Promise<{data,error}>
+     TxAuth.signOut()                                         â†’ Promise<void> (redirects to /auth/login.html)
 
    Side effect on /app/* paths: auto-runs a guard that hides body until
    session is verified, redirects to /auth/login.html if not signed in.
    The guard cooperates with html.tx-auth-pending CSS injected by the
    page's <head> before this script loads.
-   ───────────────────────────────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 (function (global) {
   'use strict';
 
-  if (global.TxAuth) return; /* idempotent — only one client per page */
+  if (global.TxAuth) return; /* idempotent â€” only one client per page */
 
   /* Which OAuth provider buttons to render in the auth UI.
      Edit to remove any provider you haven't enabled in the Supabase dashboard.
@@ -37,7 +37,7 @@
   var _readyResolve, _readyReject;
   var _ready = new Promise(function (res, rej) { _readyResolve = res; _readyReject = rej; });
 
-  /* ── Load supabase-js v2 UMD bundle from jsDelivr (CSP must allow it) ── */
+  /* â”€â”€ Load supabase-js v2 UMD bundle from jsDelivr (CSP must allow it) â”€â”€ */
   function _loadSdk() {
     return new Promise(function (resolve, reject) {
       if (global.supabase && global.supabase.createClient) return resolve();
@@ -53,12 +53,8 @@
     });
   }
 
-  var _FALLBACK_CFG = {
-    supabaseUrl:     'https://uaquknwpxdyujuousqwx.supabase.co',
-    supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhcXVrbndweGR5dWp1b3VzcXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4NDQzNDcsImV4cCI6MjA5MzQyMDM0N30.guRhVgarac8OfxW-5pIyavVPkQIfEtSs-Bfo27FJvHo',
-  };
 
-  /* ── Load /api/public-config to get SUPABASE_URL + anon key ── */
+  /* â”€â”€ Load /api/public-config to get SUPABASE_URL + anon key â”€â”€ */
   function _loadConfig() {
     var cached = null;
     try { cached = JSON.parse(sessionStorage.getItem('txSupaCfg') || 'null'); } catch (e) {}
@@ -75,9 +71,9 @@
         try { sessionStorage.setItem('txSupaCfg', JSON.stringify(cfg)); } catch (e) {}
         return cfg;
       })
-      .catch(function () {
-        try { sessionStorage.setItem('txSupaCfg', JSON.stringify(_FALLBACK_CFG)); } catch (e) {}
-        return _FALLBACK_CFG;
+      .catch(function (err) {
+        try { sessionStorage.removeItem('txSupaCfg'); } catch (e) {}
+        throw err;
       });
   }
 
@@ -131,7 +127,7 @@
     });
   }
 
-  /* ── Public API ── */
+  /* â”€â”€ Public API â”€â”€ */
   var TxAuth = {
     ready:      function () { return _ready; },
     getClient:  function () { return _client; },
@@ -198,19 +194,19 @@
       });
     },
 
-    /* Post-login perception layer: success → securing → welcome → redirect.
-       Total ~2.6s. Animation only — does not delay session creation. */
+    /* Post-login perception layer: success â†’ securing â†’ welcome â†’ redirect.
+       Total ~2.6s. Animation only â€” does not delay session creation. */
     runLoginTransition: function (opts) {
       opts = opts || {};
       var redirectTo = opts.redirectTo || '/app/dashboard.html';
 
-      /* Body may not be parsed yet if called extremely early — defer. */
+      /* Body may not be parsed yet if called extremely early â€” defer. */
       if (!document.body) {
         return void document.addEventListener('DOMContentLoaded', function () {
           TxAuth.runLoginTransition(opts);
         });
       }
-      /* Idempotent — never stack overlays if called twice. */
+      /* Idempotent â€” never stack overlays if called twice. */
       if (document.getElementById('tx-login-overlay')) return;
 
       var user       = opts.user || _user || {};
@@ -271,7 +267,7 @@
           '<div class="tx-anim-step active" data-step="1">' +
             '<div class="tx-anim-check"><svg viewBox="0 0 24 24"><polyline points="5 12 10 17 19 8"/></svg></div>' +
             '<p class="tx-anim-title">Authentication successful</p>' +
-            '<p class="tx-anim-sub">Establishing secure session…</p>' +
+            '<p class="tx-anim-sub">Establishing secure sessionâ€¦</p>' +
           '</div>' +
           '<div class="tx-anim-step" data-step="2">' +
             '<div class="tx-anim-ring"></div>' +
@@ -281,7 +277,7 @@
           '<div class="tx-anim-step" data-step="3">' +
             '<div class="tx-anim-avatar" style="'+avStyle+'">'+avInner+'</div>' +
             '<p class="tx-anim-title">Welcome back, '+_esc(firstName)+'</p>' +
-            '<p class="tx-anim-sub">Loading your trading desk…</p>' +
+            '<p class="tx-anim-sub">Loading your trading deskâ€¦</p>' +
           '</div>' +
         '</div>';
       document.body.appendChild(ov);
@@ -317,14 +313,18 @@
           sessionStorage.removeItem('txSupaCfg');
           /* Wipe per-user cached AI artifacts so the next user on this
              browser does not inherit them. Add new cache keys here. */
-          ['txInsights_v1','txWeeklyReviews_v1','txDailyDigest_v1'].forEach(function(k){
+          ['txInsights_v1','txWeeklyReviews_v1','txDailyDigest_v1','txb_history_v2'].forEach(function(k){
             try { localStorage.removeItem(k); } catch (e) {}
           });
           /* Wipe per-user trade store + cached profile rows. */
           try {
             for (var i = localStorage.length - 1; i >= 0; i--) {
               var k = localStorage.key(i);
-              if (k && (k.indexOf('txTrades_v1::') === 0 || k.indexOf('txUserProfile_v1::') === 0)) {
+              if (k && (
+                k.indexOf('txTrades_v1::') === 0 ||
+                k.indexOf('txUserProfile_v1::') === 0 ||
+                k.indexOf('txb_history_v2::') === 0
+              )) {
                 localStorage.removeItem(k);
               }
             }
@@ -340,10 +340,10 @@
 
   global.TxAuth = TxAuth;
 
-  /* ── Kick off init immediately ── */
+  /* â”€â”€ Kick off init immediately â”€â”€ */
   _init();
 
-  /* ── Auth guard — only on /app/* routes ── */
+  /* â”€â”€ Auth guard â€” only on /app/* routes â”€â”€ */
   if (/^\/app\//.test(window.location.pathname)) {
     /* Belt-and-suspenders: ensure body is hidden if the inline CSS didn't load. */
     if (!document.documentElement.classList.contains('tx-auth-pending')) {
@@ -357,7 +357,7 @@
         document.documentElement.classList.remove('tx-auth-pending');
       }
     }).catch(function () {
-      /* Fail-closed: any init failure → bounce to login. */
+      /* Fail-closed: any init failure â†’ bounce to login. */
       window.location.replace('/auth/login.html');
     });
   }

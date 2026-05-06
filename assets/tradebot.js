@@ -7,14 +7,14 @@
     "Your worst trades teach more than your best ones.",
     "Consistency beats intensity. Log every trade.",
     "A trading plan ignored is capital surrendered.",
-    "Risk management is not optional — it's the strategy.",
+    "Risk management is not optional â€” it's the strategy.",
     "The trader who reviews loses less than the one who doesn't.",
     "Patience is your edge in a world of impatient traders.",
     "Your journal is your best trading tool.",
     "Process over outcome. Every single time.",
     "One good trade executed perfectly beats ten average ones.",
-    "Fear and greed are signals — recognize them, don't follow them.",
-    "The best traders aren't the most confident — they're the most prepared.",
+    "Fear and greed are signals â€” recognize them, don't follow them.",
+    "The best traders aren't the most confident â€” they're the most prepared.",
     "A disciplined loss is still a win.",
     "Your P&L is a lagging indicator of your habits."
   ];
@@ -178,7 +178,7 @@
 
   var PANEL_HTML = `
 <div id="tx-tradebot-root">
-  <button id="tx-tradebot-fab" title="Trade Bot — AI Coach">
+  <button id="tx-tradebot-fab" title="Trade Bot â€” AI Coach">
     <span class="fab-icon-chat">
       <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 2v2.5"/>
@@ -210,7 +210,7 @@
       </div>
       <div class="txb-head-info">
         <div class="txb-head-name">Trade Bot <span id="txb-data-badge" class="txb-data-badge" style="display:none"></span></div>
-        <div class="txb-head-sub"><span class="txb-online-dot"></span>Powered by Gemini · AI Coach</div>
+        <div class="txb-head-sub"><span class="txb-online-dot"></span>Powered by Gemini Â· AI Coach</div>
       </div>
       <button class="txb-head-clear" id="txb-clear-btn">Clear</button>
     </div>
@@ -250,13 +250,36 @@
   var hasData = false;
 
   var STORAGE_KEY = 'txb_history_v2';
-  try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if(saved) history = JSON.parse(saved);
-  } catch(e){}
+
+  function historyUserKey(){
+    try {
+      if(window.TxAuth && window.TxAuth.userKey) return window.TxAuth.userKey() || 'anon';
+    } catch(e){}
+    return 'anon';
+  }
+
+  function historyStorageKey(){
+    return STORAGE_KEY + '::' + historyUserKey();
+  }
+
+  function loadHistory(){
+    try {
+      var saved = localStorage.getItem(historyStorageKey());
+      history = saved ? JSON.parse(saved) : [];
+      if(!Array.isArray(history)) history = [];
+    } catch(e){
+      history = [];
+    }
+  }
+
+  loadHistory();
+  if(window.TxAuth && window.TxAuth.ready){
+    window.TxAuth.ready().then(loadHistory).catch(function(){});
+    document.addEventListener('tx-auth-change', loadHistory);
+  }
 
   function saveHistory(){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(history.slice(-24))); }catch(e){}
+    try{ localStorage.setItem(historyStorageKey(), JSON.stringify(history.slice(-24))); }catch(e){}
   }
 
   function loadTradeContext(){
@@ -266,7 +289,7 @@
       var trades = window.TxTradeData.getTrades();
       if(hasData && trades.length > 0){
         var s = window.TxTradeData.getStats(trades);
-        dataBadge.textContent = trades.length + ' trades · ' + s.winRate + '% WR';
+        dataBadge.textContent = trades.length + ' trades Â· ' + s.winRate + '% WR';
         dataBadge.style.display = 'inline-flex';
       }
       /* Append Trading Math Engine context */
@@ -286,7 +309,7 @@
   function getWelcomeMessage(){
     if(!window.TxTradeData || !hasData){
       return (
-        "Hello! I'm Trade Bot — your AI trading coach powered by Gemini.\n\n" +
+        "Hello! I'm Trade Bot â€” your AI trading coach powered by Gemini.\n\n" +
         "I can help you understand trading metrics, build better habits, and improve your consistency.\n\n" +
         "Log your first trade in the Trade Journal and I'll give you fully personalized coaching based on your actual data."
       );
@@ -294,10 +317,10 @@
     var trades = window.TxTradeData.getTrades();
     var s = window.TxTradeData.getStats(trades);
     var streak = s.currentStreak >= 3
-      ? '\n\nYou\'re on a ' + s.currentStreak + '-trade ' + s.currentStreakType + ' streak — I have thoughts on that.'
+      ? '\n\nYou\'re on a ' + s.currentStreak + '-trade ' + s.currentStreakType + ' streak â€” I have thoughts on that.'
       : '';
     return (
-      "I've read your journal — " + s.total + " trades, " + s.winRate + "% win rate, $" + s.totalPnl.toLocaleString() + " total P&L.\n\n" +
+      "I've read your journal â€” " + s.total + " trades, " + s.winRate + "% win rate, $" + s.totalPnl.toLocaleString() + " total P&L.\n\n" +
       "I can see your behavioral patterns, your best setups, and where you're losing edge." + streak + "\n\n" +
       "What do you want to dig into?"
     );
@@ -431,7 +454,7 @@
 
     /* Attach the Supabase access token so the protected /api/chat
        endpoint can authorize the request. Falls through silently when
-       TxAuth isn't loaded (chat will then fail with 401 — by design). */
+       TxAuth isn't loaded (chat will then fail with 401 â€” by design). */
     var _hdrs = {'Content-Type': 'application/json'};
     var _tokenP = (window.TxAuth && window.TxAuth.getToken)
       ? window.TxAuth.getToken().catch(function(){ return null; })
@@ -459,7 +482,7 @@
         });
       }
       /* Some fallback paths (e.g. no GEMINI_API_KEY) may return JSON instead
-         of SSE — detect via Content-Type and degrade gracefully. */
+         of SSE â€” detect via Content-Type and degrade gracefully. */
       var ct = (resp.headers.get('content-type') || '').toLowerCase();
       if (ct.indexOf('text/event-stream') === -1) {
         return resp.json().then(function(d){
